@@ -21,11 +21,11 @@ namespace ProceduralLevel.UnityPlugins.Common
 			return new Rect(rect.x+left, rect.y+top, rect.width-right-left, rect.height-bottom-top);
 		}
 
-		public static void AddMargin(this Rect[] rect, float padding)
+		public static void AddMargin(this Rect[] rect, float margin)
 		{
 			for(int x = 0; x < rect.Length; ++x)
 			{
-				rect[x] = rect[x].AddMargin(padding);
+				rect[x] = rect[x].AddMargin(margin);
 			}
 		}
 
