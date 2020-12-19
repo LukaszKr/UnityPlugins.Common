@@ -5,6 +5,7 @@ namespace ProceduralLevel.UnityPlugins.Common
 {
 	public static class RectExt
 	{
+		#region Margin
 		public static Rect AddMargin(this Rect rect, float margin)
 		{
 			return rect.AddMargin(margin, margin, margin, margin);
@@ -20,6 +21,14 @@ namespace ProceduralLevel.UnityPlugins.Common
 			return new Rect(rect.x+left, rect.y+top, rect.width-right-left, rect.height-bottom-top);
 		}
 
+		public static void AddMargin(this Rect[] rect, float padding)
+		{
+			for(int x = 0; x < rect.Length; ++x)
+			{
+				rect[x] = rect[x].AddMargin(padding);
+			}
+		}
+
 		public static void AddMargin(this Rect[] rect, float horizontal, float vertical)
 		{
 			for(int x = 0; x < rect.Length; ++x)
@@ -27,6 +36,15 @@ namespace ProceduralLevel.UnityPlugins.Common
 				rect[x] = rect[x].AddMargin(horizontal, vertical);
 			}
 		}
+
+		public static void AddMargin(this Rect[] rect, float top, float right, float bottom, float left)
+		{
+			for(int x = 0; x < rect.Length; ++x)
+			{
+				rect[x] = rect[x].AddMargin(top, right, bottom, left);
+			}
+		}
+		#endregion
 
 		public static RectPair SplitHorizontal(this Rect rect, float leftToRightRatio)
 		{
