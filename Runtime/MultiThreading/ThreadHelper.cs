@@ -10,6 +10,8 @@ namespace ProceduralLevel.UnityPlugins.Common.MultiThreading
 		private static readonly Task[] m_TaskBuffer;
 		#endregion
 
+		public static int MaxThreadCount { get { return m_TaskBuffer.Length; } }
+
 		static ThreadHelper()
 		{
 			m_TaskBuffer = new Task[Math.Max(1, SystemInfo.processorCount)];
