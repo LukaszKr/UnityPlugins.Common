@@ -18,6 +18,11 @@ namespace ProceduralLevel.UnityPlugins.Common.MultiThreading
 		public static void RunAndWaitAll(Action action)
 		{
 			int taskCount = m_TaskBuffer.Length;
+			if(taskCount == 1)
+			{
+				action();
+				return;
+			}
 
 			for(int x = 0; x < taskCount; ++x)
 			{
