@@ -18,7 +18,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Pool
 	{
 		public static bool Contains(this EUnityPoolOptions option, EUnityPoolOptions other)
 		{
-			return (option & other) == other;
+			return other != 0 && (option & other) == other;
 		}
 	}
 }
