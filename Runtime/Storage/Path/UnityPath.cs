@@ -1,4 +1,8 @@
 ﻿using System.IO;
+#if UNITY_SWITCH
+using nn;
+using nn.fs;
+#endif
 
 namespace ProceduralLevel.UnityPlugins.Common.Storage
 {
@@ -6,72 +10,85 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 	{
 		public readonly EUnityPathType Type;
 		public readonly string Path;
-		public readonly string Ext;
 
-		public UnityPath(EUnityPathType type, string path = default, string ext = default)
+		public UnityPath(EUnityPathType type, string path)
 		{
 			Type = type;
 			Path = path;
+
+			string ext = System.IO.Path.GetExtension(path);
 			if(string.IsNullOrEmpty(ext))
 			{
-				if(string.IsNullOrEmpty(path))
+				if(!path.EndsWith("/") && !path.EndsWith("\\"))
 				{
-					Path = "";
-				}
-				else if(!path.EndsWith("/") && !path.EndsWith("\\"))
-				{
-					Path += "\\";
-				}
-				Ext = "";
-			}
-			else
-			{
-				if(ext[0] != '.')
-				{
-					Ext = "."+ext;
-				}
-				else
-				{
-					Ext = ext;
+					Path += "/";
 				}
 			}
 		}
 
 		public void EnsureFolder()
 		{
+			bool fileHandled = false;
 			string directoryPath = System.IO.Path.GetDirectoryName(ToString());
 
-			DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
-			if(!directoryInfo.Exists)
+#if UNITY_SWITCH
+			if(!Consts.IsEditor)
 			{
-				directoryInfo.Create();
+				fileHandled = true;
+				if(!PathExists(directoryPath))
+				{
+					Result result = nn.fs.Directory.Create(directoryPath);
+					result.abortUnlessSuccess();
+				}
+			}
+#endif
+			if(!fileHandled)
+			{
+				DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
+				if(!directoryInfo.Exists)
+				{
+					directoryInfo.Create();
+				}
 			}
 		}
 
-		public UnityPath Append(string sufix)
+		public bool Exists()
 		{
-			return new UnityPath(Type, Path+sufix, Ext);
+			return PathExists(ToString());
 		}
 
-		public UnityPath Append(string sufix, string ext)
+		private bool PathExists(string path)
 		{
-			return new UnityPath(Type, Path+sufix, ext);
+#if UNITY_SWITCH
+			if(!Consts.IsEditor)
+			{
+				EntryType entryType = EntryType.Directory;
+				Result result = FileSystem.GetEntryType(ref entryType, path);
+				return result.IsSuccess();
+			}
+#endif
+			return System.IO.File.Exists(path);
+		}
+
+
+		public UnityPath Append(string sufix)
+		{
+			return new UnityPath(Type, Path+sufix);
 		}
 
 		public UnityPath Format(params string[] args)
 		{
-			return new UnityPath(Type, string.Format(Path, args), Ext);
+			return new UnityPath(Type, string.Format(Path, args));
 		}
 
 		public override string ToString()
 		{
 			string prefix = Type.ToFolder();
-
-			if(string.IsNullOrEmpty(Ext))
+			if(!string.IsNullOrEmpty(prefix))
 			{
-				return string.Format("{0}{1}", prefix, Path);
+				prefix = prefix+"\\";
 			}
-			return string.Format("{0}{1}{2}", prefix, Path, Ext);
+			return string.Format("{0}{1}", prefix, Path);
 		}
 	}
 }
