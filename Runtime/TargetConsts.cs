@@ -5,7 +5,7 @@
 #if UNITY_STANDALONE
 		public static readonly bool IsPC = true;
 #else
-		public readonly static bool IsPC = false;
+		public static readonly bool IsPC = false;
 #endif
 
 #if UNITY_ANDROID || UNITY_IPHONE
@@ -27,7 +27,7 @@
 #endif
 
 #if UNITY_SWITCH || NN_PLUGIN_ENABLE
-		public readonly static bool IsSwitch = true;
+		public static readonly bool IsSwitch = true;
 #else
 		public static readonly bool IsSwitch = false;
 #endif
