@@ -1,6 +1,5 @@
 ﻿using System;
 #if UNITY_SWITCH
-using ProceduralLevel.Voxelgram2.Visual.General;
 using nn.fs;
 using nn;
 using File = nn.fs.File;
@@ -12,9 +11,6 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 {
 	public abstract class APersistentStorage
 	{
-		public static bool InMemory;
-		public static string BackupSufix = "_backup";
-
 		private readonly UnityPath m_Path;
 		private readonly bool m_UseBackup;
 
@@ -26,7 +22,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 
 		public bool Load()
 		{
-			if(InMemory)
+			if(StorageConsts.InMemory)
 			{
 				return true;
 			}
@@ -39,7 +35,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 
 		private bool TryLoadPersistent(bool backup)
 		{
-			string filePath = (backup? m_Path.Append(BackupSufix): m_Path).ToString();
+			string filePath = (backup? m_Path.Append(StorageConsts.BackupSufix): m_Path).ToString();
 			try
 			{
 				byte[] rawData = ReadBytes(filePath);
@@ -56,7 +52,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 
 		public void Save()
 		{
-			if(InMemory)
+			if(StorageConsts.InMemory)
 			{
 				return;
 			}
@@ -66,7 +62,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 
 			if(m_UseBackup)
 			{
-				CreateCopy(BackupSufix);
+				CreateCopy(StorageConsts.BackupSufix);
 			}
 
 			byte[] saveData = OnFlush();
@@ -78,7 +74,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 
 		public void CreateCopy(string sufix)
 		{
-			if(InMemory)
+			if(StorageConsts.InMemory)
 			{
 				return;
 			}
@@ -120,7 +116,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 				result.abortUnlessSuccess();
 
 				File.Close(fileHandle);
-				result = FileSystem.Commit(StorageConsts.MOUNT_NAME);
+				result = FileSystem.Commit(StorageConsts.MountName);
 				result.abortUnlessSuccess();
 
 				// Nintendo Switch Guideline 0080
@@ -139,7 +135,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 		public static byte[] ReadBytes(string path)
 		{
 #if UNITY_SWITCH
-			if(!GeneralConsts.IsEditor)
+			if(!TargetConsts.IsEditor)
 			{
 				EntryType entry = 0;
 				Result result = FileSystem.GetEntryType(ref entry, path);
@@ -160,15 +156,14 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 					File.Close(fileHandle);
 					return data;
 				}
-				return null;
 			}
 #else
 			if(File.Exists(path))
 			{
 				return File.ReadAllBytes(path);
 			}
-			return null;
 #endif
+			return null;
 		}
 	}
 }

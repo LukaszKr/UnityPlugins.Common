@@ -32,7 +32,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 			string directoryPath = System.IO.Path.GetDirectoryName(ToString());
 
 #if UNITY_SWITCH
-			if(!Consts.IsEditor)
+			if(!TargetConsts.IsEditor)
 			{
 				fileHandled = true;
 				if(!PathExists(directoryPath))
@@ -60,7 +60,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 		private bool PathExists(string path)
 		{
 #if UNITY_SWITCH
-			if(!Consts.IsEditor)
+			if(!TargetConsts.IsEditor)
 			{
 				EntryType entryType = EntryType.Directory;
 				Result result = FileSystem.GetEntryType(ref entryType, path);

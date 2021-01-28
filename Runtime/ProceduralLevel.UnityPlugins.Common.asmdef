@@ -1,6 +1,8 @@
 {
     "name": "ProceduralLevel.UnityPlugins.Common",
-    "references": [],
+    "references": [
+        "NintendoSwitchSDK"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
