@@ -3,6 +3,8 @@
 using nn.fs;
 using nn;
 using File = nn.fs.File;
+#else
+using System.IO;
 #endif
 using UnityEngine;
 
