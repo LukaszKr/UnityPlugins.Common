@@ -13,17 +13,17 @@ namespace ProceduralLevel.UnityPlugins.Common
 
 		private void Update()
 		{
-			Vector2 available = GetAvailableSpace();
-			if(!Mathf.Approximately(m_KnownWidth, available.x) || !Mathf.Approximately(m_KnownHeight, available.y))
+			Vector2 availableSpace = GetAvailableSpace();
+			if(!Mathf.Approximately(m_KnownWidth, availableSpace.x) || !Mathf.Approximately(m_KnownHeight, availableSpace.y))
 			{
-				Recalculate(available);
+				Recalculate(availableSpace);
 			}
 		}
 
-		private void Recalculate(Vector2 space)
+		private void Recalculate(Vector2 availableSpace)
 		{
-			m_KnownWidth = space.x;
-			m_KnownHeight = space.y;
+			m_KnownWidth = availableSpace.x;
+			m_KnownHeight = availableSpace.y;
 
 			float aspect = m_KnownWidth/m_KnownHeight;
 

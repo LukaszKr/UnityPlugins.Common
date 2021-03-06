@@ -15,7 +15,7 @@ namespace ProceduralLevel.UnityPlugins.Common
 
 		protected override Vector2 GetAvailableSpace()
 		{
-			return new Vector2(Screen.width, Screen.height);
+			return new Vector2(Screen.width/m_Canvas.scaleFactor, Screen.height/m_Canvas.scaleFactor);
 		}
 
 		protected override void SetSize(float width, float height)
