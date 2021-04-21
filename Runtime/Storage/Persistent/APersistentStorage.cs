@@ -40,7 +40,10 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 			try
 			{
 				byte[] rawData = ReadBytes(filePath);
-				OnLoad(rawData);
+				if(rawData != null && rawData.Length > 0)
+				{
+					OnLoad(rawData);
+				}
 				return true;
 			}
 			catch(Exception e)
