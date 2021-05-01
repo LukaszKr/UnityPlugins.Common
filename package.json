@@ -1,10 +1,10 @@
 {
 	"name": "procedurallevel.unityplugins.common",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"displayName": "Common",
 	"description": "",
 	"unity": "2019.4",
-	"unityRelease": "9f1",
+	"unityRelease": "23f1",
 	"dependencies": {
 	},
 	"keywords": [
