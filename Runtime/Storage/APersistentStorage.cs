@@ -32,7 +32,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 			string filePath = (backup? m_Path.Append(StorageConsts.BackupSufix): m_Path).ToString();
 			try
 			{
-				byte[] rawData = DefaultDataPersistence.Instance.ReadBytes(filePath);
+				byte[] rawData = DataPersistence.Instance.ReadBytes(filePath);
 				if(rawData != null && rawData.Length > 0)
 				{
 					OnLoad(rawData);
@@ -63,7 +63,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 			}
 
 			byte[] saveData = OnFlush();
-			DefaultDataPersistence.Instance.WriteBytes(filePath, saveData);
+			DataPersistence.Instance.WriteBytes(filePath, saveData);
 		}
 
 		protected abstract void OnLoad(byte[] saveData);
@@ -78,10 +78,10 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 
 			string filePath = m_Path.ToString();
 			string copyFilePath = m_Path.Append(sufix).ToString();
-			byte[] data = DefaultDataPersistence.Instance.ReadBytes(filePath);
+			byte[] data = DataPersistence.Instance.ReadBytes(filePath);
 			if(data != null)
 			{
-				DefaultDataPersistence.Instance.WriteBytes(copyFilePath, data);
+				DataPersistence.Instance.WriteBytes(copyFilePath, data);
 			}
 		}
 	}

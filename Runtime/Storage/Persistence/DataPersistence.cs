@@ -2,9 +2,9 @@
 
 namespace ProceduralLevel.UnityPlugins.Common.Storage
 {
-	public class DefaultDataPersistence
+	public class DataPersistence
 	{
-		public static DefaultDataPersistence Instance = new DefaultDataPersistence();
+		public static DataPersistence Instance = new DataPersistence();
 
 		public virtual bool PathExists(string path)
 		{

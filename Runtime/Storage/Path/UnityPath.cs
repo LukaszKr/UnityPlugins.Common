@@ -23,12 +23,12 @@
 		public void EnsureFolder()
 		{
 			string directoryPath = System.IO.Path.GetDirectoryName(ToString());
-			DefaultDataPersistence.Instance.EnsureDirectory(directoryPath);
+			DataPersistence.Instance.EnsureDirectory(directoryPath);
 		}
 
 		public bool Exists()
 		{
-			return DefaultDataPersistence.Instance.PathExists(ToString());
+			return DataPersistence.Instance.PathExists(ToString());
 		}
 
 		public UnityPath Append(string sufix)
