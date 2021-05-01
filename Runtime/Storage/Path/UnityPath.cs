@@ -1,10 +1,4 @@
-﻿using System.IO;
-#if UNITY_SWITCH
-using nn;
-using nn.fs;
-#endif
-
-namespace ProceduralLevel.UnityPlugins.Common.Storage
+﻿namespace ProceduralLevel.UnityPlugins.Common.Storage
 {
 	public struct UnityPath
 	{
@@ -28,48 +22,14 @@ namespace ProceduralLevel.UnityPlugins.Common.Storage
 
 		public void EnsureFolder()
 		{
-			bool fileHandled = false;
 			string directoryPath = System.IO.Path.GetDirectoryName(ToString());
-
-#if UNITY_SWITCH
-			if(!TargetConsts.IsEditor)
-			{
-				fileHandled = true;
-				if(!PathExists(directoryPath))
-				{
-					Result result = nn.fs.Directory.Create(directoryPath);
-					result.abortUnlessSuccess();
-				}
-			}
-#endif
-			if(!fileHandled)
-			{
-				DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
-				if(!directoryInfo.Exists)
-				{
-					directoryInfo.Create();
-				}
-			}
+			DefaultDataPersistence.Instance.EnsureDirectory(directoryPath);
 		}
 
 		public bool Exists()
 		{
-			return PathExists(ToString());
+			return DefaultDataPersistence.Instance.PathExists(ToString());
 		}
-
-		private bool PathExists(string path)
-		{
-#if UNITY_SWITCH
-			if(!TargetConsts.IsEditor)
-			{
-				EntryType entryType = EntryType.Directory;
-				Result result = FileSystem.GetEntryType(ref entryType, path);
-				return result.IsSuccess();
-			}
-#endif
-			return System.IO.File.Exists(path);
-		}
-
 
 		public UnityPath Append(string sufix)
 		{

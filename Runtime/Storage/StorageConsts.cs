@@ -4,9 +4,5 @@
 	{
 		public static bool InMemory = false;
 		public static string BackupSufix = "_backup";
-
-#if UNITY_SWITCH
-		public static string MountName = "GameSave";
-#endif
 	}
 }
