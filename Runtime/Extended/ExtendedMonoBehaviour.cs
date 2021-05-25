@@ -6,19 +6,19 @@ namespace ProceduralLevel.UnityPlugins.Common.Extended
 	public abstract class ExtendedMonoBehaviour: MonoBehaviour
 	{
 		[NonSerialized]
-		private Transform _Transform;
+		private Transform m_Transform;
 		[NonSerialized]
-		private GameObject _GameObject;
+		private GameObject m_GameObject;
 
 		public Transform Transform
 		{
 			get
 			{
-				if(ReferenceEquals(_Transform, null))
+				if(ReferenceEquals(m_Transform, null))
 				{
-					_Transform = base.transform;
+					m_Transform = base.transform;
 				}
-				return _Transform;
+				return m_Transform;
 			}
 		}
 
@@ -26,11 +26,11 @@ namespace ProceduralLevel.UnityPlugins.Common.Extended
 		{
 			get
 			{
-				if(ReferenceEquals(_GameObject, null))
+				if(ReferenceEquals(m_GameObject, null))
 				{
-					_GameObject = base.gameObject;
+					m_GameObject = base.gameObject;
 				}
-				return _GameObject;
+				return m_GameObject;
 			}
 		}
 
