@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ProceduralLevel.UnityPlugins.Common.Extended
 {
-	public abstract class ExtendedMonoBehaviour: MonoBehaviour
+	public abstract class ExtendedMonoBehaviour : MonoBehaviour
 	{
 		[NonSerialized]
 		private Transform m_Transform;

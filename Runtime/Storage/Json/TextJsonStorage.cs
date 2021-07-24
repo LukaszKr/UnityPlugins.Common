@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace ProceduralLevel.UnityPlugins.Common.Storage
 {
-	public class TextJsonStorage<TData>: APersistentStorage
+	public class TextJsonStorage<TData> : APersistentStorage
 		where TData : class
 	{
 		public readonly TData Target;

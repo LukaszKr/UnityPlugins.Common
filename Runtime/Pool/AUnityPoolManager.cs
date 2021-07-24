@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ProceduralLevel.UnityPlugins.Common.Pool
 {
-	public abstract class AUnityPoolManager: ExtendedMonoBehaviour
+	public abstract class AUnityPoolManager : ExtendedMonoBehaviour
 	{
 		public UnityPool<TEntry> CreatePool<TEntry>(TEntry prefab, int initialCapacity, EUnityPoolOptions options)
 			where TEntry : ExtendedMonoBehaviour, IUnityPoolEntry

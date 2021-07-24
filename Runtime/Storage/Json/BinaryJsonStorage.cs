@@ -4,7 +4,7 @@ using Newtonsoft.Json.Bson;
 
 namespace ProceduralLevel.UnityPlugins.Common.Storage
 {
-	public class BinaryJsonStorage<TData>: APersistentStorage
+	public class BinaryJsonStorage<TData> : APersistentStorage
 		where TData : class
 	{
 		public readonly TData Target;
