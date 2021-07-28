@@ -32,7 +32,8 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Pool
 		{
 			for(int x = 0; x < Capacity; ++x)
 			{
-				Return(CreateEntry());
+				TEntry entry = CreateEntry();
+				PushEntry(entry);
 			}
 		}
 
@@ -79,14 +80,19 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Pool
 					{
 						entry.GameObject.SetActive(false);
 					}
-					entry.Transform.SetParent(m_Parent, false);
-					m_Pool.Push(entry);
+					PushEntry(entry);
 				}
 				else
 				{
 					DestroyEntry(entry);
 				}
 			}
+		}
+
+		private void PushEntry(TEntry entry)
+		{
+			entry.Transform.SetParent(m_Parent, false);
+			m_Pool.Push(entry);
 		}
 
 		public void Return(TEntry[] entries)
