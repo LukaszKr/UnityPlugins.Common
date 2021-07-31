@@ -76,10 +76,6 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Pool
 				if(m_Parent && entry)
 				{
 					entry.OnReturnToPool();
-					if(m_Options.Contains(EUnityPoolOptions.ManageActive))
-					{
-						entry.GameObject.SetActive(false);
-					}
 					PushEntry(entry);
 				}
 				else
@@ -91,6 +87,10 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Pool
 
 		private void PushEntry(TEntry entry)
 		{
+			if(m_Options.Contains(EUnityPoolOptions.ManageActive))
+			{
+				entry.GameObject.SetActive(false);
+			}
 			entry.Transform.SetParent(m_Parent, false);
 			m_Pool.Push(entry);
 		}
