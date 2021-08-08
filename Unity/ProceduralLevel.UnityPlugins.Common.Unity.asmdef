@@ -1,6 +1,8 @@
 {
     "name": "ProceduralLevel.UnityPlugins.Common.Unity",
-    "references": [],
+    "references": [
+        "GUID:b277b211e00b784498da01e1a7f0ec09"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
