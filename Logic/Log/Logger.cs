@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ProceduralLevel.UnityPlugins.Common.Logic
 {
-	public class DebugLog
+	public class Logger
 	{
-		public static readonly DebugLog Default = new DebugLog();
+		public static readonly Logger Default = new Logger();
 		private readonly List<ALogHandler> m_Handlers = new List<ALogHandler>();
 
 		public void AddHandler(ALogHandler handler)
