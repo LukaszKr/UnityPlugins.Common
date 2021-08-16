@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProceduralLevel.UnityPlugins.Common.Logic
+namespace ProceduralLevel.UnityPlugins.Common.Unity
 {
 	public abstract class ALogHandler
 	{

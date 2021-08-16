@@ -1,5 +1,4 @@
 ﻿using System;
-using ProceduralLevel.UnityPlugins.Common.Logic;
 using UnityEngine;
 
 namespace ProceduralLevel.UnityPlugins.Common.Unity

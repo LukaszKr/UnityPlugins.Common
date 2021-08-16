@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ProceduralLevel.UnityPlugins.Common.Logic
+namespace ProceduralLevel.UnityPlugins.Common.Unity
 {
 	public class Logger
 	{

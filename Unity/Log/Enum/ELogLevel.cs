@@ -1,4 +1,4 @@
-﻿namespace ProceduralLevel.UnityPlugins.Common.Logic
+﻿namespace ProceduralLevel.UnityPlugins.Common.Unity
 {
 	public enum ELogLevel
 	{
