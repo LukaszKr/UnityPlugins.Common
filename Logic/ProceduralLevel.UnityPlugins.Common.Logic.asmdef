@@ -1,5 +1,6 @@
 {
     "name": "ProceduralLevel.UnityPlugins.Common.Logic",
+    "rootNamespace": "ProceduralLevel.UnityPlugins.Common.Logic",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
