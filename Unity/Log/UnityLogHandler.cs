@@ -29,13 +29,13 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 			{
 				case ELogLevel.Info:
 				case ELogLevel.Debug:
-					Debug.Log(formatted);
+					UnityLogExt.LogInfo(formatted, typeof(UnityLogHandler));
 					break;
 				case ELogLevel.Warning:
-					Debug.LogWarning(formatted);
+					UnityLogExt.LogWarning(formatted, typeof(UnityLogHandler));
 					break;
 				case ELogLevel.Error:
-					Debug.LogError(formatted);
+					UnityLogExt.LogError(formatted, typeof(UnityLogHandler));
 					break;
 			}
 		}
