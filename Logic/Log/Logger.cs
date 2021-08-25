@@ -48,7 +48,6 @@ namespace ProceduralLevel.UnityPlugins.Common.Logic
 			Log(ELogLevel.Info, message);
 		}
 
-
 		public void LogWarning(string message)
 		{
 			Log(ELogLevel.Warning, message);
