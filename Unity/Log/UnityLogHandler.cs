@@ -12,10 +12,12 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 		public Color ErrorColor = new Color(1f, 0.6f, 0.6f);
 
 		public readonly string Channel;
+		public bool Callstack = true;
 
-		public UnityLogHandler(string channel = "")
+		public UnityLogHandler(string channel = "", bool callstack = true)
 		{
 			Channel = channel;
+			Callstack = callstack;
 		}
 
 		public override void Log(ELogLevel level, string message)

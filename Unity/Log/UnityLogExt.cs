@@ -19,22 +19,22 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 			m_LogError = typeof(UnityEngine.Debug).GetMethod("LogError", BindingFlags.NonPublic | BindingFlags.Static);
 		}
 
-		public static void LogInfo(string msg, Type cutoffPoint)
+		public static void LogInfo(string msg, Type cutoffPoint, EUnityLogMode mode = EUnityLogMode.All)
 		{
-			Log(msg, cutoffPoint, m_LogInfo);
+			Log(msg, cutoffPoint, m_LogInfo, mode);
 		}
 
-		public static void LogWarning(string msg, Type cutoffPoint)
+		public static void LogWarning(string msg, Type cutoffPoint, EUnityLogMode mode = EUnityLogMode.All)
 		{
-			Log(msg, cutoffPoint, m_LogWarning);
+			Log(msg, cutoffPoint, m_LogWarning, mode);
 		}
 
-		public static void LogError(string msg, Type cutoffPoint)
+		public static void LogError(string msg, Type cutoffPoint, EUnityLogMode mode = EUnityLogMode.All)
 		{
-			Log(msg, cutoffPoint, m_LogError);
+			Log(msg, cutoffPoint, m_LogError, mode);
 		}
 
-		private static void Log(string msg, Type cutoffPoint, MethodInfo logMethod)
+		private static void Log(string msg, Type cutoffPoint, MethodInfo logMethod, EUnityLogMode mode)
 		{
 			if(cutoffPoint == null)
 			{
@@ -72,7 +72,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 					entryColumn = frame.GetFileColumnNumber();
 				}
 
-				if(foundEntry)
+				if(foundEntry && mode.Contains(EUnityLogMode.Callstack))
 				{
 					string fileName = frame.GetFileName();
 					int lineNumber = frame.GetFileLineNumber();
