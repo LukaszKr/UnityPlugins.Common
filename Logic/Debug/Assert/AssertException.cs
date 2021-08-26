@@ -2,9 +2,9 @@
 
 namespace ProceduralLevel.UnityPlugins.Common.Logic
 {
-	public class DebugAssertException : Exception
+	public class AssertException : Exception
 	{
-		public DebugAssertException(string message)
+		public AssertException(string message)
 			: base(message)
 		{
 		}

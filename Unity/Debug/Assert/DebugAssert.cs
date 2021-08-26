@@ -6,22 +6,16 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 {
 	public static partial class DebugAssert
 	{
-		[Conditional(AssertLogicConsts.EDITOR_CONDITIONAL)]
+		[Conditional(CommmonLogicConsts.DEBUG_ASSERT)]
 		public static void IsDestroyed(GameObject go, string message)
 		{
-			if(go)
-			{
-				throw new DebugAssertException($"[IsDestroyed, {message}]");
-			}
+			RuntimeAssert.IsDestroyed(go, message);
 		}
 
-		[Conditional(AssertLogicConsts.EDITOR_CONDITIONAL)]
+		[Conditional(CommmonLogicConsts.DEBUG_ASSERT)]
 		public static void IsNotDestroyed(GameObject go, string message)
 		{
-			if(!go)
-			{
-				throw new DebugAssertException($"[IsNotDestroyed, {message}]");
-			}
+			RuntimeAssert.IsNotDestroyed(go, message);
 		}
 	}
 }
