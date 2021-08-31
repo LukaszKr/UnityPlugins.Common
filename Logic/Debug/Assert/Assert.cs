@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace ProceduralLevel.UnityPlugins.Common.Logic
 {
-	public static partial class RuntimeAssert
+	public static partial class Assert
 	{
 		private const float APPROX = 0.00001f;
 
