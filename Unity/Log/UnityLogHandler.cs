@@ -1,6 +1,7 @@
 ﻿using System;
 using ProceduralLevel.UnityPlugins.Common.Logic;
 using UnityEngine;
+using Logger = ProceduralLevel.UnityPlugins.Common.Logic.Logger;
 
 namespace ProceduralLevel.UnityPlugins.Common.Unity
 {
@@ -12,12 +13,21 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 		public Color ErrorColor = new Color(1f, 0.6f, 0.6f);
 
 		public readonly string Channel;
+		public readonly Type CutoffType = null;
 		public bool Callstack = true;
 
-		public UnityLogHandler(string channel = "", bool callstack = true)
+		public UnityLogHandler(string channel = "", bool callstack = true, Type cutoffType = null)
 		{
 			Channel = channel;
 			Callstack = callstack;
+			if(cutoffType == null)
+			{
+				CutoffType = typeof(Logger);
+			}
+			else
+			{
+				CutoffType = cutoffType;
+			}
 		}
 
 		public override void Log(ELogLevel level, string message)
@@ -31,13 +41,13 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 			{
 				case ELogLevel.Info:
 				case ELogLevel.Debug:
-					UnityLogExt.LogInfo(formatted, typeof(UnityLogHandler));
+					UnityLogExt.LogInfo(formatted, CutoffType);
 					break;
 				case ELogLevel.Warning:
-					UnityLogExt.LogWarning(formatted, typeof(UnityLogHandler));
+					UnityLogExt.LogWarning(formatted, CutoffType);
 					break;
 				case ELogLevel.Error:
-					UnityLogExt.LogError(formatted, typeof(UnityLogHandler));
+					UnityLogExt.LogError(formatted, CutoffType);
 					break;
 			}
 		}
