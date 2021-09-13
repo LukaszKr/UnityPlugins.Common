@@ -81,7 +81,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 						continue;
 					}
 
-					message.Append($"{method.DeclaringType.FullName}:{method.Name}()");
+					message.Append($"{method.DeclaringType.Name}:{method.Name}()");
 					message.Append($" (at <a href=\"{fileName} line=\"{lineNumber}\">");
 					//the first stack message is found now we add the other stack frames to the log
 					string shorterFileName = fileName.Remove(0, Application.dataPath.Length - 6); //6 for "Assets"
