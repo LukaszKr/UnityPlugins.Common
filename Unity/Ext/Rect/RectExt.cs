@@ -46,6 +46,28 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 		}
 		#endregion
 
+		#region Add
+		public static Rect AddLeft(this Rect rect, float width)
+		{
+			return new Rect(rect.x-width, rect.y, rect.width+width, rect.height);
+		}
+
+		public static Rect AddRight(this Rect rect, float width)
+		{
+			return new Rect(rect.x, rect.y, rect.width+width, rect.height);
+		}
+
+		public static Rect AddTop(this Rect rect, float height)
+		{
+			return new Rect(rect.x, rect.y-height, rect.width, rect.height+height);
+		}
+
+		public static Rect AddBottom(this Rect rect, float height)
+		{
+			return new Rect(rect.x, rect.y, rect.width, rect.height+height);
+		}
+		#endregion
+
 		public static RectPair SplitHorizontal(this Rect rect, float leftToRightRatio)
 		{
 			float leftWidth = rect.width*leftToRightRatio;
