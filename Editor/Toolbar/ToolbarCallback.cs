@@ -63,23 +63,23 @@ namespace ProceduralLevel.UnityPlugins.Common.Editor
 					RegisterCallback("ToolbarZoneLeftAlign", OnToolbarGUILeft);
 					RegisterCallback("ToolbarZoneRightAlign", OnToolbarGUIRight);
 
-					void RegisterCallback(string root, Action cb) 
+					void RegisterCallback(string root, Action cb)
 					{
 						VisualElement toolbarZone = mRoot.Q(root);
 
 						VisualElement parent = new VisualElement()
 						{
-							style = 
+							style =
 							{
 								flexGrow = 1,
 								flexDirection = FlexDirection.Row,
 							}
 						};
 						IMGUIContainer container = new IMGUIContainer();
-						container.onGUIHandler += () => 
-						{ 
+						container.onGUIHandler += () =>
+						{
 							cb?.Invoke();
-						}; 
+						};
 						parent.Add(container);
 						toolbarZone.Add(parent);
 					}
