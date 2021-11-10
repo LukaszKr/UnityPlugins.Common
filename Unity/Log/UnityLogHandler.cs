@@ -32,6 +32,37 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 
 		public override void Log(ELogLevel level, string message)
 		{
+			if(Application.isEditor)
+			{
+				LogEditor(level, message);
+			}
+			else
+			{
+				LogBuild(level, message);
+			}
+		}
+
+		private void LogBuild(ELogLevel level, string message)
+		{
+			switch(level)
+			{
+				case ELogLevel.Info:
+				case ELogLevel.Debug:
+					Debug.Log(message);
+					break;
+				case ELogLevel.Warning:
+					Debug.LogWarning(message);
+					break;
+				case ELogLevel.Error:
+					Debug.LogError(message);
+					break;
+				default:
+					throw new NotImplementedException();
+			}
+		}
+
+		private void LogEditor(ELogLevel level, string message)
+		{
 			Color unityColor = GetColor(level);
 			string color = ColorUtility.ToHtmlStringRGB(unityColor);
 			string channelStr = (string.IsNullOrEmpty(Channel)? "": $"[{Channel}]");
