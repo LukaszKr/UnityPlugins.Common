@@ -12,8 +12,15 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 		private static readonly MethodInfo m_LogWarning;
 		private static readonly MethodInfo m_LogError;
 
+		private static readonly int m_AssetPathLength;
+
 		static UnityLogExt()
 		{
+			string assetPath = Application.dataPath;
+			//Remove Asset
+			assetPath = assetPath.Substring(assetPath.Length - 6);
+			m_AssetPathLength = assetPath.Length;
+
 			m_LogInfo = typeof(UnityEngine.Debug).GetMethod("LogInfo", BindingFlags.NonPublic | BindingFlags.Static);
 			m_LogWarning = typeof(UnityEngine.Debug).GetMethod("LogWarning", BindingFlags.NonPublic | BindingFlags.Static);
 			m_LogError = typeof(UnityEngine.Debug).GetMethod("LogError", BindingFlags.NonPublic | BindingFlags.Static);
@@ -82,10 +89,13 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 					}
 
 					message.Append($"{method.DeclaringType.Name}:{method.Name}()");
-					message.Append($" (at <a href=\"{fileName} line=\"{lineNumber}\">");
+					message.Append($" (at <a href=\"{fileName}\" line=\"{lineNumber}\">");
 					//the first stack message is found now we add the other stack frames to the log
-					string shorterFileName = fileName.Remove(0, Application.dataPath.Length - 6); //6 for "Assets"
-					message.Append($"{shorterFileName}:{lineNumber}</a>)\n");
+					if(fileName.Length > m_AssetPathLength)
+					{
+						fileName = fileName.Remove(0, m_AssetPathLength);
+					}
+					message.Append($"{fileName}:{lineNumber}</a>)\n");
 				}
 			}
 

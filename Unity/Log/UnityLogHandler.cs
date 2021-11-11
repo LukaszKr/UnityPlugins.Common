@@ -1,7 +1,6 @@
 ﻿using System;
 using ProceduralLevel.UnityPlugins.Common.Logic;
 using UnityEngine;
-using Logger = ProceduralLevel.UnityPlugins.Common.Logic.Logger;
 
 namespace ProceduralLevel.UnityPlugins.Common.Unity
 {
@@ -22,7 +21,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 			Callstack = callstack;
 			if(cutoffType == null)
 			{
-				CutoffType = typeof(Logger);
+				CutoffType = typeof(CustomLogger);
 			}
 			else
 			{
