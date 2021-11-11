@@ -18,7 +18,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 		{
 			string assetPath = Application.dataPath;
 			//Remove Asset
-			assetPath = assetPath.Substring(assetPath.Length - 6);
+			assetPath = assetPath.Substring(0, assetPath.Length - 6);
 			m_AssetPathLength = assetPath.Length;
 
 			m_LogInfo = typeof(UnityEngine.Debug).GetMethod("LogInfo", BindingFlags.NonPublic | BindingFlags.Static);
@@ -81,7 +81,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 
 				if(foundEntry && mode.Contains(EUnityLogMode.Callstack))
 				{
-					string fileName = frame.GetFileName();
+					string fileName = frame.GetFileName().Replace('\\', '/');
 					int lineNumber = frame.GetFileLineNumber();
 					if(string.IsNullOrEmpty(fileName))
 					{
@@ -90,7 +90,6 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 
 					message.Append($"{method.DeclaringType.Name}:{method.Name}()");
 					message.Append($" (at <a href=\"{fileName}\" line=\"{lineNumber}\">");
-					//the first stack message is found now we add the other stack frames to the log
 					if(fileName.Length > m_AssetPathLength)
 					{
 						fileName = fileName.Remove(0, m_AssetPathLength);
