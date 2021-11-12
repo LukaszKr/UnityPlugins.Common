@@ -6,10 +6,9 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 {
 	public class UnityLogHandler : ALogHandler
 	{
-		public Color DebugColor = new Color(1f, 1f, 1f);
-		public Color InfoColor = new Color(0.6f, 0.6f, 1f);
-		public Color WarningColor = new Color(1f, 1f, 0.6f);
-		public Color ErrorColor = new Color(1f, 0.6f, 0.6f);
+		public Color InfoColor = new Color(1.0f, 1.0f, 1.0f);
+		public Color WarningColor = new Color(1.0f, 1.0f, 0.6f);
+		public Color ErrorColor = new Color(1.0f, 0.6f, 0.6f);
 
 		public readonly string Channel;
 		public readonly Type CutoffType = null;
@@ -29,70 +28,45 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 			}
 		}
 
-		public override void Log(ELogLevel level, string message)
+		public override void Log(ELogType logType, string message)
 		{
 			if(Application.isEditor)
 			{
-				LogEditor(level, message);
+				Color unityColor = GetColor(logType);
+				string color = ColorUtility.ToHtmlStringRGB(unityColor);
+				string channelStr = (string.IsNullOrEmpty(Channel)? "": $"[{Channel}]");
+				string formatted = $"<color=#{color}>{channelStr}{message}</color>";
+
+				UnityLogExt.Log(formatted, CutoffType, logType);
 			}
 			else
 			{
-				LogBuild(level, message);
+				switch(logType)
+				{
+					case ELogType.Info:
+						Debug.Log(message);
+						break;
+					case ELogType.Warning:
+						Debug.LogWarning(message);
+						break;
+					case ELogType.Error:
+						Debug.LogError(message);
+						break;
+					default:
+						throw new NotImplementedException();
+				}
 			}
 		}
 
-		private void LogBuild(ELogLevel level, string message)
+		public Color GetColor(ELogType level)
 		{
 			switch(level)
 			{
-				case ELogLevel.Info:
-				case ELogLevel.Debug:
-					Debug.Log(message);
-					break;
-				case ELogLevel.Warning:
-					Debug.LogWarning(message);
-					break;
-				case ELogLevel.Error:
-					Debug.LogError(message);
-					break;
-				default:
-					throw new NotImplementedException();
-			}
-		}
-
-		private void LogEditor(ELogLevel level, string message)
-		{
-			Color unityColor = GetColor(level);
-			string color = ColorUtility.ToHtmlStringRGB(unityColor);
-			string channelStr = (string.IsNullOrEmpty(Channel)? "": $"[{Channel}]");
-			string formatted = $"<color=#{color}>{channelStr}{message}</color>";
-
-			switch(level)
-			{
-				case ELogLevel.Info:
-				case ELogLevel.Debug:
-					UnityLogExt.LogInfo(formatted, CutoffType);
-					break;
-				case ELogLevel.Warning:
-					UnityLogExt.LogWarning(formatted, CutoffType);
-					break;
-				case ELogLevel.Error:
-					UnityLogExt.LogError(formatted, CutoffType);
-					break;
-			}
-		}
-
-		public Color GetColor(ELogLevel level)
-		{
-			switch(level)
-			{
-				case ELogLevel.Debug:
-					return DebugColor;
-				case ELogLevel.Info:
+				case ELogType.Info:
 					return InfoColor;
-				case ELogLevel.Warning:
+				case ELogType.Warning:
 					return WarningColor;
-				case ELogLevel.Error:
+				case ELogType.Error:
 					return ErrorColor;
 				default:
 					throw new NotImplementedException();

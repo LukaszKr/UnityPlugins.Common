@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Text;
+using ProceduralLevel.UnityPlugins.Common.Logic;
 using UnityEngine;
 
 namespace ProceduralLevel.UnityPlugins.Common.Unity
@@ -21,27 +22,14 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 			assetPath = assetPath.Substring(0, assetPath.Length - 6);
 			m_AssetPathLength = assetPath.Length;
 
-			m_LogInfo = typeof(UnityEngine.Debug).GetMethod("LogInfo", BindingFlags.NonPublic | BindingFlags.Static);
-			m_LogWarning = typeof(UnityEngine.Debug).GetMethod("LogWarning", BindingFlags.NonPublic | BindingFlags.Static);
-			m_LogError = typeof(UnityEngine.Debug).GetMethod("LogError", BindingFlags.NonPublic | BindingFlags.Static);
+			Type debugType = typeof(UnityEngine.Debug);
+
+			m_LogInfo = debugType.GetMethod("LogInformation", BindingFlags.NonPublic | BindingFlags.Static);
+			m_LogWarning = debugType.GetMethod("LogCompilerWarning", BindingFlags.NonPublic | BindingFlags.Static);
+			m_LogError = debugType.GetMethod("LogCompilerError", BindingFlags.NonPublic | BindingFlags.Static);
 		}
 
-		public static void LogInfo(string msg, Type cutoffPoint, EUnityLogMode mode = EUnityLogMode.All)
-		{
-			Log(msg, cutoffPoint, m_LogInfo, mode);
-		}
-
-		public static void LogWarning(string msg, Type cutoffPoint, EUnityLogMode mode = EUnityLogMode.All)
-		{
-			Log(msg, cutoffPoint, m_LogWarning, mode);
-		}
-
-		public static void LogError(string msg, Type cutoffPoint, EUnityLogMode mode = EUnityLogMode.All)
-		{
-			Log(msg, cutoffPoint, m_LogError, mode);
-		}
-
-		private static void Log(string msg, Type cutoffPoint, MethodInfo logMethod, EUnityLogMode mode)
+		public static void Log(string msg, Type cutoffPoint, ELogType logType, EUnityLogMode mode = EUnityLogMode.All)
 		{
 			if(cutoffPoint == null)
 			{
@@ -49,11 +37,10 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 			}
 
 			StringBuilder message = new StringBuilder($"{msg}");
-			message.AppendLine();
 			StackTrace stack = new StackTrace(true);
 			int frameCount = stack.FrameCount;
 			bool foundEntry = false;
-			bool foundCutoffPoint = false;
+			bool foundCutoffPoint = (cutoffPoint == null);
 			bool isCutoffPoint;
 
 			string entryFileName = "";
@@ -88,19 +75,33 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 						continue;
 					}
 
-					message.Append($"{method.DeclaringType.Name}:{method.Name}()");
+					message.AppendLine();
+					message.Append($"{method.DeclaringType.FullName}:{method.Name} ()");
 					message.Append($" (at <a href=\"{fileName}\" line=\"{lineNumber}\">");
 					if(fileName.Length > m_AssetPathLength)
 					{
 						fileName = fileName.Remove(0, m_AssetPathLength);
 					}
-					message.Append($"{fileName}:{lineNumber}</a>)\n");
+					message.Append($"{fileName}:{lineNumber}</a>)");
 				}
 			}
 
 			string formattedMessage = message.ToString();
+
 			object[] args = new object[] { formattedMessage, entryFileName, entryLine, entryColumn };
-			logMethod.Invoke(null, args);
+
+			switch(logType)
+			{
+				case ELogType.Info:
+					m_LogInfo.Invoke(null, args);
+					break;
+				case ELogType.Warning:
+					m_LogWarning.Invoke(null, args);
+					break;
+				case ELogType.Error:
+					m_LogError.Invoke(null, args);
+					break;
+			}
 		}
 	}
 }
