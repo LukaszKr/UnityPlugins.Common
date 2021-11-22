@@ -1,9 +1,7 @@
 {
     "name": "ProceduralLevel.UnityPlugins.Common.Unity",
     "rootNamespace": "ProceduralLevel.UnityPlugins.Common.Unity",
-    "references": [
-        "GUID:5d74df7e354dc244083156607613e10f"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
