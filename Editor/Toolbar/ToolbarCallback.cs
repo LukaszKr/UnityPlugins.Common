@@ -23,7 +23,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Editor
 		private static Type m_WindowBackendType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.IWindowBackend");
 		private static PropertyInfo m_WindowBackend = m_GUIViewType.GetProperty("windowBackend",
 			BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-		private static PropertyInfo m_WiewVisualTree = m_WindowBackendType.GetProperty("visualTree",
+		private static PropertyInfo m_viewVisualTree = m_WindowBackendType.GetProperty("visualTree",
 			BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 #else
 		private static PropertyInfo m_ViewVisualTree = m_GUIViewType.GetProperty("visualTree",
@@ -88,10 +88,10 @@ namespace ProceduralLevel.UnityPlugins.Common.Editor
 					object windowBackend = m_WindowBackend.GetValue(m_CurrentToolbar);
 
 					// Get it's visual tree
-					VisualElement visualTree = (VisualElement) m_WiewVisualTree.GetValue(windowBackend, null);
+					VisualElement visualTree = (VisualElement) m_viewVisualTree.GetValue(windowBackend, null);
 #else
 					// Get it's visual tree
-					var visualTree = (VisualElement) m_viewVisualTree.GetValue(m_currentToolbar, null);
+					var visualTree = (VisualElement) m_ViewVisualTree.GetValue(m_CurrentToolbar, null);
 #endif
 
 					// Get first child which 'happens' to be toolbar IMGUIContainer
