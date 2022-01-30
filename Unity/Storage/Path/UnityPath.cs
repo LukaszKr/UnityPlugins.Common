@@ -1,9 +1,12 @@
-﻿namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
+﻿using System;
+
+namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 {
+	[Serializable]
 	public struct UnityPath
 	{
-		public readonly EUnityPathType Type;
-		public readonly string Path;
+		public EUnityPathType Type;
+		public string Path;
 
 		public UnityPath(EUnityPathType type, string path)
 		{
