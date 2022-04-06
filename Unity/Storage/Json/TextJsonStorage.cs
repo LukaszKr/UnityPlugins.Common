@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 {
 	public class TextJsonStorage<TData> : APersistentStorage<TData>
+		where TData : class
 	{
 
 		public TextJsonStorage(UnityPath path, bool useBackup = true)
@@ -11,10 +12,15 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 		{
 		}
 
-		protected override TData OnLoad(byte[] saveData)
+		protected override TData OnLoad(TData current, byte[] saveData)
 		{
 			string content = Encoding.UTF8.GetString(saveData);
-			return JsonConvert.DeserializeObject<TData>(content);
+			if(current == null)
+			{
+				return JsonConvert.DeserializeObject<TData>(content);
+			}
+			JsonConvert.PopulateObject(content, current);
+			return current;
 		}
 
 		protected override byte[] OnFlush(TData data)

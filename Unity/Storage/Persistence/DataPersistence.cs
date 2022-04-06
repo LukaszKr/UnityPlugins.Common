@@ -6,6 +6,16 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 	{
 		public static DataPersistence Instance = new DataPersistence();
 
+		public virtual bool Delete(string path)
+		{
+			if(PathExists(path))
+			{
+				File.Delete(path);
+				return true;
+			}
+			return false;
+		}
+
 		public virtual bool PathExists(string path)
 		{
 			return File.Exists(path);

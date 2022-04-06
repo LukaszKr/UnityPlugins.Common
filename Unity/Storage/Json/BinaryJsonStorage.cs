@@ -5,13 +5,14 @@ using Newtonsoft.Json.Bson;
 namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 {
 	public class BinaryJsonStorage<TData> : APersistentStorage<TData>
+		where TData : class
 	{
 		public BinaryJsonStorage(UnityPath path, bool useBackup = true)
 			: base(path, useBackup)
 		{
 		}
 
-		protected override TData OnLoad(byte[] saveData)
+		protected override TData OnLoad(TData current, byte[] saveData)
 		{
 			JsonSerializer serializer = GetSerializer();
 			using(MemoryStream ms = new MemoryStream(saveData))
@@ -20,7 +21,12 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 				using(BsonReader jsonReader = new BsonReader(ms))
 #pragma warning restore CS0618 // Type or member is obsolete
 				{
-					return serializer.Deserialize<TData>(jsonReader);
+					if(current == null)
+					{
+						return serializer.Deserialize<TData>(jsonReader);
+					}
+					serializer.Populate(jsonReader, current);
+					return current;
 				}
 			}
 		}
