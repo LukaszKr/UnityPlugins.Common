@@ -3,26 +3,23 @@ using Newtonsoft.Json;
 
 namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 {
-	public class TextJsonStorage<TData> : APersistentStorage
-		where TData : class
+	public class TextJsonStorage<TData> : APersistentStorage<TData>
 	{
-		public readonly TData Target;
 
-		public TextJsonStorage(TData target, UnityPath path, bool useBackup = true)
+		public TextJsonStorage(UnityPath path, bool useBackup = true)
 			: base(path, useBackup)
 		{
-			Target = target;
 		}
 
-		protected override void OnLoad(byte[] saveData)
+		protected override TData OnLoad(byte[] saveData)
 		{
 			string content = Encoding.UTF8.GetString(saveData);
-			JsonConvert.PopulateObject(content, Target);
+			return JsonConvert.DeserializeObject<TData>(content);
 		}
 
-		protected override byte[] OnFlush()
+		protected override byte[] OnFlush(TData data)
 		{
-			string text = JsonConvert.SerializeObject(Target, Formatting.Indented);
+			string text = JsonConvert.SerializeObject(data, Formatting.Indented);
 			return Encoding.UTF8.GetBytes(text);
 		}
 	}

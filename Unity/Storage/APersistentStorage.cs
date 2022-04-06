@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 {
-	public abstract class APersistentStorage
+	public abstract class APersistentStorage<TData>
 	{
 		private readonly UnityPath m_Path;
 		private readonly bool m_UseBackup;
@@ -47,7 +47,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 			return false;
 		}
 
-		public void Save()
+		public void Save(TData data)
 		{
 			if(StorageConsts.InMemory)
 			{
@@ -62,12 +62,12 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 				CreateCopy(StorageConsts.BackupSufix);
 			}
 
-			byte[] saveData = OnFlush();
+			byte[] saveData = OnFlush(data);
 			DataPersistence.Instance.WriteBytes(filePath, saveData);
 		}
 
-		protected abstract void OnLoad(byte[] saveData);
-		protected abstract byte[] OnFlush();
+		protected abstract TData OnLoad(byte[] saveData);
+		protected abstract byte[] OnFlush(TData data);
 
 		public void CreateCopy(string sufix)
 		{

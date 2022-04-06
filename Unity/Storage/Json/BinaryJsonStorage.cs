@@ -4,18 +4,14 @@ using Newtonsoft.Json.Bson;
 
 namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 {
-	public class BinaryJsonStorage<TData> : APersistentStorage
-		where TData : class
+	public class BinaryJsonStorage<TData> : APersistentStorage<TData>
 	{
-		public readonly TData Target;
-
-		public BinaryJsonStorage(TData target, UnityPath path, bool useBackup = true)
+		public BinaryJsonStorage(UnityPath path, bool useBackup = true)
 			: base(path, useBackup)
 		{
-			Target = target;
 		}
 
-		protected override void OnLoad(byte[] saveData)
+		protected override TData OnLoad(byte[] saveData)
 		{
 			JsonSerializer serializer = GetSerializer();
 			using(MemoryStream ms = new MemoryStream(saveData))
@@ -24,12 +20,12 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 				using(BsonReader jsonReader = new BsonReader(ms))
 #pragma warning restore CS0618 // Type or member is obsolete
 				{
-					serializer.Populate(jsonReader, Target);
+					return serializer.Deserialize<TData>(jsonReader);
 				}
 			}
 		}
 
-		protected override byte[] OnFlush()
+		protected override byte[] OnFlush(TData data)
 		{
 			JsonSerializer serializer = new JsonSerializer();
 			using(MemoryStream ms = new MemoryStream())
@@ -38,7 +34,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 				using(BsonWriter jsonWriter = new BsonWriter(ms))
 #pragma warning restore CS0618 // Type or member is obsolete
 				{
-					serializer.Serialize(jsonWriter, Target);
+					serializer.Serialize(jsonWriter, data);
 				}
 				return ms.ToArray();
 			}
