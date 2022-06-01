@@ -9,7 +9,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 	{
 		private ContextClass<TContext> m_Context;
 
-		public TContext Context { get { return m_Context?.Value; } }
+		public TContext Context { get { return m_Context?.Context; } }
 
 		public void SetContext(TContext newContext)
 		{
@@ -18,7 +18,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 				m_Context = new ContextClass<TContext>(OnAttach, OnDetach, OnReplace);
 			}
 
-			m_Context.SetValue(newContext);
+			m_Context.SetContext(newContext);
 		}
 
 		protected virtual void OnReplace(EventBinder binder, TContext oldContext)
