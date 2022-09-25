@@ -30,7 +30,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 		}
 
 		[JsonIgnore]
-		public bool IsDefault { get { return m_UseDefault; } }
+		public bool IsDefault => m_UseDefault;
 
 		[JsonIgnore]
 		public readonly CustomEvent<TValue> OnChanged = new CustomEvent<TValue>();

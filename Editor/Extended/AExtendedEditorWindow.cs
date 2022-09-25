@@ -14,8 +14,8 @@ namespace ProceduralLevel.UnityPlugins.Common.Editor
 		private int m_LastWidth;
 		private int m_LastHeight;
 
-		public float Width { get { return position.width; } }
-		public float Height { get { return position.height; } }
+		public float Width => position.width;
+		public float Height => position.height;
 
 		protected abstract void Initialize();
 

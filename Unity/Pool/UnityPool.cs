@@ -15,8 +15,8 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Pool
 		private readonly TEntry m_Prefab;
 		private readonly EUnityPoolOptions m_Options;
 
-		public int UnusedCount { get { return m_Pool.Count; } }
-		public string Name { get { return m_Parent.name; } }
+		public int UnusedCount => m_Pool.Count;
+		public string Name => m_Parent.name;
 
 		public UnityPool(Transform parent, TEntry prefab, int initialCapacity, EUnityPoolOptions options)
 		{

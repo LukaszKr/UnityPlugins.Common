@@ -5,7 +5,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Editor
 {
 	public abstract class AExtendedPropertyDrawer : PropertyDrawer
 	{
-		protected virtual bool DrawDefault { get { return false; } }
+		protected virtual bool DrawDefault => false;
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{

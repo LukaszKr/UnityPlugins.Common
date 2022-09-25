@@ -9,7 +9,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 	{
 		private ContextClass<TContext> m_Context;
 
-		public TContext Context { get { return m_Context?.Context; } }
+		public TContext Context => m_Context?.Context;
 
 		public void SetContext(TContext newContext)
 		{

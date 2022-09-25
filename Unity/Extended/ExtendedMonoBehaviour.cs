@@ -36,9 +36,9 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Extended
 
 #pragma warning disable IDE1006 // NEVER EVER USE THOSE DIRECTLY!
 		[Obsolete]
-		public new Transform transform { get { throw new InvalidOperationException(); } }
+		public new Transform transform => throw new InvalidOperationException();
 		[Obsolete]
-		public new GameObject gameObject { get { throw new InvalidOperationException(); } }
+		public new GameObject gameObject => throw new InvalidOperationException();
 #pragma warning restore IDE1006
 	}
 }

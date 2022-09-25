@@ -12,8 +12,8 @@ namespace ProceduralLevel.UnityPlugins.Preferences
 		public static TPrefs Instance;
 
 		public abstract string Prefix { get; }
-		public virtual bool SaveStatic { get { return false; } }
-		public virtual bool SavePrivate { get { return false; } }
+		public virtual bool SaveStatic => false;
+		public virtual bool SavePrivate => false;
 
 		private Vector2 m_Scroll;
 

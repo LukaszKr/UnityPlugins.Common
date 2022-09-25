@@ -9,8 +9,8 @@ namespace ProceduralLevel.UnityPlugins.Common.Editor
 		public static readonly Color32 ProSkinColor = new Color32(53, 53, 53, 255);
 		public static readonly Color32 FreeSkinColor = new Color32(194, 194, 194, 255);
 
-		public static Color32 SkinColor { get { return (EditorGUIUtility.isProSkin ? ProSkinColor : FreeSkinColor); } }
-		public static float LineHeight { get { return EditorGUIUtility.singleLineHeight; } }
+		public static Color32 SkinColor => (EditorGUIUtility.isProSkin ? ProSkinColor : FreeSkinColor);
+		public static float LineHeight => EditorGUIUtility.singleLineHeight;
 
 		public static GUIStyle CreateBackgroundStyle(Texture2D texture)
 		{
