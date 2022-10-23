@@ -51,7 +51,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 			{
 				prefix = prefix+"\\";
 			}
-			return string.Format("{0}{1}", prefix, Path);
+			return $"{prefix}{Path}";
 		}
 	}
 }

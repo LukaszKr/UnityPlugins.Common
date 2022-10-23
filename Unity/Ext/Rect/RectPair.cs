@@ -15,7 +15,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 
 		public override string ToString()
 		{
-			return string.Format("[A: {0}, B: {1}]", A, B);
+			return $"[{nameof(A)}: {A}, {nameof(B)}: {B}]";
 		}
 	}
 }

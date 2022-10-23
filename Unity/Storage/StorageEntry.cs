@@ -57,8 +57,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 
 		public override string ToString()
 		{
-			return string.Format("[Value: {0}, UseDefault: {1}]",
-				m_Value, m_UseDefault);
+			return $"[Value: {m_Value}, UseDefault: {m_UseDefault}]";
 		}
 	}
 }
