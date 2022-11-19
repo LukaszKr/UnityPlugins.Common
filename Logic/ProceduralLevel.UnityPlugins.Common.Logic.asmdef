@@ -1,9 +1,7 @@
 {
-    "name": "ProceduralLevel.UnityPlugins.Common.Unity",
-    "rootNamespace": "ProceduralLevel.UnityPlugins.Common.Unity",
-    "references": [
-        "GUID:6232f6338b78bdd45981274d4933d4ae"
-    ],
+    "name": "ProceduralLevel.UnityPlugins.Common.Logic",
+    "rootNamespace": "ProceduralLevel.UnityPlugins.Common.Logic",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
@@ -15,5 +13,5 @@
     "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
-    "noEngineReferences": false
+    "noEngineReferences": true
 }
