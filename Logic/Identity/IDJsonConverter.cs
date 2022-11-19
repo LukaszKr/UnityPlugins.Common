@@ -1,25 +1,25 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using ProceduralLevel.Common.Identity;
+using System;
 
 namespace ProceduralLevel.UnityPlugins.Common.Logic
 {
-	internal class UGuidJsonConverter : JsonConverter
+	public class IDJsonConverter : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			string strValue = value.ToString();
-			writer.WriteValue(strValue);
+			writer.WriteValue(value.GetHashCode());
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			string rawValue = (string)reader.Value;
-			return Activator.CreateInstance(objectType, rawValue);
+			int intValue = int.Parse(reader.Value.ToString());
+			return Activator.CreateInstance(objectType, intValue);
 		}
 
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(UGuid<>) == objectType;
+			return typeof(ID<>) == objectType;
 		}
 	}
 }
