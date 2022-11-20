@@ -68,7 +68,12 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 
 				if(foundEntry && mode.Contains(EUnityLogMode.Callstack))
 				{
-					string fileName = frame.GetFileName().Replace('\\', '/');
+					string fileName = frame.GetFileName();
+					if(fileName == null)
+					{
+						fileName = string.Empty;
+					}
+					fileName = fileName.Replace('\\', '/');
 					int lineNumber = frame.GetFileLineNumber();
 					if(string.IsNullOrEmpty(fileName))
 					{
