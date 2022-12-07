@@ -7,7 +7,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Logic
 	{
 		private const float APPROX = 0.00001f;
 
-		public static void IsTrue(bool condition, string message = "")
+		public static void IsTrue(bool condition, FormattableString message = null)
 		{
 			if(!condition)
 			{
@@ -15,7 +15,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Logic
 			}
 		}
 
-		public static void IsFalse(bool condition, string message = "")
+		public static void IsFalse(bool condition, FormattableString message = null)
 		{
 			if(condition)
 			{
@@ -23,7 +23,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Logic
 			}
 		}
 
-		public static void IsNull<T>(T obj, string message = "")
+		public static void IsNull<T>(T obj, FormattableString message = null)
 			where T : class
 		{
 			if(obj != null)
@@ -32,7 +32,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Logic
 			}
 		}
 
-		public static void IsNotNull<T>(T obj, string message = "")
+		public static void IsNotNull<T>(T obj, FormattableString message = null)
 			where T : class
 		{
 			if(obj == null)
@@ -41,17 +41,17 @@ namespace ProceduralLevel.UnityPlugins.Common.Logic
 			}
 		}
 
-		public static void AreEqual<T>(T expected, T actual, string message = "")
+		public static void AreEqual<T>(T expected, T actual, FormattableString message = null)
 		{
 			AreEqual(expected, actual, null, message);
 		}
 
-		public static void AreNotEqual<T>(T expected, T actual, string message = "")
+		public static void AreNotEqual<T>(T expected, T actual, FormattableString message = null)
 		{
 			AreNotEqual(expected, actual, null, message);
 		}
 
-		public static void AreEqual<T>(T expected, T actual, IEqualityComparer<T> comparer, string message = "")
+		public static void AreEqual<T>(T expected, T actual, IEqualityComparer<T> comparer, FormattableString message = null)
 		{
 			if(comparer == null)
 			{
@@ -69,7 +69,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Logic
 			}
 		}
 
-		public static void AreNotEqual<T>(T expected, T actual, IEqualityComparer<T> comparer, string message = "")
+		public static void AreNotEqual<T>(T expected, T actual, IEqualityComparer<T> comparer, FormattableString message = null)
 		{
 			if(comparer == null)
 			{
@@ -87,17 +87,17 @@ namespace ProceduralLevel.UnityPlugins.Common.Logic
 			}
 		}
 
-		public static void AreApproximatelyEqual(float expected, float actual, string message = "")
+		public static void AreApproximatelyEqual(float expected, float actual, FormattableString message = null)
 		{
 			AreApproximatelyEqual(expected, actual, APPROX, message);
 		}
 
-		public static void AreNotApproximatelyEqual(float expected, float actual, string message = "")
+		public static void AreNotApproximatelyEqual(float expected, float actual, FormattableString message = null)
 		{
 			AreNotApproximatelyEqual(expected, actual, APPROX, message);
 		}
 
-		public static void AreApproximatelyEqual(float expected, float actual, float tolerance, string message = "")
+		public static void AreApproximatelyEqual(float expected, float actual, float tolerance, FormattableString message = null)
 		{
 			if(Math.Abs(expected-actual) > tolerance)
 			{
@@ -105,7 +105,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Logic
 			}
 		}
 
-		public static void AreNotApproximatelyEqual(float expected, float actual, float tolerance, string message = "")
+		public static void AreNotApproximatelyEqual(float expected, float actual, float tolerance, FormattableString message = null)
 		{
 			if(Math.Abs(expected-actual) <= tolerance)
 			{
