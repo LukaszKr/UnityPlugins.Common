@@ -21,13 +21,13 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 			m_Context.SetContext(newContext);
 		}
 
-		protected virtual void OnReplace(EventBinder binder, TContext oldContext)
+		protected virtual void OnReplace(EventBinder binder, TContext oldContext, TContext newContext)
 		{
 			OnDetach();
-			OnAttach(binder);
+			OnAttach(binder, newContext);
 		}
 
-		protected abstract void OnAttach(EventBinder binder);
+		protected abstract void OnAttach(EventBinder binder, TContext context);
 		protected abstract void OnDetach();
 	}
 }
