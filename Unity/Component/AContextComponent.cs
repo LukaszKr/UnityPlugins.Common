@@ -1,33 +1,49 @@
-﻿using ProceduralLevel.Common.Context;
-using ProceduralLevel.Common.Event;
+﻿using ProceduralLevel.Common.Event;
 using ProceduralLevel.UnityPlugins.Common.Unity.Extended;
+using System;
 
 namespace ProceduralLevel.UnityPlugins.Common.Unity
 {
 	public abstract class AContextComponent<TContext> : ExtendedMonoBehaviour
 		where TContext : class
 	{
-		private ContextClass<TContext> m_Context;
+		protected TContext m_Context;
+		private readonly EventBinder m_ContextBinder = new EventBinder();
 
-		public TContext Context => m_Context?.Context;
-
-		public void SetContext(TContext newContext)
+		public void SetContext(TContext context)
 		{
-			if(m_Context == null)
+			if(context == m_Context)
 			{
-				m_Context = new ContextClass<TContext>(OnAttach, OnDetach, OnReplace);
+				throw new InvalidOperationException();
 			}
 
-			m_Context.SetContext(newContext);
+			m_ContextBinder.UnbindAll();
+			TContext oldContext = m_Context;
+			m_Context = context;
+			if(context != null)
+			{
+				if(oldContext != null)
+				{
+					OnReplace(m_ContextBinder, oldContext, context);
+				}
+				else
+				{
+					OnAttach(m_ContextBinder);
+				}
+			}
+			else if(oldContext != null)
+			{
+				OnDetach();
+			}
 		}
 
 		protected virtual void OnReplace(EventBinder binder, TContext oldContext, TContext newContext)
 		{
 			OnDetach();
-			OnAttach(binder, newContext);
+			OnAttach(binder);
 		}
 
-		protected abstract void OnAttach(EventBinder binder, TContext context);
+		protected abstract void OnAttach(EventBinder binder);
 		protected abstract void OnDetach();
 	}
 }
