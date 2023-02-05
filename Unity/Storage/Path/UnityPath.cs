@@ -26,12 +26,12 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 		public void EnsureFolder()
 		{
 			string directoryPath = System.IO.Path.GetDirectoryName(ToString());
-			DataPersistence.Instance.EnsureDirectory(directoryPath);
+			ADataPersistence.Instance.EnsureDirectory(directoryPath);
 		}
 
 		public bool Exists()
 		{
-			return DataPersistence.Instance.PathExists(ToString());
+			return ADataPersistence.Instance.PathExists(ToString());
 		}
 
 		public UnityPath Append(string sufix)

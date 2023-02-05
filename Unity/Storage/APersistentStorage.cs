@@ -23,26 +23,16 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 
 		public void Delete(bool deleteBackup = true)
 		{
-			if(StorageConsts.InMemory)
-			{
-				return;
-			}
-
-			DataPersistence.Instance.Delete(m_FilePath);
+			ADataPersistence.Instance.Delete(m_FilePath);
 
 			if(m_UseBackup && deleteBackup)
 			{
-				DataPersistence.Instance.Delete(m_BackupFilePath);
+				ADataPersistence.Instance.Delete(m_BackupFilePath);
 			}
 		}
 
 		public TData Load(TData current)
 		{
-			if(StorageConsts.InMemory)
-			{
-				return current;
-			}
-
 			TData loaded = TryLoadPersistent(current, false);
 			if(loaded == null && m_UseBackup)
 			{
@@ -56,7 +46,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 			string filePath = (backup? m_BackupFilePath: m_FilePath);
 			try
 			{
-				byte[] rawData = DataPersistence.Instance.ReadBytes(filePath);
+				byte[] rawData = ADataPersistence.Instance.ReadBytes(filePath);
 				if(rawData != null && rawData.Length > 0)
 				{
 					return OnLoad(current, rawData);
@@ -73,11 +63,6 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 
 		public void Save(TData data)
 		{
-			if(StorageConsts.InMemory)
-			{
-				return;
-			}
-
 			m_Path.EnsureFolder();
 
 			if(m_UseBackup)
@@ -86,7 +71,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 			}
 
 			byte[] saveData = OnFlush(data);
-			DataPersistence.Instance.WriteBytes(m_FilePath, saveData);
+			ADataPersistence.Instance.WriteBytes(m_FilePath, saveData);
 		}
 
 		protected abstract TData OnLoad(TData current, byte[] saveData);
@@ -94,15 +79,10 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 
 		public void CreateCopy(string sufix)
 		{
-			if(StorageConsts.InMemory)
-			{
-				return;
-			}
-
-			byte[] data = DataPersistence.Instance.ReadBytes(m_FilePath);
+			byte[] data = ADataPersistence.Instance.ReadBytes(m_FilePath);
 			if(data != null)
 			{
-				DataPersistence.Instance.WriteBytes(m_BackupFilePath, data);
+				ADataPersistence.Instance.WriteBytes(m_BackupFilePath, data);
 			}
 		}
 	}
