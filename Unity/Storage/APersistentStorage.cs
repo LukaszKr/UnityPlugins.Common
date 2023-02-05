@@ -9,15 +9,31 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 		private readonly UnityPath m_Path;
 		private readonly bool m_UseBackup;
 
+		private readonly string m_FilePath;
+		private readonly string m_BackupFilePath;
+
 		protected APersistentStorage(UnityPath path, bool useBackup)
 		{
 			m_Path = path;
 			m_UseBackup = useBackup;
+
+			m_FilePath = m_Path.ToString();
+			m_BackupFilePath = m_Path.Append(StorageConsts.BackupSufix).ToString();
 		}
 
-		public void Delete()
+		public void Delete(bool deleteBackup = true)
 		{
+			if(StorageConsts.InMemory)
+			{
+				return;
+			}
 
+			DataPersistence.Instance.Delete(m_FilePath);
+
+			if(m_UseBackup && deleteBackup)
+			{
+				DataPersistence.Instance.Delete(m_BackupFilePath);
+			}
 		}
 
 		public TData Load(TData current)
@@ -37,7 +53,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 
 		private TData TryLoadPersistent(TData current, bool backup)
 		{
-			string filePath = (backup? m_Path.Append(StorageConsts.BackupSufix): m_Path).ToString();
+			string filePath = (backup? m_BackupFilePath: m_FilePath);
 			try
 			{
 				byte[] rawData = DataPersistence.Instance.ReadBytes(filePath);
@@ -62,7 +78,6 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 				return;
 			}
 
-			string filePath = m_Path.ToString();
 			m_Path.EnsureFolder();
 
 			if(m_UseBackup)
@@ -71,7 +86,7 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 			}
 
 			byte[] saveData = OnFlush(data);
-			DataPersistence.Instance.WriteBytes(filePath, saveData);
+			DataPersistence.Instance.WriteBytes(m_FilePath, saveData);
 		}
 
 		protected abstract TData OnLoad(TData current, byte[] saveData);
@@ -84,12 +99,10 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 				return;
 			}
 
-			string filePath = m_Path.ToString();
-			string copyFilePath = m_Path.Append(sufix).ToString();
-			byte[] data = DataPersistence.Instance.ReadBytes(filePath);
+			byte[] data = DataPersistence.Instance.ReadBytes(m_FilePath);
 			if(data != null)
 			{
-				DataPersistence.Instance.WriteBytes(copyFilePath, data);
+				DataPersistence.Instance.WriteBytes(m_BackupFilePath, data);
 			}
 		}
 	}
