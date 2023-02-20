@@ -13,5 +13,24 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 		{
 			return new Color32((byte)(color.r+r), (byte)(color.g+g), (byte)(color.b+b), (byte)(color.a+a));
 		}
+
+		public static Color Blend(this Color color, Color other, float blend)
+		{
+			float reverseBlend =  1f-blend;
+			if(blend <= 0f)
+			{
+				return color;
+			}
+			if(blend >= 1f)
+			{
+				return other;
+			}
+
+			return new Color(
+				color.r*reverseBlend+other.r*blend,
+				color.g*reverseBlend+other.g*blend,
+				color.b*reverseBlend+other.b*blend,
+				color.a*reverseBlend+other.a*blend);
+		}
 	}
 }
