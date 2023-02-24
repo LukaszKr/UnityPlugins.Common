@@ -69,7 +69,6 @@ namespace ProceduralLevel.UnityPlugins.Common.Editor
 			{
 				DrawCompilationScreen();
 			}
-			Repaint();
 		}
 
 		private void CheckDimensions()
