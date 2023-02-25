@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using ProceduralLevel.Common.Ext;
 
 namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 {
@@ -14,24 +13,6 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 
 	public static class EUnityPathTypeExt
 	{
-		public static string ToFolder(this EUnityPathType type)
-		{
-			switch(type)
-			{
-				case EUnityPathType.Streaming:
-					return Application.streamingAssetsPath+"\\";
-				case EUnityPathType.Persistent:
-					return Application.persistentDataPath+"\\";
-				case EUnityPathType.Assets:
-					return Application.dataPath+"\\";
-				case EUnityPathType.Absolute:
-					return string.Empty;
-				case EUnityPathType.Project:
-					string dataPath = Application.dataPath;
-					return dataPath.Substring(0, dataPath.Length-7)+"\\"; //7 = "Assets/"
-				default:
-					throw new NotImplementedException();
-			}
-		}
+		public static readonly EnumExt<EUnityPathType> Meta = new EnumExt<EUnityPathType>();
 	}
 }

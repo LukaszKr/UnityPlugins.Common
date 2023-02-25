@@ -35,5 +35,10 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 			}
 			return m_Storage[path];
 		}
+
+		public override string ToFolder(EUnityPathType pathType)
+		{
+			return $"{pathType}\\";
+		}
 	}
 }

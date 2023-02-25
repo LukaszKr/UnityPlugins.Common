@@ -15,5 +15,7 @@
 
 		public abstract void WriteBytes(string path, byte[] data);
 		public abstract byte[] ReadBytes(string path);
+
+		public abstract string ToFolder(EUnityPathType pathType);
 	}
 }

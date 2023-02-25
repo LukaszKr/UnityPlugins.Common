@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using UnityEngine;
 
 namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 {
@@ -44,6 +46,26 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 				return File.ReadAllBytes(path);
 			}
 			return null;
+		}
+
+		public override string ToFolder(EUnityPathType pathType)
+		{
+			switch(pathType)
+			{
+				case EUnityPathType.Streaming:
+					return Application.streamingAssetsPath+"\\";
+				case EUnityPathType.Persistent:
+					return Application.persistentDataPath+"\\";
+				case EUnityPathType.Assets:
+					return Application.dataPath+"\\";
+				case EUnityPathType.Absolute:
+					return string.Empty;
+				case EUnityPathType.Project:
+					string dataPath = Application.dataPath;
+					return dataPath.Substring(0, dataPath.Length-7)+"\\"; //7 = "Assets/"
+				default:
+					throw new NotImplementedException();
+			}
 		}
 	}
 }
