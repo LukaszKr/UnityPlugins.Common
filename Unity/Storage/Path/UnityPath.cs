@@ -47,10 +47,6 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 		public override string ToString()
 		{
 			string prefix = ADataPersistence.Instance.ToFolder(Type);
-			if(!string.IsNullOrEmpty(prefix))
-			{
-				prefix = prefix+"\\";
-			}
 			return $"{prefix}{Path}";
 		}
 	}
