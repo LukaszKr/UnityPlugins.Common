@@ -1,4 +1,6 @@
-﻿namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
+﻿using System.Text;
+
+namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
 {
 	public abstract class ADataPersistence
 	{
@@ -7,6 +9,17 @@
 		public static void SetInMemory()
 		{
 			Instance = new MemoryDataPersistence();
+		}
+
+		public void WriteString(string path, string data)
+		{
+			WriteBytes(path, Encoding.UTF8.GetBytes(data));
+		}
+
+		public string ReadString(string path)
+		{
+			byte[] rawData = ReadBytes(path);
+			return Encoding.UTF8.GetString(rawData);
 		}
 
 		public abstract bool Delete(string path);
