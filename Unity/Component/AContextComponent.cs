@@ -10,8 +10,16 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 		protected TContext m_Context;
 		private readonly EventBinder m_ContextBinder = new EventBinder();
 
+		private bool m_Initialized;
+
 		public void SetContext(TContext context)
 		{
+			if(!m_Initialized)
+			{
+				OnInitialize();
+				m_Initialized = true;
+			}
+
 			if(context == m_Context)
 			{
 				throw new InvalidOperationException();
@@ -35,6 +43,11 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 			{
 				OnDetach();
 			}
+		}
+
+		protected virtual void OnInitialize()
+		{
+
 		}
 
 		protected virtual void OnReplace(EventBinder binder, TContext oldContext)
