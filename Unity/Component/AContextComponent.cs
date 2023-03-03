@@ -45,17 +45,13 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 			}
 		}
 
-		protected virtual void OnInitialize()
-		{
-
-		}
-
 		protected virtual void OnReplace(EventBinder binder, TContext oldContext)
 		{
 			OnDetach();
 			OnAttach(binder);
 		}
 
+		protected abstract void OnInitialize();
 		protected abstract void OnAttach(EventBinder binder);
 		protected abstract void OnDetach();
 	}
