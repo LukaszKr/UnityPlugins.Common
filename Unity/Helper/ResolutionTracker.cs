@@ -5,12 +5,18 @@ namespace ProceduralLevel.UnityPlugins.Common.Unity
 {
 	public class ResolutionTracker
 	{
+		public static ResolutionTracker Instance = new ResolutionTracker();
+
 		private int m_KnownWidth;
 		private int m_KnownHeight;
 		private ScreenOrientation m_KnownOrientation;
 		private bool m_IsDirty;
 
 		public readonly CustomEvent<int, int> OnResolutionChanged = new CustomEvent<int, int>();
+
+		private ResolutionTracker()
+		{
+		}
 
 		public void Update()
 		{
