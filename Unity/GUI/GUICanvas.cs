@@ -31,5 +31,10 @@ namespace ProceduralLevel.Common.Unity
 			Height = Mathf.CeilToInt(Height/Scale);
 			GUI.matrix = Matrix4x4.Scale(new Vector3(Scale, Scale, Scale));
 		}
+
+		public Rect GetRect()
+		{
+			return new Rect(0, 0, Width, Height);
+		}
 	}
 }
