@@ -1,7 +1,7 @@
 ﻿using ProceduralLevel.Common.Event;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity
+namespace ProceduralLevel.Common.Unity
 {
 	public class ResolutionTracker
 	{

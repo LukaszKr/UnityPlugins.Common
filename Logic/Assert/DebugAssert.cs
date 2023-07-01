@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace ProceduralLevel.UnityPlugins.Common.Logic
+namespace ProceduralLevel.Common.Logic
 {
 	public static partial class DebugAssert
 	{

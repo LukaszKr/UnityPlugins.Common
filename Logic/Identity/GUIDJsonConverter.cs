@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using ProceduralLevel.Common.Identity;
 
-namespace ProceduralLevel.UnityPlugins.Common.Logic
+namespace ProceduralLevel.Common.Logic
 {
 	internal class GUIDJsonConverter : JsonConverter
 	{

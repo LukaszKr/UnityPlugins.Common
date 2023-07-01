@@ -2,7 +2,7 @@
 using ProceduralLevel.Common.Identity;
 using System;
 
-namespace ProceduralLevel.UnityPlugins.Common.Logic
+namespace ProceduralLevel.Common.Logic
 {
 	public class IDJsonConverter : JsonConverter
 	{

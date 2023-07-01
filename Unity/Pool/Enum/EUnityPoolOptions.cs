@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity.Pool
+namespace ProceduralLevel.Common.Unity.Pool
 {
 	[Flags]
 	public enum EUnityPoolOptions

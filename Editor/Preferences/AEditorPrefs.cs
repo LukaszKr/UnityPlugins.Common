@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using ProceduralLevel.UnityPlugins.Common.Editor;
+using ProceduralLevel.Common.Editor;
 using UnityEditor;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Preferences
+namespace ProceduralLevel.Preferences
 {
 	public abstract class AEditorPrefs<TPrefs>
 		where TPrefs : class, new()

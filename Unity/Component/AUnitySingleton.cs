@@ -1,4 +1,4 @@
-﻿namespace ProceduralLevel.UnityPlugins.Common.Unity.Extended
+﻿namespace ProceduralLevel.Common.Unity.Extended
 {
 	public abstract class AUnitySingleton<TObject> : ExtendedMonoBehaviour
 		where TObject : AUnitySingleton<TObject>

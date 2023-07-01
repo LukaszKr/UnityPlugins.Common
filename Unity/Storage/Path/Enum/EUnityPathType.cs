@@ -1,6 +1,6 @@
 ﻿using ProceduralLevel.Common.Ext;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
+namespace ProceduralLevel.Common.Unity.Storage
 {
 	public enum EUnityPathType
 	{

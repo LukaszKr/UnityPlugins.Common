@@ -1,7 +1,7 @@
-﻿using ProceduralLevel.UnityPlugins.Common.Unity.Extended;
+﻿using ProceduralLevel.Common.Unity.Extended;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity.Pool
+namespace ProceduralLevel.Common.Unity.Pool
 {
 	public abstract class AUnityPoolManager : ExtendedMonoBehaviour
 	{

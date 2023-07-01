@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using Exception = System.Exception;
 
-namespace ProceduralLevel.UnityPlugins.Common.Editor
+namespace ProceduralLevel.Common.Editor
 {
 	public static class AssetDatabaseExt
 	{

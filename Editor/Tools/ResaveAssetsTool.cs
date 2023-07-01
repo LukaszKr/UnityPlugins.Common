@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Editor
+namespace ProceduralLevel.Common.Editor
 {
 	public static class ResaveAssetsTool
 	{

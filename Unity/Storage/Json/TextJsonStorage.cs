@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Newtonsoft.Json;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
+namespace ProceduralLevel.Common.Unity.Storage
 {
 	public class TextJsonStorage<TData> : APersistentStorage<TData>
 		where TData : class

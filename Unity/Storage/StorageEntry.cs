@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using ProceduralLevel.Common.Event;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
+namespace ProceduralLevel.Common.Unity.Storage
 {
 	public class StorageEntry<TValue>
 	{

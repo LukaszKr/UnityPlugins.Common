@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
+namespace ProceduralLevel.Common.Unity.Storage
 {
 	public abstract class ADataPersistence
 	{

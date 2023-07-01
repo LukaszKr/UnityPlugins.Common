@@ -8,7 +8,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Editor
+namespace ProceduralLevel.Common.Editor
 {
 	[InitializeOnLoad]
 	public static class ToolbarExtender

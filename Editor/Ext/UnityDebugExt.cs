@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Unity.CodeEditor;
 
-namespace ProceduralLevel.UnityPlugins.Common.Editor
+namespace ProceduralLevel.Common.Editor
 {
 	public static class UnityDebugExt
 	{

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Editor
+namespace ProceduralLevel.Common.Editor
 {
 	public abstract class APropertyAttributeDrawer<PropertyType> : AExtendedPropertyDrawer
 		where PropertyType : PropertyAttribute

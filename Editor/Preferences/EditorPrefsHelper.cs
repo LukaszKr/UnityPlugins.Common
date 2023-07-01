@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 
-namespace ProceduralLevel.UnityPlugins.Preferences
+namespace ProceduralLevel.Preferences
 {
 	public static class EditorPrefsHelper
 	{

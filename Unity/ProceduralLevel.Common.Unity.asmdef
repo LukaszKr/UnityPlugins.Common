@@ -1,6 +1,6 @@
 {
-    "name": "ProceduralLevel.UnityPlugins.Common.Unity",
-    "rootNamespace": "ProceduralLevel.UnityPlugins.Common.Unity",
+    "name": "ProceduralLevel.Common.Unity",
+    "rootNamespace": "ProceduralLevel.Common.Unity",
     "references": [
         "GUID:6232f6338b78bdd45981274d4933d4ae"
     ],

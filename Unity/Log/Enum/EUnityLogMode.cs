@@ -1,7 +1,7 @@
 ﻿using System;
 using ProceduralLevel.Common.Ext;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity
+namespace ProceduralLevel.Common.Unity
 {
 	[Flags]
 	public enum EUnityLogMode

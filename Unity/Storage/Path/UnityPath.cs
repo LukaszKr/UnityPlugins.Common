@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
+namespace ProceduralLevel.Common.Unity.Storage
 {
 	[Serializable]
 	public struct UnityPath

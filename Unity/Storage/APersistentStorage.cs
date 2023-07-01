@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
+namespace ProceduralLevel.Common.Unity.Storage
 {
 	public abstract class APersistentStorage<TData>
 		where TData : class

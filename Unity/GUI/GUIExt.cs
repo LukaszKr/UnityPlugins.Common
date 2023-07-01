@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity
+namespace ProceduralLevel.Common.Unity
 {
 	public static class GUIExt
 	{

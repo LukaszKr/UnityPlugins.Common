@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using ProceduralLevel.UnityPlugins.Common.Unity.Extended;
+using ProceduralLevel.Common.Unity.Extended;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity.Pool
+namespace ProceduralLevel.Common.Unity.Pool
 {
 	public sealed class UnityPool<TEntry>
 		where TEntry : ExtendedMonoBehaviour, IUnityPoolEntry

@@ -1,4 +1,4 @@
-﻿namespace ProceduralLevel.UnityPlugins.Common.Unity.Pool
+﻿namespace ProceduralLevel.Common.Unity.Pool
 {
 	public interface IUnityPoolEntry
 	{

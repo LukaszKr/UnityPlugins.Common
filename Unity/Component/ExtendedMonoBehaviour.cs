@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity.Extended
+namespace ProceduralLevel.Common.Unity.Extended
 {
 	public abstract class ExtendedMonoBehaviour : MonoBehaviour
 	{

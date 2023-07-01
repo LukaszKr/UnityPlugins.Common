@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
+namespace ProceduralLevel.Common.Unity.Storage
 {
 	public class FileDataPersistence : ADataPersistence
 	{

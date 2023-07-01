@@ -1,4 +1,4 @@
-﻿namespace ProceduralLevel.UnityPlugins.Common.Unity.Storage
+﻿namespace ProceduralLevel.Common.Unity.Storage
 {
 	public static class StorageConsts
 	{

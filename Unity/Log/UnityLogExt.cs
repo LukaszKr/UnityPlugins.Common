@@ -5,7 +5,7 @@ using System.Text;
 using ProceduralLevel.Common.Logger;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity
+namespace ProceduralLevel.Common.Unity
 {
 	public static class UnityLogExt
 	{

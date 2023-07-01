@@ -1,7 +1,7 @@
-﻿using ProceduralLevel.UnityPlugins.Common.Logic;
+﻿using ProceduralLevel.Common.Logic;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity
+namespace ProceduralLevel.Common.Unity
 {
 	public static class BoundsExt
 	{

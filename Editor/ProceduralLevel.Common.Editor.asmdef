@@ -1,6 +1,6 @@
 {
-    "name": "ProceduralLevel.UnityPlugins.Common.Editor",
-    "rootNamespace": "ProceduralLevel.UnityPlugins.Common.Editor",
+    "name": "ProceduralLevel.Common.Editor",
+    "rootNamespace": "ProceduralLevel.Common.Editor",
     "references": [
         "GUID:210304052f12ca14a9ff88e9466ff4a5"
     ],

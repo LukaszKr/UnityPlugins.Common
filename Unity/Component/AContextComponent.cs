@@ -1,8 +1,8 @@
 ﻿using ProceduralLevel.Common.Event;
-using ProceduralLevel.UnityPlugins.Common.Unity.Extended;
+using ProceduralLevel.Common.Unity.Extended;
 using System;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity
+namespace ProceduralLevel.Common.Unity
 {
 	public abstract class AContextComponent<TContext> : ExtendedMonoBehaviour
 		where TContext : class

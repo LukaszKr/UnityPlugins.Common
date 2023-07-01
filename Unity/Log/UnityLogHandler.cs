@@ -2,7 +2,7 @@
 using ProceduralLevel.Common.Logger;
 using UnityEngine;
 
-namespace ProceduralLevel.UnityPlugins.Common.Unity
+namespace ProceduralLevel.Common.Unity
 {
 	public class UnityLogHandler : ALogHandler
 	{
