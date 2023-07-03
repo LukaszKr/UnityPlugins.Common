@@ -9,6 +9,13 @@
 	},
 	"keywords": [
 	],
+	"samples": [
+		{
+			"displayName": "Inline Asset",
+			"description": "Inline Assets",
+			"path": "Samples/InlineAssets"
+		}
+	],
 	"author": {
 		"name": "Procedural Level",
 		"url": "https://www.procedurallevel.com"

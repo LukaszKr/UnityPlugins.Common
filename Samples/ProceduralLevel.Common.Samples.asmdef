@@ -1,0 +1,19 @@
+{
+    "name": "ProceduralLevel.Common.Samples",
+    "rootNamespace": "ProceduralLevel.Common.Samples",
+    "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:224b9066e0d54394c948b9d5e6bdf270",
+        "GUID:210304052f12ca14a9ff88e9466ff4a5",
+        "GUID:8f1a59cf6f3c6854099cf89b7ffbbb5a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

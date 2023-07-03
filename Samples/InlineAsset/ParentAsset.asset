@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6100989955506595876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7ce8328d886b84b9c6d90495ea4344, type: 3}
+  m_Name: BaseAssetB_StringInlineAsset
+  m_EditorClassIdentifier: 
+  BaseValue: 1
+  SomeText: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ded3533cccb0d4c4f84d5dd86e2cdacb, type: 3}
+  m_Name: ParentAsset
+  m_EditorClassIdentifier: 
+  bufferField: 0
+  BaseAssetA: {fileID: 4520249051893977112}
+  BaseAssetB: {fileID: -6100989955506595876}
+--- !u!114 &4520249051893977112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f450aaac146dcaf41a380f2bea89f675, type: 3}
+  m_Name: BaseAssetA_IntInlineAsset
+  m_EditorClassIdentifier: 
+  BaseValue: 0
+  IntValue: 0
