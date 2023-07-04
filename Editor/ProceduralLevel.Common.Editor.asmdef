@@ -2,6 +2,7 @@
     "name": "ProceduralLevel.Common.Editor",
     "rootNamespace": "ProceduralLevel.Common.Editor",
     "references": [
+        "GUID:6232f6338b78bdd45981274d4933d4ae",
         "GUID:210304052f12ca14a9ff88e9466ff4a5"
     ],
     "includePlatforms": [
@@ -10,7 +11,9 @@
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
-    "precompiledReferences": [],
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
     "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],

@@ -4,6 +4,7 @@ using System.Reflection;
 using ProceduralLevel.Common.Unity;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 namespace ProceduralLevel.Common.Editor
@@ -16,28 +17,53 @@ namespace ProceduralLevel.Common.Editor
 		protected override void Draw(Rect position, SerializedProperty property, GUIContent label)
 		{
 			Object value = property.objectReferenceValue;
+			RectPair pair = position.CutTop(20f);
 			if(value == null)
 			{
-				DrawCreateAsset(position, property, label);
+				DrawCreateAsset(pair.A, property, label);
 			}
 			else
 			{
-				DrawCurrentAsset(position, property, value, label);
+				DrawCurrentAsset(pair.A, property, value, label);
 			}
 		}
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
-			return base.GetPropertyHeight(property, label);
+			float height = base.GetPropertyHeight(property, label);
+
+			if(Attribute.DrawEditor && (!Attribute.Expandable || property.isExpanded))
+			{
+				if(m_PrevEditor != null)
+				{
+					SerializedProperty iterator = m_PrevEditor.serializedObject.GetIterator();
+					while(iterator.NextVisible(true))
+					{
+						height += EditorGUI.GetPropertyHeight(property, true);
+					}
+				}
+			}
+
+			return height;
 		}
+
 
 		private void DrawCreateAsset(Rect position, SerializedProperty property, GUIContent label)
 		{
 			RectPair pair = position.CutLeft(EditorGUIUtility.labelWidth);
-			EditorGUI.LabelField(pair.A, label);
-			if(GUI.Button(pair.B, fieldInfo.FieldType.Name))
+			Type fieldType = fieldInfo.FieldType;
+			if(fieldType.IsArray)
 			{
-				List<Type> validTypes = GetAllAssignableTo(fieldInfo.FieldType);
+				fieldType = fieldType.GetElementType();
+			}
+			else if(fieldType.IsGenericType) //lists
+			{
+				fieldType = fieldType.GetGenericArguments()[0];
+			}
+			EditorGUI.LabelField(pair.A, label);
+			if(GUI.Button(pair.B, fieldType.Name))
+			{
+				List<Type> validTypes = GetAllAssignableTo(fieldType);
 				validTypes.Sort((a, b) => a.Name.CompareTo(b.Name));
 				GenericMenu menu = new GenericMenu();
 				int count = validTypes.Count;
@@ -64,8 +90,8 @@ namespace ProceduralLevel.Common.Editor
 			{
 				EditorGUI.LabelField(labelPair.A, property.displayName);
 			}
-			RectPair deletePair = position.CutRight(32);
-			EditorGUI.BeginDisabledGroup(true);
+			RectPair deletePair = position.CutRight(EditorGUIUtility.singleLineHeight);
+			EditorGUI.BeginDisabledGroup(!assetAttribute.AllowExternal);
 			EditorGUI.ObjectField(deletePair.A, target, target.GetType(), false);
 			EditorGUI.EndDisabledGroup();
 			if(GUI.Button(deletePair.B, "X"))
@@ -126,7 +152,10 @@ namespace ProceduralLevel.Common.Editor
 		private void DeleteAsset(SerializedProperty property)
 		{
 			Object target = property.serializedObject.targetObject;
-			AssetDatabase.RemoveObjectFromAsset(property.objectReferenceValue);
+			if(AssetDatabase.IsSubAsset(property.objectReferenceInstanceIDValue))
+			{
+				AssetDatabase.RemoveObjectFromAsset(property.objectReferenceValue);
+			}
 			property.objectReferenceValue = null;
 			property.serializedObject.ApplyModifiedProperties();
 			EditorUtility.SetDirty(target);

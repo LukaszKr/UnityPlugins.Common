@@ -1,4 +1,5 @@
-﻿using ProceduralLevel.Common.Unity;
+﻿using System.Collections.Generic;
+using ProceduralLevel.Common.Unity;
 using UnityEngine;
 
 namespace ProceduralLevel.Common.Samples
@@ -13,5 +14,9 @@ namespace ProceduralLevel.Common.Samples
 		public AInlineAsset BaseAssetA;
 		[InlineAsset]
 		public AInlineAsset BaseAssetB;
+		[InlineAsset(false)]
+		public AInlineAsset[] ArrayOfAssets;
+		[InlineAsset(false)]
+		public List<AInlineAsset> ListOfAssets;
 	}
 }
