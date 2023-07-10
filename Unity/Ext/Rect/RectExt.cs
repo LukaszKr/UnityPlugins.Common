@@ -6,6 +6,26 @@ namespace ProceduralLevel.Common.Unity
 	public static class RectExt
 	{
 		#region Margin
+		public static Rect AddMarginTop(this Rect rect, float margin)
+		{
+			return rect.AddMargin(margin, 0f, 0f, 0f);
+		}
+
+		public static Rect AddMarginRight(this Rect rect, float margin)
+		{
+			return rect.AddMargin(0f, margin, 0f, 0f);
+		}
+
+		public static Rect AddMarginBottom(this Rect rect, float margin)
+		{
+			return rect.AddMargin(0f, 0f, margin, 0f);
+		}
+
+		public static Rect AddMarginLeft(this Rect rect, float margin)
+		{
+			return rect.AddMargin(0f, 0f, 0f, margin);
+		}
+
 		public static Rect AddMargin(this Rect rect, float margin)
 		{
 			return rect.AddMargin(margin, margin, margin, margin);
@@ -94,32 +114,60 @@ namespace ProceduralLevel.Common.Unity
 			Split(rect, target, ratios, VerticalSplitCallback);
 		}
 
-		public static RectPair CutLeft(this Rect rect, float width)
+		public static RectPair CutLeft(this Rect rect, float amount)
 		{
-			Rect left = new Rect(rect.x, rect.y, width, rect.height);
-			Rect right = new Rect(rect.x+width, rect.y, rect.width-width, rect.height);
+			Rect left = new Rect(rect.x, rect.y, amount, rect.height);
+			Rect right = new Rect(rect.x+amount, rect.y, rect.width-amount, rect.height);
 			return new RectPair(left, right);
 		}
 
-		public static RectPair CutRight(this Rect rect, float width)
+		public static Rect CutLeft(this Rect rect, float amount, out Rect result)
 		{
-			Rect left = new Rect(rect.x, rect.y, rect.width-width, rect.height);
-			Rect right = new Rect(rect.x+left.width, rect.y, width, rect.height);
+			RectPair pair = rect.CutLeft(amount);
+			result = pair.A;
+			return pair.B;
+		}
+
+		public static RectPair CutRight(this Rect rect, float amount)
+		{
+			Rect left = new Rect(rect.x, rect.y, rect.width-amount, rect.height);
+			Rect right = new Rect(rect.x+left.width, rect.y, amount, rect.height);
 			return new RectPair(left, right);
 		}
 
-		public static RectPair CutTop(this Rect rect, float height)
+		public static Rect CutRight(this Rect rect, float amount, out Rect result)
 		{
-			Rect top = new Rect(rect.x, rect.y, rect.width, height);
-			Rect bottom = new Rect(rect.x, rect.y+height, rect.width, rect.height-height);
+			RectPair pair = rect.CutRight(amount);
+			result = pair.B;
+			return pair.A;
+		}
+
+		public static RectPair CutTop(this Rect rect, float amount)
+		{
+			Rect top = new Rect(rect.x, rect.y, rect.width, amount);
+			Rect bottom = new Rect(rect.x, rect.y+amount, rect.width, rect.height-amount);
 			return new RectPair(top, bottom);
 		}
 
-		public static RectPair CutBottom(this Rect rect, float height)
+		public static Rect CutTop(this Rect rect, float amount, out Rect result)
 		{
-			Rect top = new Rect(rect.x, rect.y, rect.width, rect.height-height);
-			Rect bottom = new Rect(rect.x, rect.y+top.height, rect.width, height);
+			RectPair pair = rect.CutTop(amount);
+			result = pair.A;
+			return pair.B;
+		}
+
+		public static RectPair CutBottom(this Rect rect, float amount)
+		{
+			Rect top = new Rect(rect.x, rect.y, rect.width, rect.height-amount);
+			Rect bottom = new Rect(rect.x, rect.y+top.height, rect.width, amount);
 			return new RectPair(top, bottom);
+		}
+
+		public static Rect CutBottom(this Rect rect, float amount, out Rect result)
+		{
+			RectPair pair = rect.CutBottom(amount);
+			result = pair.B;
+			return pair.A;
 		}
 
 		private static void Split(Rect rect, Rect[] target, float[] ratios, NextPositionDelegate nextPositionCallback)
