@@ -8,13 +8,15 @@ namespace ProceduralLevel.Common.Logic
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			writer.WriteValue(value.GetHashCode());
+			int rawValue = int.Parse(value.ToString());
+			writer.WriteValue(rawValue);
+
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
-			int intValue = int.Parse(reader.Value.ToString());
-			return Activator.CreateInstance(objectType, intValue);
+			int rawValue = int.Parse(reader.Value.ToString());
+			return Activator.CreateInstance(objectType, rawValue);
 		}
 
 		public override bool CanConvert(Type objectType)
