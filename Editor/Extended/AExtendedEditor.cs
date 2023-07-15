@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Diagnostics;
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
@@ -9,7 +10,11 @@ namespace ProceduralLevel.Common.Editor
 		private bool m_Initialize = false;
 		private bool m_Compiling = false;
 
-		public DataType Target => target as DataType;
+		public DataType Target
+		{
+			[DebuggerStepThrough]
+			get => target as DataType;
+		}
 
 		protected bool DisableOnCompile = true;
 		protected bool DrawDefault  = false;

@@ -2,6 +2,6 @@
 {
 	public static class SamplesConsts
 	{
-		public const string MENU = "Samples/Inline Assets/";
+		public const string MENU = "Samples/Common/";
 	}
 }
