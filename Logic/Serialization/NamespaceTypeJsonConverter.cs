@@ -6,10 +6,10 @@ namespace ProceduralLevel.Common.Logic
 {
 	public class NamespaceTypeConverter : JsonConverter
 	{
-		public const string TYPE_FIELD = "$field";
+		public const string TYPE_FIELD = "$type";
 
 		public readonly string Namespace;
-		public readonly string Assembly;
+		public readonly string AssemblyName;
 		private bool _canWrite = true;
 
 		public override bool CanWrite => _canWrite;
@@ -17,12 +17,12 @@ namespace ProceduralLevel.Common.Logic
 		public NamespaceTypeConverter(string namespaceAndAssembly)
 		{
 			Namespace = namespaceAndAssembly;
-			Assembly = namespaceAndAssembly;
+			AssemblyName = namespaceAndAssembly;
 		}
-		public NamespaceTypeConverter(string ns, string asm)
+		public NamespaceTypeConverter(string @namespace, string assembly)
 		{
-			Namespace = ns;
-			Assembly = asm;
+			Namespace = @namespace;
+			AssemblyName = assembly;
 		}
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
@@ -37,7 +37,7 @@ namespace ProceduralLevel.Common.Logic
 		private Type GetType(JObject jObject)
 		{
 			string typeName = (string)jObject.Property(TYPE_FIELD);
-			string fullTypeName = $"{Namespace}.{typeName}, {Assembly}";
+			string fullTypeName = $"{Namespace}.{typeName}, {AssemblyName}";
 			Type simpleType = Type.GetType(fullTypeName);
 			return simpleType;
 		}

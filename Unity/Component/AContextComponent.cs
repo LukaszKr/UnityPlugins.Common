@@ -12,6 +12,14 @@ namespace ProceduralLevel.Common.Unity
 
 		private bool m_Initialized;
 
+		public void Clear()
+		{
+			if(m_Context != null)
+			{
+				SetContext(null);
+			}
+		}
+
 		public void SetContext(TContext context)
 		{
 			if(!m_Initialized)
