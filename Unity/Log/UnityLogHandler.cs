@@ -1,5 +1,5 @@
 ﻿using System;
-using ProceduralLevel.Common.Logger;
+using ProceduralLevel.Common.Logic;
 using UnityEngine;
 
 namespace ProceduralLevel.Common.Unity

@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Text;
-using ProceduralLevel.Common.Logger;
+using ProceduralLevel.Common.Logic;
 using UnityEngine;
 
 namespace ProceduralLevel.Common.Unity
