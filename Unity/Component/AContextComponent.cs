@@ -12,7 +12,7 @@ namespace ProceduralLevel.Common.Unity
 
 		private bool m_Initialized;
 
-		public void Clear()
+		public void SetNullContext()
 		{
 			if(m_Context != null)
 			{
