@@ -44,7 +44,7 @@ namespace ProceduralLevel.Common.Unity
 
 		public static void PopBackgroundColor()
 		{
-			GUI.color = m_BackgroundColorStack.Pop();
+			GUI.backgroundColor = m_BackgroundColorStack.Pop();
 		}
 
 		public static void PushContentColor(Color color)
