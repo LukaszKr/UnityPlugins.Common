@@ -20,7 +20,7 @@ namespace ProceduralLevel.Common.Unity
 			ReferenceHeight = height;
 		}
 
-		public void Use()
+		public void Update()
 		{
 			Width = Screen.width;
 			Height = Screen.height;
@@ -29,6 +29,11 @@ namespace ProceduralLevel.Common.Unity
 			Scale = Mathf.Max(ScaleX, ScaleY);
 			Width = Mathf.CeilToInt(Width/Scale);
 			Height = Mathf.CeilToInt(Height/Scale);
+		}
+
+		public void Use()
+		{
+			Update();
 			GUI.matrix = Matrix4x4.Scale(new Vector3(Scale, Scale, Scale));
 		}
 
