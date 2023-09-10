@@ -1,4 +1,4 @@
-﻿using ProceduralLevel.Common.Assertion;
+﻿using ProceduralLevel.Common.Logic;
 
 namespace ProceduralLevel.Common.Unity.Extended
 {
@@ -9,7 +9,6 @@ namespace ProceduralLevel.Common.Unity.Extended
 
 		public AUnitySingleton()
 		{
-			GameAssert.IsNull(Instance);
 			Instance = this as TObject;
 		}
 	}

@@ -1,4 +1,4 @@
-﻿using ProceduralLevel.Common.Assertion;
+﻿using ProceduralLevel.Common.Logic;
 using UnityEngine;
 
 namespace ProceduralLevel.Common.Unity
