@@ -1,4 +1,4 @@
-﻿using ProceduralLevel.Common.Logic;
+﻿using ProceduralLevel.Common.Assertion;
 using UnityEngine;
 
 namespace ProceduralLevel.Common.Unity
@@ -7,7 +7,7 @@ namespace ProceduralLevel.Common.Unity
 	{
 		public static void GetCorners(this Bounds bounds, Vector3[] corners)
 		{
-			DebugAssert.AreEqual(8, corners.Length);
+			GameAssert.AreEqual(8, corners.Length);
 			Vector3 min = bounds.min;
 			Vector3 max = bounds.max;
 			Vector3 size = bounds.size;

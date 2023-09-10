@@ -1,4 +1,6 @@
-﻿namespace ProceduralLevel.Common.Unity.Extended
+﻿using ProceduralLevel.Common.Assertion;
+
+namespace ProceduralLevel.Common.Unity.Extended
 {
 	public abstract class AUnitySingleton<TObject> : ExtendedMonoBehaviour
 		where TObject : AUnitySingleton<TObject>
@@ -7,6 +9,7 @@
 
 		public AUnitySingleton()
 		{
+			GameAssert.IsNull(Instance);
 			Instance = this as TObject;
 		}
 	}
