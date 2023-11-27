@@ -11,6 +11,14 @@ namespace ProceduralLevel.Common.Unity
 		private bool m_ContextIsSet;
 		private bool m_Initialized;
 
+		private void Awake()
+		{
+			if(!m_ContextIsSet)
+			{
+				enabled = false;
+			}
+		}
+
 		public void ClearContext()
 		{
 			if(m_ContextIsSet)
@@ -19,6 +27,7 @@ namespace ProceduralLevel.Common.Unity
 				m_Context = default;
 				m_ContextBinder.UnbindAll();
 				OnDetach();
+				enabled = false;
 			}
 		}
 
@@ -44,6 +53,7 @@ namespace ProceduralLevel.Common.Unity
 				m_Context = context;
 				OnAttach(m_ContextBinder);
 			}
+			enabled = true;
 		}
 
 		protected virtual void OnReplace(EventBinder binder, TContext oldContext)
