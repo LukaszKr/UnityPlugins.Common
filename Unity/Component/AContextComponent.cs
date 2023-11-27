@@ -15,7 +15,8 @@ namespace ProceduralLevel.Common.Unity
 		{
 			if(!m_ContextIsSet)
 			{
-				enabled = false;
+				GameObject.SetActive(false);
+				DisableContextObject();
 			}
 		}
 
@@ -27,7 +28,7 @@ namespace ProceduralLevel.Common.Unity
 				m_Context = default;
 				m_ContextBinder.UnbindAll();
 				OnDetach();
-				enabled = false;
+				DisableContextObject();
 			}
 		}
 
@@ -53,7 +54,7 @@ namespace ProceduralLevel.Common.Unity
 				m_Context = context;
 				OnAttach(m_ContextBinder);
 			}
-			enabled = true;
+			EnableContextObject();
 		}
 
 		protected virtual void OnReplace(EventBinder binder, TContext oldContext)
@@ -65,5 +66,15 @@ namespace ProceduralLevel.Common.Unity
 		protected abstract void OnInitialize();
 		protected abstract void OnAttach(EventBinder binder);
 		protected abstract void OnDetach();
+
+		protected virtual void DisableContextObject()
+		{
+			GameObject.SetActive(false);
+		}
+
+		protected virtual void EnableContextObject()
+		{
+			GameObject.SetActive(true);
+		}
 	}
 }
