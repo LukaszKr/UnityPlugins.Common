@@ -15,7 +15,6 @@ namespace ProceduralLevel.Common.Unity
 		{
 			if(!m_ContextIsSet)
 			{
-				GameObject.SetActive(false);
 				DisableContextObject();
 			}
 		}
@@ -24,10 +23,10 @@ namespace ProceduralLevel.Common.Unity
 		{
 			if(m_ContextIsSet)
 			{
+				OnDetach();
 				m_ContextIsSet = false;
 				m_Context = default;
 				m_ContextBinder.UnbindAll();
-				OnDetach();
 				DisableContextObject();
 			}
 		}
@@ -36,8 +35,8 @@ namespace ProceduralLevel.Common.Unity
 		{
 			if(!m_Initialized)
 			{
-				OnInitialize();
 				m_Initialized = true;
+				OnInitialize();
 			}
 
 			m_ContextBinder.UnbindAll();
