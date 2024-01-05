@@ -1,14 +1,21 @@
 ﻿using System;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Shims;
 
 namespace ProceduralLevel.Common.Logic
 {
-	public class GUIDJsonConverter : JsonConverter
+	[JsonConverter(typeof(UGuid<>))]
+	internal class UGuidJsonConverter : JsonConverter
 	{
+		[Preserve]
+		public UGuidJsonConverter()
+		{
+		}
+
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			IGenericGUID id = (IGenericGUID)value;
-			writer.WriteValue(id.Value.ToString());
+			string strValue = value.ToString();
+			writer.WriteValue(strValue);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -19,7 +26,7 @@ namespace ProceduralLevel.Common.Logic
 
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(IGenericGUID) == objectType;
+			return typeof(UGuid<>) == objectType;
 		}
 	}
 }

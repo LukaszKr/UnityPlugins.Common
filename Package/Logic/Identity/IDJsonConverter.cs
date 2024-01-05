@@ -7,8 +7,8 @@ namespace ProceduralLevel.Common.Logic
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			IGenericID id = (IGenericID)value;
-			writer.WriteValue(id.Value);
+			string strValue = value.ToString();
+			writer.WriteValue(int.Parse(strValue));
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -19,7 +19,7 @@ namespace ProceduralLevel.Common.Logic
 
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(IGenericID) == objectType;
+			return typeof(ID<>) == objectType;
 		}
 	}
 }

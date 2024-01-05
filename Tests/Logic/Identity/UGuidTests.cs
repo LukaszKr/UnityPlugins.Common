@@ -4,14 +4,14 @@ using ProceduralLevel.Common.Logic;
 
 namespace ProceduralLevel.Common.Tests
 {
-	public class GUIDTests
+	public class UGuidTests
 	{
 		[Test]
 		public void SerializeAndDeserialize()
 		{
-			GUID<int> id = GUID<int>.Create();
+			UGuid<int> id = UGuid<int>.Create();
 			string json = JsonConvert.SerializeObject(id);
-			GUID<int> deserialized = JsonConvert.DeserializeObject<GUID<int>>(json);
+			UGuid<int> deserialized = JsonConvert.DeserializeObject<UGuid<int>>(json);
 			Assert.AreEqual(id, deserialized);
 		}
 	}

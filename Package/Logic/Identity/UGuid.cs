@@ -1,42 +1,45 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Shims;
+using ProceduralLevel.Common.Ext;
 
 namespace ProceduralLevel.Common.Logic
 {
-	[JsonConverter(typeof(GUIDJsonConverter))]
-	public readonly struct GUID<T> : IEquatable<GUID<T>>, IComparable<GUID<T>>, IGenericGUID
+	[Serializable, JsonConverter(typeof(UGuidJsonConverter))]
+	public struct UGuid<T> : IEquatable<UGuid<T>>, IComparable<UGuid<T>>, IBinarySerializable
 	{
 		public readonly Guid Value;
 
-		public static bool operator ==(GUID<T> left, GUID<T> right) => (left.Value == right.Value);
-		public static bool operator !=(GUID<T> left, GUID<T> right) => (left.Value != right.Value);
+		public static bool operator ==(UGuid<T> left, UGuid<T> right) => (left.Value == right.Value);
+		public static bool operator !=(UGuid<T> left, UGuid<T> right) => (left.Value != right.Value);
 
-		Guid IGenericGUID.Value => Value;
-
-		public static GUID<T> Create()
+		public static UGuid<T> Create()
 		{
 			Guid guid = Guid.NewGuid();
-			return new GUID<T>(guid);
+			return new UGuid<T>(guid);
 		}
 
-		public GUID(Guid guid)
+		[Preserve]
+		public UGuid(Guid guid)
 		{
 			Value = guid;
 		}
 
-		public GUID(GUID<T> uguid)
+		[Preserve]
+		public UGuid(UGuid<T> uguid)
 		{
 			Value = uguid.Value;
 		}
 
-		public GUID(string guid)
+		[Preserve]
+		public UGuid(string guid)
 		{
 			Value = new Guid(guid);
 		}
 
-		#region Serialization
-		public GUID(BinaryReader reader)
+		#region Serialziation
+		public UGuid(BinaryReader reader)
 		{
 			Value = new Guid(reader.ReadString());
 		}
@@ -52,7 +55,7 @@ namespace ProceduralLevel.Common.Logic
 			return Value.GetHashCode();
 		}
 
-		public bool Equals(GUID<T> other)
+		public bool Equals(UGuid<T> other)
 		{
 			if(other != null)
 			{
@@ -68,7 +71,7 @@ namespace ProceduralLevel.Common.Logic
 				return false;
 			}
 
-			if(obj is GUID<T> casted)
+			if(obj is UGuid<T> casted)
 			{
 				return casted.Value == Value;
 			}
@@ -76,14 +79,14 @@ namespace ProceduralLevel.Common.Logic
 			return false;
 		}
 
-		public int CompareTo(GUID<T> other)
+		public int CompareTo(UGuid<T> other)
 		{
 			return Value.CompareTo(other.Value);
 		}
 
 		public override string ToString()
 		{
-			return $"({Value})";
+			return Value.ToString();
 		}
 	}
 }

@@ -5,14 +5,12 @@ using Newtonsoft.Json;
 namespace ProceduralLevel.Common.Logic
 {
 	[JsonConverter(typeof(IDJsonConverter))]
-	public readonly struct ID<T> : IEquatable<ID<T>>, IComparable<ID<T>>, IGenericID
+	public readonly struct ID<T> : IEquatable<ID<T>>, IComparable<ID<T>>
 	{
 		public readonly int Value;
 
 		public static bool operator ==(ID<T> left, ID<T> right) => (left.Value == right.Value);
 		public static bool operator !=(ID<T> left, ID<T> right) => (left.Value != right.Value);
-
-		int IGenericID.Value => Value;
 
 		public ID(int value)
 		{
@@ -67,7 +65,7 @@ namespace ProceduralLevel.Common.Logic
 
 		public override string ToString()
 		{
-			return $"({Value})";
+			return $"{Value}";
 		}
 	}
 }
