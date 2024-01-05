@@ -4,6 +4,13 @@ namespace ProceduralLevel.Common.Unity
 {
 	public static class ColorExt
 	{
+		public static readonly Color White = new Color(1f, 1f, 1f, 1f);
+
+		public static Vector3 ToVector3(this Color color)
+		{
+			return new Vector3(color.r, color.g, color.b);
+		}
+
 		public static Color Offset(this Color color, float r, float g, float b, float a = 0f)
 		{
 			return new Color(color.r+r, color.g+g, color.b+b, color.a+a);
