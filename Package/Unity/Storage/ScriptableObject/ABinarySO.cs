@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ProceduralLevel.Common.Unity
 {
 	public abstract class ABinarySO<TObject> : ScriptableObject
-		where TObject : class, IBinarySerializable, new()
+		where TObject : class, IBinarySerializable
 	{
 		[SerializeField, HideInInspector]
 		private byte[] m_RawData;
@@ -23,7 +23,7 @@ namespace ProceduralLevel.Common.Unity
 		{
 			if(m_RawData == null)
 			{
-				m_Value = new TObject();
+				m_Value = Create();
 				return;
 			}
 
@@ -34,10 +34,11 @@ namespace ProceduralLevel.Common.Unity
 			catch(Exception e)
 			{
 				Debug.LogException(e, this);
-				m_Value = new TObject();
+				m_Value = Create();
 			}
 		}
 
+		protected abstract TObject Create();
 		protected abstract TObject Create(BinaryReader reader);
 
 #if UNITY_EDITOR
