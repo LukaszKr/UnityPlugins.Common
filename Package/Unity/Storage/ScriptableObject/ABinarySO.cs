@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ProceduralLevel.Common.Unity
 {
-	public abstract class ABinarySO<TObject> : ScriptableObject
+	public abstract class ABinarySO<TObject> : ScriptableObject, ISerializationCallbackReceiver
 		where TObject : class, IBinarySerializable
 	{
 		[SerializeField, HideInInspector]
@@ -38,11 +38,7 @@ namespace ProceduralLevel.Common.Unity
 			}
 		}
 
-		protected abstract TObject Create();
-		protected abstract TObject Create(BinaryReader reader);
-
-#if UNITY_EDITOR
-		public void Editor_Save()
+		private void Save()
 		{
 			using(MemoryStream stream = new MemoryStream())
 			{
@@ -50,9 +46,18 @@ namespace ProceduralLevel.Common.Unity
 				{
 					m_Value.WriteToBuffer(writer);
 					m_RawData = stream.ToArray();
-					UnityEditor.EditorUtility.SetDirty(this);
 				}
 			}
+		}
+
+		protected abstract TObject Create();
+		protected abstract TObject Create(BinaryReader reader);
+
+#if UNITY_EDITOR
+		public void Editor_Save()
+		{
+			Save();
+			UnityEditor.EditorUtility.SetDirty(this);
 		}
 
 		public void Editor_RecordObject(string reason)
@@ -60,5 +65,17 @@ namespace ProceduralLevel.Common.Unity
 			UnityEditor.Undo.RecordObject(this, reason);
 		}
 #endif
+
+		#region Serialization Callbacks
+		public void OnBeforeSerialize()
+		{
+			Save();
+		}
+
+		public void OnAfterDeserialize()
+		{
+			Load();
+		}
+		#endregion
 	}
 }
