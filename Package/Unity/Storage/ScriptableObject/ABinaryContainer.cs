@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ProceduralLevel.Common.Unity
 {
-	public abstract class ABinarySO<TObject> : ScriptableObject, ISerializationCallbackReceiver
+	public abstract class ABinaryContainer<TObject> : ScriptableObject, ISerializationCallbackReceiver
 		where TObject : class, IBinarySerializable
 	{
 		[SerializeField, HideInInspector]
