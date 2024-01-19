@@ -5,7 +5,7 @@ namespace ProceduralLevel.Common.Unity
 	public readonly struct ComputeShaderKernel
 	{
 		public readonly ComputeShader Shader;
-		public readonly int Kernel;
+		public readonly int Index;
 		public readonly int ThreadGroupX;
 		public readonly int ThreadGroupY;
 		public readonly int ThreadGroupZ;
@@ -13,9 +13,9 @@ namespace ProceduralLevel.Common.Unity
 		public ComputeShaderKernel(ComputeShader computeShader, string kernelName)
 		{
 			Shader = computeShader;
-			Kernel = computeShader.FindKernel(kernelName);
+			Index = computeShader.FindKernel(kernelName);
 			uint x, y, z;
-			computeShader.GetKernelThreadGroupSizes(Kernel, out x, out y, out z);
+			computeShader.GetKernelThreadGroupSizes(Index, out x, out y, out z);
 			ThreadGroupX = (int)x;
 			ThreadGroupY = (int)y;
 			ThreadGroupZ = (int)z;
@@ -26,7 +26,7 @@ namespace ProceduralLevel.Common.Unity
 			int groupXCount = Mathf.CeilToInt((float)groupX / ThreadGroupX);
 			int groupYCount = Mathf.CeilToInt((float)groupY / ThreadGroupY);
 			int groupZCount = Mathf.CeilToInt((float)groupZ / ThreadGroupZ);
-			Shader.Dispatch(Kernel, groupXCount, groupYCount, groupZCount);
+			Shader.Dispatch(Index, groupXCount, groupYCount, groupZCount);
 		}
 	}
 }
