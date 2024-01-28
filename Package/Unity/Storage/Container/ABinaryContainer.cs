@@ -11,6 +11,15 @@ namespace ProceduralLevel.Common.Unity
 		[SerializeField, HideInInspector]
 		private byte[] m_BinaryData;
 
+		public void SetBinaryData(byte[] data, bool load = true)
+		{
+			m_BinaryData = data;
+			if(load)
+			{
+				Load();
+			}
+		}
+
 		public override void Load()
 		{
 			if(m_BinaryData == null)

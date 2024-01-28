@@ -9,6 +9,15 @@ namespace ProceduralLevel.Common.Unity
 		[SerializeField, HideInInspector]
 		private string m_Json;
 
+		public void SetJson(string json, bool load = true)
+		{
+			m_Json = json;
+			if(load)
+			{
+				Load();
+			}
+		}
+
 		public override void Load()
 		{
 			if(!string.IsNullOrEmpty(m_Json))
