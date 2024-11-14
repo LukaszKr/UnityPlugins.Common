@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace UnityPlugins.Reflection.Logic
+namespace UnityPlugins.Common.Logic
 {
 	public static class TypeUtility
 	{

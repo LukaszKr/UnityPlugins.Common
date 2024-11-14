@@ -1,7 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 
-namespace UnityPlugins.Animation.Unity
+namespace UnityPlugins.Common.Unity
 {
 	public class SequenceAnimation
 	{
