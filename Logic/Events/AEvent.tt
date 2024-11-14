@@ -1,0 +1,20 @@
+﻿<#@ include file="./HelperMethod.tt" #>
+namespace ProceduralLevel.Common.Event
+{
+<# for(int x = 0; x < tCount; x++) { #>
+	public abstract class AEvent<#= listGenerics(x) #> : ABaseEvent<AEvent<#= listGenerics(x) #>.Callback>
+	{
+		public delegate void Callback(<#= listParams(x) #>);
+
+		public abstract void Invoke(<#= listParams(x) #>);
+<# if(x > 0) { #>
+
+		public override string ToString()
+		{
+			return base.ToString() + $"[Types(<#= listVars("{{typeof(T{0}).Name}}", x) #>)]";
+		}
+<# } #>
+	}
+
+<# } #>
+}

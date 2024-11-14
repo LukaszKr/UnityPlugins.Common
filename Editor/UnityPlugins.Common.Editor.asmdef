@@ -1,0 +1,22 @@
+{
+    "name": "UnityPlugins.Common.Editor",
+    "rootNamespace": "UnityPlugins.Common.Editor",
+    "references": [
+        "GUID:a4f27f4560b427748867decce1333bea",
+        "GUID:b3e8d852c59b26a49874f043a6c012c1"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "DOTween.dll",
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

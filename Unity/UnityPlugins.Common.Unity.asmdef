@@ -1,0 +1,18 @@
+{
+    "name": "UnityPlugins.Common.Unity",
+    "rootNamespace": "UnityPlugins.Common.Unity",
+    "references": [
+        "GUID:a4f27f4560b427748867decce1333bea"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "DOTween.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

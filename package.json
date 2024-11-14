@@ -1,0 +1,23 @@
+{
+	"name": "unityplugins.common",
+	"version": "2.0.0",
+	"displayName": "UnityPlugins.Common",
+	"description": "",
+	"unity": "2019.4",
+	"unityRelease": "23f1",
+	"dependencies": {
+	},
+	"keywords": [
+	],
+	"samples": [
+		{
+			"displayName": "Inline Asset",
+			"description": "Inline Assets",
+			"path": "Samples/InlineAssets"
+		}
+	],
+	"author": {
+		"name": "Procedural Level",
+		"url": "https://www.procedurallevel.com"
+	}
+}
