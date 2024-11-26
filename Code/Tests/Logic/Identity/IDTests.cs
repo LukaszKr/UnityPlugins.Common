@@ -30,8 +30,8 @@ namespace UnityPlugins.Common.Logic.Identity
 			new EqualsTest(false, new ID<int>(1), new ID<int>(0)),
 		};
 
-		[Test]
-		public void Equals([ValueSource(nameof(m_EqualsTests))] EqualsTest test)
+		[Test, TestCaseSource(nameof(m_EqualsTests))]
+		public void Equals(EqualsTest test)
 		{
 			test.Run();
 		}

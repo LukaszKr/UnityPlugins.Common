@@ -32,8 +32,8 @@ namespace UnityPlugins.Common.Logic.Identity
 				new UGuid<int>("d2037916-1d1f-4888-857f-7042778d9e67")),
 		};
 
-		[Test]
-		public void Equals([ValueSource(nameof(m_EqualsTests))] EqualsTest test)
+		[Test, TestCaseSource(nameof(m_EqualsTests))]
+		public void Equals(EqualsTest test)
 		{
 			test.Run();
 		}
