@@ -7,7 +7,7 @@
 
 		public AContextClass()
 		{
-			m_ContextHandler = new ContextHandler<TContext>(OnAttach, OnDetach, OnReplace);
+			m_ContextHandler = new ContextHandler<TContext>(OnAttach, OnDetach, Replace);
 		}
 
 		public void SetContext(TContext context)
@@ -29,10 +29,16 @@
 		protected abstract void OnAttach(EventBinder binder);
 		protected abstract void OnDetach();
 
-		protected virtual void OnReplace(TContext context, EventBinder binder, TContext oldContext)
+		private void Replace(TContext newContext, EventBinder binder, TContext oldContext)
+		{
+			m_Context = newContext;
+			OnReplace(binder, oldContext);
+		}
+
+		protected virtual void OnReplace(EventBinder binder, TContext oldContext)
 		{
 			OnDetach();
-			OnAttach(context, binder);
+			OnAttach(m_Context, binder);
 		}
 	}
 }

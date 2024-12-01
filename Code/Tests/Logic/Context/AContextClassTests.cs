@@ -7,9 +7,16 @@ namespace UnityPlugins.Common.Logic.Context
 	{
 		private class TestContextClass : AContextClass<int>
 		{
+			public bool ContextWillBeDifferent;
+
 			public int AttachCallCount;
 			public int DetachCallCount;
 			public int ReplaceCallCount;
+
+			public TestContextClass(bool willChangeContext = false)
+			{
+				ContextWillBeDifferent = willChangeContext;
+			}
 
 			protected override void OnAttach(EventBinder binder)
 			{
@@ -21,11 +28,15 @@ namespace UnityPlugins.Common.Logic.Context
 				DetachCallCount++;
 			}
 
-			protected override void OnReplace(int context, EventBinder binder, int oldContext)
+			protected override void OnReplace(EventBinder binder, int oldContext)
 			{
 				ReplaceCallCount++;
+				if(ContextWillBeDifferent)
+				{
+					Assert.AreNotEqual(m_Context, oldContext);
+				}
 
-				base.OnReplace(context, binder, oldContext);
+				base.OnReplace(binder, oldContext);
 			}
 		}
 
@@ -41,7 +52,7 @@ namespace UnityPlugins.Common.Logic.Context
 		[Test]
 		public void SetContext_ToDifferent()
 		{
-			TestContextClass test = new TestContextClass();
+			TestContextClass test = new TestContextClass(true);
 			test.SetContext(1);
 			test.SetContext(2);
 
