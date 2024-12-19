@@ -8,6 +8,8 @@ namespace UnityPlugins.Common.Unity
 		private Sequence m_Sequence;
 		private Action m_OnFinished;
 
+		public bool IsActive => m_Sequence != null;
+
 		public Sequence Start(Action onFinished = null, bool completePrevious = false)
 		{
 			Kill(completePrevious);
