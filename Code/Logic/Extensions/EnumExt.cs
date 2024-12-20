@@ -16,5 +16,10 @@ namespace UnityPlugins.Common.Logic
 			MinValue = Values[0].GetHashCode();
 			MaxValue = Values[Values.Length-1].GetHashCode();
 		}
+
+		public TEnum GetRandom(Random random)
+		{
+			return Values[random.Next(0, Values.Length)];
+		}
 	}
 }
