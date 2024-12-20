@@ -4,22 +4,24 @@ namespace UnityPlugins.Common.Logic
 {
 	public readonly struct BinaryPayloadHeader : IEquatable<BinaryPayloadHeader>
 	{
-		public readonly int Position;
+		public readonly int Offset;
 		public readonly int Length;
 
 		public static bool operator ==(BinaryPayloadHeader left, BinaryPayloadHeader right) => left.Equals(right);
 		public static bool operator !=(BinaryPayloadHeader left, BinaryPayloadHeader right) => !left.Equals(right);
 
-		public BinaryPayloadHeader(int position, int length)
+		public int FinalOffset => Offset+Length;
+
+		public BinaryPayloadHeader(int offset, int length)
 		{
-			Position = position;
+			Offset = offset;
 			Length = length;
 		}
 
-		public BinaryPayloadHeader(int position, FastBinaryReader reader)
+		public BinaryPayloadHeader(FastBinaryReader reader)
 		{
-			Position = position;
 			Length = reader.ReadInt();
+			Offset = reader.Head;
 		}
 
 		public override bool Equals(object obj)
@@ -34,12 +36,12 @@ namespace UnityPlugins.Common.Logic
 
 		public bool Equals(BinaryPayloadHeader other)
 		{
-			return Position == other.Position && Length == other.Length;
+			return Offset == other.Offset && Length == other.Length;
 		}
 
 		public override int GetHashCode()
 		{
-			return HashCode.Combine(Position, Length);
+			return HashCode.Combine(Offset, Length);
 		}
 
 		public override string ToString()

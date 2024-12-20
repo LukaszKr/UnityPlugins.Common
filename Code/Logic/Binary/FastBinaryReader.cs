@@ -18,7 +18,7 @@ namespace UnityPlugins.Common.Logic
 		#region Payload
 		public BinaryPayloadHeader ReadPayload()
 		{
-			return new BinaryPayloadHeader(Head, this);
+			return new BinaryPayloadHeader(this);
 		}
 
 		public void SkipPayload(BinaryPayloadHeader header)

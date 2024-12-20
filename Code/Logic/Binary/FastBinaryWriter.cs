@@ -28,19 +28,19 @@ namespace UnityPlugins.Common.Logic
 		#region Payload
 		public BinaryPayloadHeader StartPayload()
 		{
-			BinaryPayloadHeader header = new BinaryPayloadHeader(Head, 0);
 			Write(0);
+			BinaryPayloadHeader header = new BinaryPayloadHeader(Head, 0);
 			return header;
 		}
 
 		public BinaryPayloadHeader EndPayload(BinaryPayloadHeader header)
 		{
 			int currentHead = Head;
-			Head = header.Position;
-			int length = currentHead-Head-4;
+			int length = currentHead-header.Offset;
+			Head = header.Offset-4;
 			Write(length);
 			Head = currentHead;
-			return new BinaryPayloadHeader(header.Position, length);
+			return new BinaryPayloadHeader(header.Offset, length);
 		}
 		#endregion
 
