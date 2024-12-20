@@ -16,6 +16,51 @@ namespace UnityPlugins.Common.Logic.Binary
 			m_Writer = new FastBinaryWriter(buffer);
 		}
 
+		[Test]
+		public void Payload()
+		{
+			m_Writer.Write(1);
+			BinaryPayloadHeader writePayload = m_Writer.StartPayload();
+			Assert.AreEqual(4, writePayload.Position);
+			Assert.AreEqual(0, writePayload.Length);
+			m_Writer.Write(1);
+			m_Writer.Write(2);
+			m_Writer.Write(3);
+			writePayload = m_Writer.EndPayload(writePayload);
+			Assert.AreEqual(4, writePayload.Position);
+			Assert.AreEqual(12, writePayload.Length);
+			m_Writer.Write(5);
+
+			Assert.AreEqual(1, m_Reader.ReadInt());
+			BinaryPayloadHeader readPayload = m_Reader.ReadPayload();
+			Assert.AreEqual(4, readPayload.Position);
+			Assert.AreEqual(12, readPayload.Length);
+			Assert.AreEqual(1, m_Reader.ReadInt());
+			Assert.AreEqual(2, m_Reader.ReadInt());
+			Assert.AreEqual(3, m_Reader.ReadInt());
+		}
+
+		[Test]
+		public void Payload_Skip()
+		{
+			m_Writer.Write(1);
+			BinaryPayloadHeader writePayload = m_Writer.StartPayload();
+			Assert.AreEqual(4, writePayload.Position);
+			Assert.AreEqual(0, writePayload.Length);
+			m_Writer.Write(1);
+			m_Writer.Write(2);
+			m_Writer.Write(3);
+			writePayload = m_Writer.EndPayload(writePayload);
+			m_Writer.Write(5);
+
+			Assert.AreEqual(1, m_Reader.ReadInt());
+			BinaryPayloadHeader header = m_Reader.ReadPayload();
+			Assert.AreEqual(4, header.Position);
+			Assert.AreEqual(12, header.Length);
+			m_Reader.SkipPayload(header);
+			Assert.AreEqual(5, m_Reader.ReadInt());
+		}
+
 		[Test, Description("Write&Read bool.")]
 		[TestCase(false)]
 		[TestCase(true)]

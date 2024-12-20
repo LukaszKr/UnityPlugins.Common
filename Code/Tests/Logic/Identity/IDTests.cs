@@ -1,6 +1,6 @@
-﻿using UnityPlugins.Common.Tests;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NUnit.Framework;
+using UnityPlugins.Common.Tests;
 
 namespace UnityPlugins.Common.Logic.Identity
 {

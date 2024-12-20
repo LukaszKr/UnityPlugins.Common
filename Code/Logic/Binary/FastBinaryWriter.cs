@@ -25,6 +25,25 @@ namespace UnityPlugins.Common.Logic
 			Head = 0;
 		}
 
+		#region Payload
+		public BinaryPayloadHeader StartPayload()
+		{
+			BinaryPayloadHeader header = new BinaryPayloadHeader(Head, 0);
+			Write(0);
+			return header;
+		}
+
+		public BinaryPayloadHeader EndPayload(BinaryPayloadHeader header)
+		{
+			int currentHead = Head;
+			Head = header.Position;
+			int length = currentHead-Head-4;
+			Write(length);
+			Head = currentHead;
+			return new BinaryPayloadHeader(header.Position, length);
+		}
+		#endregion
+
 		public byte[] GetBytes()
 		{
 			byte[] result = new byte[Head];

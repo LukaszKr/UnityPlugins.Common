@@ -15,6 +15,18 @@ namespace UnityPlugins.Common.Logic
 			Buffer = buffer;
 		}
 
+		#region Payload
+		public BinaryPayloadHeader ReadPayload()
+		{
+			return new BinaryPayloadHeader(Head, this);
+		}
+
+		public void SkipPayload(BinaryPayloadHeader header)
+		{
+			Head += header.Length;
+		}
+		#endregion
+
 		public bool ReadBoolean()
 		{
 			byte result = Buffer[Head++];
