@@ -1,0 +1,64 @@
+﻿using System.Runtime.Serialization;
+using Newtonsoft.Json;
+using UnityPlugins.Common.Logic;
+
+namespace UnityPlugins.Common.Unity
+{
+	public class StorageEntry<TValue>
+	{
+		[JsonProperty]
+		private TValue m_Value;
+		[JsonProperty]
+		private bool m_WasModified = false;
+
+		[JsonIgnore]
+		private readonly TValue m_DefaultValue;
+
+		[JsonIgnore]
+		public TValue Value
+		{
+			get { return m_Value; }
+			set
+			{
+				if(!Equals(m_Value, value))
+				{
+					m_WasModified = true;
+					m_Value = value;
+					OnChanged.Invoke(m_Value);
+				}
+			}
+		}
+
+		[JsonIgnore]
+		public bool WasModified => m_WasModified;
+
+		[JsonIgnore]
+		public readonly CustomEvent<TValue> OnChanged = new CustomEvent<TValue>();
+
+		public StorageEntry(TValue defaultValue)
+		{
+			m_DefaultValue = defaultValue;
+			m_Value = defaultValue;
+		}
+
+		public static implicit operator TValue(StorageEntry<TValue> entry)
+		{
+			return entry.Value;
+		}
+
+		[OnDeserialized]
+		internal void OnAfterDeserialize(StreamingContext context)
+		{
+			if(m_WasModified)
+			{
+				return;
+			}
+			m_Value = m_DefaultValue;
+		}
+
+		public override string ToString()
+		{
+			return $"[Value: {m_Value}, UseDefault: {m_WasModified}]";
+		}
+	}
+}
