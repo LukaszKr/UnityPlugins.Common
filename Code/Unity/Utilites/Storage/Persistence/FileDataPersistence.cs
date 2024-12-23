@@ -44,9 +44,14 @@ namespace UnityPlugins.Common.Unity
 		{
 			if(!File.Exists(path))
 			{
-				throw new FileNotFoundException();
+				throw new FileNotFoundException(path);
 			}
 			return File.ReadAllBytes(path);
+		}
+
+		public override void Copy(string sourceFileName, string destinationFileName)
+		{
+			File.Copy(sourceFileName, destinationFileName);
 		}
 
 		public override string ToBasePath(EUnityPathType pathType)
@@ -65,7 +70,7 @@ namespace UnityPlugins.Common.Unity
 					string dataPath = Application.dataPath;
 					return dataPath.Substring(0, dataPath.Length-7)+"/"; //7 = "Assets/"
 				default:
-					throw new NotImplementedException();
+					throw new NotImplementedException(pathType.ToString());
 			}
 		}
 	}

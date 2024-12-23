@@ -20,6 +20,7 @@ namespace UnityPlugins.Common.Unity
 		public abstract void EnsureDirectory(string directoryPath);
 		public abstract void WriteBytes(string path, byte[] data);
 		public abstract byte[] ReadBytes(string path);
+		public abstract void Copy(string sourceFileName, string destinationFileName);
 		public abstract string ToBasePath(EUnityPathType pathType);
 	}
 }

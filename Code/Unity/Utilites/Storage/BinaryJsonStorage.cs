@@ -12,7 +12,7 @@ namespace UnityPlugins.Common.Unity
 		{
 		}
 
-		protected override TData OnLoad(TData current, byte[] saveData)
+		protected override TData FromBytes(TData current, byte[] saveData)
 		{
 			JsonSerializer serializer = GetSerializer();
 			using(MemoryStream ms = new MemoryStream(saveData))
@@ -31,7 +31,7 @@ namespace UnityPlugins.Common.Unity
 			}
 		}
 
-		protected override byte[] OnFlush(TData data)
+		protected override byte[] ToBytes(TData data)
 		{
 			JsonSerializer serializer = new JsonSerializer();
 			using(MemoryStream ms = new MemoryStream())

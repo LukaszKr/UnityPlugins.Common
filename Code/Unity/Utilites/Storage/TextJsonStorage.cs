@@ -12,7 +12,7 @@ namespace UnityPlugins.Common.Unity
 		{
 		}
 
-		protected override TData OnLoad(TData current, byte[] saveData)
+		protected override TData FromBytes(TData current, byte[] saveData)
 		{
 			string content = Encoding.UTF8.GetString(saveData);
 			if(current == null)
@@ -23,7 +23,7 @@ namespace UnityPlugins.Common.Unity
 			return current;
 		}
 
-		protected override byte[] OnFlush(TData data)
+		protected override byte[] ToBytes(TData data)
 		{
 			string text = JsonConvert.SerializeObject(data, Formatting.Indented);
 			return Encoding.UTF8.GetBytes(text);

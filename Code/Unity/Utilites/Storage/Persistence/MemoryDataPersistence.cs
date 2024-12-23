@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace UnityPlugins.Common.Unity
@@ -31,9 +32,17 @@ namespace UnityPlugins.Common.Unity
 		{
 			if(!m_Storage.ContainsKey(path))
 			{
-				throw new FileNotFoundException();
+				throw new FileNotFoundException(path);
 			}
 			return m_Storage[path];
+		}
+
+		public override void Copy(string sourceFileName, string destinationFileName)
+		{
+			byte[] bytes = m_Storage[sourceFileName];
+			byte[] copied = new byte[bytes.Length];
+			Array.Copy(bytes, copied, bytes.Length);
+			m_Storage[destinationFileName] = copied;
 		}
 
 		public override string ToBasePath(EUnityPathType pathType)

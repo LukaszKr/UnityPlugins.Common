@@ -54,13 +54,12 @@ namespace UnityPlugins.Common.Unity
 				byte[] rawData = m_Persistence.ReadBytes(filePath);
 				if(rawData != null && rawData.Length > 0)
 				{
-					return OnLoad(current, rawData);
+					return FromBytes(current, rawData);
 				}
 				return null;
 			}
 			catch(Exception e)
 			{
-				Debug.LogError(string.Format("Exception while loading '{0}'.", filePath));
 				Debug.LogException(e);
 			}
 			return null;
@@ -70,25 +69,16 @@ namespace UnityPlugins.Common.Unity
 		{
 			m_Persistence.EnsureDirectory(FilePath);
 
-			if(UseBackup)
+			if(UseBackup && m_Persistence.PathExists(FilePath))
 			{
-				CreateCopy(BackupSufix);
+				m_Persistence.Copy(FilePath, BackupFilePath);
 			}
 
-			byte[] saveData = OnFlush(data);
+			byte[] saveData = ToBytes(data);
 			m_Persistence.WriteBytes(FilePath, saveData);
 		}
 
-		protected abstract TData OnLoad(TData current, byte[] saveData);
-		protected abstract byte[] OnFlush(TData data);
-
-		public void CreateCopy(string sufix)
-		{
-			byte[] data = m_Persistence.ReadBytes(FilePath);
-			if(data != null)
-			{
-				m_Persistence.WriteBytes(BackupFilePath, data);
-			}
-		}
+		protected abstract TData FromBytes(TData current, byte[] saveData);
+		protected abstract byte[] ToBytes(TData data);
 	}
 }
