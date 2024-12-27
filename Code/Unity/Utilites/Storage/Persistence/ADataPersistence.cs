@@ -21,6 +21,5 @@ namespace UnityPlugins.Common.Unity
 		public abstract void WriteBytes(string path, byte[] bytes);
 		public abstract byte[] ReadBytes(string path);
 		public abstract void CreateCopy(string sourceFileName, string destinationFileName);
-		public abstract string ToBasePath(EUnityPathType pathType);
 	}
 }

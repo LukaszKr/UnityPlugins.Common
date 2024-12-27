@@ -26,12 +26,6 @@ namespace UnityPlugins.Common.Unity
 			BackupPath = $"{rawPath}{BackupSufix}{extension}";
 		}
 
-		protected ADataStorage(ADataPersistence persistence, UnityPath filePath, bool useBackup)
-			: this(persistence, filePath.ToString(persistence), useBackup)
-		{
-
-		}
-
 		public void Delete(bool deleteBackup = true)
 		{
 			m_Persistence.Delete(FilePath);

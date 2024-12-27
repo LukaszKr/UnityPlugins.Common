@@ -12,12 +12,12 @@ namespace UnityPlugins.Common.Unity.Storage.Persistence
 
 		protected override string GetMainPath()
 		{
-			return new UnityPath(EUnityPathType.Project, "Tests/Storage/Main.data").ToString(m_Persistence);
+			return new UnityPath(EUnityPathType.Project, "Tests/Storage/Main.data");
 		}
 
 		protected override string GetCopyPath()
 		{
-			return new UnityPath(EUnityPathType.Project, "Tests/Storage/Copy.data").ToString(m_Persistence);
+			return new UnityPath(EUnityPathType.Project, "Tests/Storage/Copy.data");
 		}
 	}
 }

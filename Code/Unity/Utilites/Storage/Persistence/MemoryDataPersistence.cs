@@ -46,10 +46,5 @@ namespace UnityPlugins.Common.Unity
 			Array.Copy(bytes, copied, bytes.Length);
 			m_Storage[destinationFileName] = copied;
 		}
-
-		public override string ToBasePath(EUnityPathType pathType)
-		{
-			return $"{pathType}/";
-		}
 	}
 }

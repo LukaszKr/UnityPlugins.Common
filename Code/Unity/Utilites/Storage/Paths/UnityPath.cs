@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace UnityPlugins.Common.Unity
 {
@@ -10,6 +11,8 @@ namespace UnityPlugins.Common.Unity
 
 		public static bool operator ==(UnityPath l, UnityPath r) => l.Equals(r);
 		public static bool operator !=(UnityPath l, UnityPath r) => !l.Equals(r);
+
+		public static implicit operator string(UnityPath path) => path.ToString();
 
 		public UnityPath(EUnityPathType type, string path)
 		{
@@ -67,15 +70,30 @@ namespace UnityPlugins.Common.Unity
 			return HashCode.Combine(Type, Path);
 		}
 
-		public override string ToString()
+		private string GetBasePath()
 		{
-			return Path;
+			switch(Type)
+			{
+				case EUnityPathType.Streaming:
+					return Application.streamingAssetsPath+"/";
+				case EUnityPathType.Persistent:
+					return Application.persistentDataPath+"/";
+				case EUnityPathType.Assets:
+					return Application.dataPath+"/";
+				case EUnityPathType.Absolute:
+					return string.Empty;
+				case EUnityPathType.Project:
+					string dataPath = Application.dataPath;
+					return dataPath.Substring(0, dataPath.Length-7)+"/"; //7 = "Assets/"
+				default:
+					throw new NotImplementedException(Type.ToString());
+			}
 		}
 
-		public string ToString(ADataPersistence persistence)
+		public override string ToString()
 		{
-			string prefix = persistence.ToBasePath(Type);
-			return $"{prefix}{Path}";
+			string basePath = GetBasePath();
+			return $"{basePath}{Path}";
 		}
 	}
 }

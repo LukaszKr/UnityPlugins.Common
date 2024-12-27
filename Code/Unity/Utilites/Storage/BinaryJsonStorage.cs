@@ -12,11 +12,6 @@ namespace UnityPlugins.Common.Unity
 		{
 		}
 
-		public BinaryJsonStorage(ADataPersistence persistence, UnityPath filePath, bool useBackup = true)
-			: base(persistence, filePath, useBackup)
-		{
-		}
-
 		protected override TData FromBytes(TData current, byte[] saveData)
 		{
 			JsonSerializer serializer = GetSerializer();

@@ -54,25 +54,5 @@ namespace UnityPlugins.Common.Unity
 		{
 			File.Copy(sourceFileName, destinationFileName);
 		}
-
-		public override string ToBasePath(EUnityPathType pathType)
-		{
-			switch(pathType)
-			{
-				case EUnityPathType.Streaming:
-					return Application.streamingAssetsPath+"/";
-				case EUnityPathType.Persistent:
-					return Application.persistentDataPath+"/";
-				case EUnityPathType.Assets:
-					return Application.dataPath+"/";
-				case EUnityPathType.Absolute:
-					return string.Empty;
-				case EUnityPathType.Project:
-					string dataPath = Application.dataPath;
-					return dataPath.Substring(0, dataPath.Length-7)+"/"; //7 = "Assets/"
-				default:
-					throw new NotImplementedException(pathType.ToString());
-			}
-		}
 	}
 }

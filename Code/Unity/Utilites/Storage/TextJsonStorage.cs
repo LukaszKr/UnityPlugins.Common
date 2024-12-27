@@ -11,11 +11,6 @@ namespace UnityPlugins.Common.Unity
 		{
 		}
 
-		public TextJsonStorage(ADataPersistence persistence, UnityPath filePath, bool useBackup = true)
-			: base(persistence, filePath, useBackup)
-		{
-		}
-
 		protected override TData FromBytes(TData current, byte[] saveData)
 		{
 			string content = Encoding.UTF8.GetString(saveData);
