@@ -31,25 +31,26 @@ namespace UnityPlugins.Common.Unity
 			}
 		}
 
-		public override void WriteBytes(string path, byte[] data)
+		public override void WriteBytes(string path, byte[] bytes)
 		{
+			EnsureDirectory(path);
 			using(FileStream stream = File.Create(path))
 			{
-				stream.Write(data, 0, data.Length);
+				stream.Write(bytes, 0, bytes.Length);
 				stream.Flush(true);
 			}
 		}
 
 		public override byte[] ReadBytes(string path)
 		{
-			if(!File.Exists(path))
+			if(!PathExists(path))
 			{
 				throw new FileNotFoundException(path);
 			}
 			return File.ReadAllBytes(path);
 		}
 
-		public override void Copy(string sourceFileName, string destinationFileName)
+		public override void CreateCopy(string sourceFileName, string destinationFileName)
 		{
 			File.Copy(sourceFileName, destinationFileName);
 		}

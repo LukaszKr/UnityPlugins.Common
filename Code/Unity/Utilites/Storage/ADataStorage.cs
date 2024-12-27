@@ -77,7 +77,7 @@ namespace UnityPlugins.Common.Unity
 
 			if(UseBackup && m_Persistence.PathExists(FilePath))
 			{
-				m_Persistence.Copy(FilePath, BackupPath);
+				m_Persistence.CreateCopy(FilePath, BackupPath);
 			}
 
 			byte[] saveData = ToBytes(data);

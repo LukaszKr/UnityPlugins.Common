@@ -23,9 +23,11 @@ namespace UnityPlugins.Common.Unity
 			//Do nothing
 		}
 
-		public override void WriteBytes(string path, byte[] data)
+		public override void WriteBytes(string path, byte[] bytes)
 		{
-			m_Storage[path] = data;
+			byte[] bytesCopy = new byte[bytes.Length];
+			Array.Copy(bytes, bytesCopy, bytes.Length);
+			m_Storage[path] = bytesCopy;
 		}
 
 		public override byte[] ReadBytes(string path)
@@ -37,7 +39,7 @@ namespace UnityPlugins.Common.Unity
 			return m_Storage[path];
 		}
 
-		public override void Copy(string sourceFileName, string destinationFileName)
+		public override void CreateCopy(string sourceFileName, string destinationFileName)
 		{
 			byte[] bytes = m_Storage[sourceFileName];
 			byte[] copied = new byte[bytes.Length];
