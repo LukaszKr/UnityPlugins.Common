@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
+using NUnit.Framework;
 
 namespace UnityPlugins.Common.Unity.Storage.Persistence
 {
@@ -39,6 +40,18 @@ namespace UnityPlugins.Common.Unity.Storage.Persistence
 				m_Persistence.Delete(path);
 				Assert.IsFalse(m_Persistence.PathExists(path));
 			}
+		}
+
+		[Test]
+		public void FileDoesntExist_ReadBytes()
+		{
+			Assert.Throws<FileNotFoundException>(() => m_Persistence.ReadBytes("missingpath.file"));
+		}
+
+		[Test]
+		public void FileDoesntExist_ReadString()
+		{
+			Assert.Throws<FileNotFoundException>(() => m_Persistence.ReadString("missingpath.file"));
 		}
 
 		[Test]
