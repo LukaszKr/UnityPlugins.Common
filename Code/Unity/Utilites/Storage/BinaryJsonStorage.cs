@@ -7,8 +7,13 @@ namespace UnityPlugins.Common.Unity
 	public class BinaryJsonStorage<TData> : ADataStorage<TData>
 		where TData : class
 	{
-		public BinaryJsonStorage(ADataPersistence persistence, UnityPath path, bool useBackup = true)
-			: base(persistence, path, useBackup)
+		public BinaryJsonStorage(ADataPersistence persistence, string filePath, bool useBackup = true)
+			: base(persistence, filePath, useBackup)
+		{
+		}
+
+		public BinaryJsonStorage(ADataPersistence persistence, UnityPath filePath, bool useBackup = true)
+			: base(persistence, filePath, useBackup)
 		{
 		}
 
@@ -17,9 +22,7 @@ namespace UnityPlugins.Common.Unity
 			JsonSerializer serializer = GetSerializer();
 			using(MemoryStream ms = new MemoryStream(saveData))
 			{
-#pragma warning disable CS0618 // Type or member is obsolete
 				using(BsonReader jsonReader = new BsonReader(ms))
-#pragma warning restore CS0618 // Type or member is obsolete
 				{
 					if(current == null)
 					{
@@ -36,9 +39,7 @@ namespace UnityPlugins.Common.Unity
 			JsonSerializer serializer = new JsonSerializer();
 			using(MemoryStream ms = new MemoryStream())
 			{
-#pragma warning disable CS0618 // Type or member is obsolete
 				using(BsonWriter jsonWriter = new BsonWriter(ms))
-#pragma warning restore CS0618 // Type or member is obsolete
 				{
 					serializer.Serialize(jsonWriter, data);
 				}

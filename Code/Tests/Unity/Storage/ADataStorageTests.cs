@@ -25,7 +25,7 @@ namespace UnityPlugins.Common.Unity.Storage
 		public void SetUp()
 		{
 			m_Persistence = new MemoryDataPersistence();
-			m_Storage = CreateStorage(m_Persistence, new UnityPath(EUnityPathType.Project, "Tests/Storage.test"));
+			m_Storage = CreateStorage(m_Persistence, "Tests/Storage.test");
 		}
 
 		[TearDown]
@@ -34,7 +34,27 @@ namespace UnityPlugins.Common.Unity.Storage
 			m_Storage.Delete(true);
 		}
 
-		protected abstract ADataStorage<TestData> CreateStorage(ADataPersistence persistence, UnityPath path);
+		protected abstract ADataStorage<TestData> CreateStorage(ADataPersistence persistence, string path);
+
+		[Test]
+		public void Delete()
+		{
+			TestData toSave = CreateTestData();
+			SaveWithBackup(toSave);
+			m_Storage.Delete(true);
+			Assert.IsFalse(m_Persistence.PathExists(m_Storage.FilePath));
+			Assert.IsFalse(m_Persistence.PathExists(m_Storage.BackupPath));
+		}
+
+		[Test]
+		public void Delete_KeepBackup()
+		{
+			TestData toSave = CreateTestData();
+			SaveWithBackup(toSave);
+			m_Storage.Delete(false);
+			Assert.IsFalse(m_Persistence.PathExists(m_Storage.FilePath));
+			Assert.IsTrue(m_Persistence.PathExists(m_Storage.BackupPath));
+		}
 
 		[Test]
 		public void SaveAndLoad()
@@ -72,16 +92,16 @@ namespace UnityPlugins.Common.Unity.Storage
 			AssertData(toSave, loaded);
 		}
 
+		#region Helpers
 		private void SaveWithBackup(TestData toSave)
 		{
 			m_Storage.Save(toSave);
 			Assert.IsTrue(m_Persistence.PathExists(m_Storage.FilePath));
-			Assert.IsFalse(m_Persistence.PathExists(m_Storage.BackupFilePath));
+			Assert.IsFalse(m_Persistence.PathExists(m_Storage.BackupPath));
 			m_Storage.Save(toSave);
-			Assert.IsTrue(m_Persistence.PathExists(m_Storage.BackupFilePath));
+			Assert.IsTrue(m_Persistence.PathExists(m_Storage.BackupPath));
 		}
 
-		#region Helpers
 		private void AssertData(TestData expected, TestData data)
 		{
 			Assert.IsNotNull(expected);

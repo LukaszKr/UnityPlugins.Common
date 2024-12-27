@@ -6,9 +6,13 @@ namespace UnityPlugins.Common.Unity
 	public class TextJsonStorage<TData> : ADataStorage<TData>
 		where TData : class
 	{
+		public TextJsonStorage(ADataPersistence persistence, string filePath, bool useBackup = true)
+			: base(persistence, filePath, useBackup)
+		{
+		}
 
-		public TextJsonStorage(ADataPersistence persistence, UnityPath path, bool useBackup = true)
-			: base(persistence, path, useBackup)
+		public TextJsonStorage(ADataPersistence persistence, UnityPath filePath, bool useBackup = true)
+			: base(persistence, filePath, useBackup)
 		{
 		}
 

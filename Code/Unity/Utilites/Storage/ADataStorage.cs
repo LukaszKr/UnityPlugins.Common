@@ -13,17 +13,23 @@ namespace UnityPlugins.Common.Unity
 
 		public readonly bool UseBackup;
 		public readonly string FilePath;
-		public readonly string BackupFilePath;
+		public readonly string BackupPath;
 
-		protected ADataStorage(ADataPersistence persistence, UnityPath path, bool useBackup)
+		protected ADataStorage(ADataPersistence persistence, string filePath, bool useBackup)
 		{
 			m_Persistence = persistence;
 			UseBackup = useBackup;
 
-			FilePath = path.ToString(persistence);
+			FilePath = filePath;
 			string extension = Path.GetExtension(FilePath);
 			string rawPath = Path.GetFileNameWithoutExtension(FilePath);
-			BackupFilePath = $"{rawPath}{BackupSufix}{extension}";
+			BackupPath = $"{rawPath}{BackupSufix}{extension}";
+		}
+
+		protected ADataStorage(ADataPersistence persistence, UnityPath filePath, bool useBackup)
+			: this(persistence, filePath.ToString(persistence), useBackup)
+		{
+
 		}
 
 		public void Delete(bool deleteBackup = true)
@@ -32,7 +38,7 @@ namespace UnityPlugins.Common.Unity
 
 			if(UseBackup && deleteBackup)
 			{
-				m_Persistence.Delete(BackupFilePath);
+				m_Persistence.Delete(BackupPath);
 			}
 		}
 
@@ -48,7 +54,7 @@ namespace UnityPlugins.Common.Unity
 
 		private TData TryLoadPersistent(TData current, bool backup)
 		{
-			string filePath = (backup? BackupFilePath: FilePath);
+			string filePath = (backup? BackupPath: FilePath);
 			try
 			{
 				byte[] rawData = m_Persistence.ReadBytes(filePath);
@@ -71,7 +77,7 @@ namespace UnityPlugins.Common.Unity
 
 			if(UseBackup && m_Persistence.PathExists(FilePath))
 			{
-				m_Persistence.Copy(FilePath, BackupFilePath);
+				m_Persistence.Copy(FilePath, BackupPath);
 			}
 
 			byte[] saveData = ToBytes(data);

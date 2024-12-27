@@ -9,7 +9,7 @@ namespace UnityPlugins.Common.Unity
 		[JsonProperty]
 		private TValue m_Value;
 		[JsonProperty]
-		private bool m_WasModified = false;
+		private bool m_Modified = false;
 
 		[JsonIgnore]
 		private readonly TValue m_DefaultValue;
@@ -22,7 +22,7 @@ namespace UnityPlugins.Common.Unity
 			{
 				if(!Equals(m_Value, value))
 				{
-					m_WasModified = true;
+					m_Modified = true;
 					m_Value = value;
 					OnChanged.Invoke(m_Value);
 				}
@@ -30,7 +30,7 @@ namespace UnityPlugins.Common.Unity
 		}
 
 		[JsonIgnore]
-		public bool WasModified => m_WasModified;
+		public bool Modified => m_Modified;
 
 		[JsonIgnore]
 		public readonly CustomEvent<TValue> OnChanged = new CustomEvent<TValue>();
@@ -49,7 +49,7 @@ namespace UnityPlugins.Common.Unity
 		[OnDeserialized]
 		internal void OnAfterDeserialize(StreamingContext context)
 		{
-			if(m_WasModified)
+			if(m_Modified)
 			{
 				return;
 			}
@@ -58,7 +58,7 @@ namespace UnityPlugins.Common.Unity
 
 		public override string ToString()
 		{
-			return $"[Value: {m_Value}, UseDefault: {m_WasModified}]";
+			return $"[{nameof(Value)}: {m_Value}, {nameof(Modified)}: {m_Modified}]";
 		}
 	}
 }
