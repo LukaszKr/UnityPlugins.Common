@@ -38,17 +38,20 @@ namespace UnityPlugins.Common.Unity
 
 		public TData Load(TData current)
 		{
-			TData loaded = TryLoadPersistent(current, false);
+			TData loaded = TryLoadPersistent(current, FilePath);
 			if(loaded == null && UseBackup)
 			{
-				return TryLoadPersistent(current, true);
+				loaded = TryLoadPersistent(current, BackupPath);
 			}
-			return loaded;
+			if(loaded != null)
+			{
+				return loaded;
+			}
+			return current;
 		}
 
-		private TData TryLoadPersistent(TData current, bool backup)
+		private TData TryLoadPersistent(TData current, string filePath)
 		{
-			string filePath = (backup? BackupPath: FilePath);
 			try
 			{
 				byte[] rawData = m_Persistence.ReadBytes(filePath);
