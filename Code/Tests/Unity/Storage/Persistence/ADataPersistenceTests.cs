@@ -45,13 +45,14 @@ namespace UnityPlugins.Common.Unity.Storage.Persistence
 		[Test]
 		public void FileDoesntExist_ReadBytes()
 		{
-			Assert.Throws<FileNotFoundException>(() => m_Persistence.ReadBytes("missingpath.file"));
+			byte[] result = m_Persistence.TryReadBytes("missingpath.file");
 		}
 
 		[Test]
 		public void FileDoesntExist_ReadString()
 		{
-			Assert.Throws<FileNotFoundException>(() => m_Persistence.ReadString("missingpath.file"));
+			string result = m_Persistence.ReadString("missingpath.file");
+			Assert.AreEqual(string.Empty, result);
 		}
 
 		[Test]
@@ -69,7 +70,7 @@ namespace UnityPlugins.Common.Unity.Storage.Persistence
 			byte[] bytes = new byte[] { 5, 4, 3, 2, 1 };
 			string testPath = GetMainPath();
 			m_Persistence.WriteBytes(testPath, bytes);
-			byte[] readBytes = m_Persistence.ReadBytes(testPath);
+			byte[] readBytes = m_Persistence.TryReadBytes(testPath);
 
 			Assert.IsTrue(bytes != readBytes); //different array object should be returned
 			Assert.AreEqual(bytes.Length, readBytes.Length);

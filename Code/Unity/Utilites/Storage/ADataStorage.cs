@@ -54,7 +54,7 @@ namespace UnityPlugins.Common.Unity
 		{
 			try
 			{
-				byte[] rawData = m_Persistence.ReadBytes(filePath);
+				byte[] rawData = m_Persistence.TryReadBytes(filePath);
 				if(rawData != null && rawData.Length > 0)
 				{
 					return FromBytes(current, rawData);

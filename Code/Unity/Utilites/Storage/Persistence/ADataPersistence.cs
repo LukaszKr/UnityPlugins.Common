@@ -11,7 +11,11 @@ namespace UnityPlugins.Common.Unity
 		
 		public string ReadString(string path)
 		{
-			byte[] rawData = ReadBytes(path);
+			byte[] rawData = TryReadBytes(path);
+			if(rawData == null)
+			{
+				return string.Empty;
+			}
 			return Encoding.UTF8.GetString(rawData);
 		}
 
@@ -19,7 +23,7 @@ namespace UnityPlugins.Common.Unity
 		public abstract bool PathExists(string path);
 		public abstract void EnsureDirectory(string directoryPath);
 		public abstract void WriteBytes(string path, byte[] bytes);
-		public abstract byte[] ReadBytes(string path);
+		public abstract byte[] TryReadBytes(string path);
 		public abstract void CreateCopy(string sourceFileName, string destinationFileName);
 	}
 }

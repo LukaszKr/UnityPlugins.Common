@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 
 namespace UnityPlugins.Common.Unity
 {
@@ -30,11 +29,11 @@ namespace UnityPlugins.Common.Unity
 			m_Storage[path] = bytesCopy;
 		}
 
-		public override byte[] ReadBytes(string path)
+		public override byte[] TryReadBytes(string path)
 		{
 			if(!m_Storage.ContainsKey(path))
 			{
-				throw new FileNotFoundException(path);
+				return null;
 			}
 			return m_Storage[path];
 		}

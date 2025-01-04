@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using UnityEngine;
+﻿using System.IO;
 
 namespace UnityPlugins.Common.Unity
 {
@@ -41,11 +39,11 @@ namespace UnityPlugins.Common.Unity
 			}
 		}
 
-		public override byte[] ReadBytes(string path)
+		public override byte[] TryReadBytes(string path)
 		{
 			if(!PathExists(path))
 			{
-				throw new FileNotFoundException(path);
+				return null;
 			}
 			return File.ReadAllBytes(path);
 		}
