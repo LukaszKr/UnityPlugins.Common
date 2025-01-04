@@ -1,15 +1,18 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text;
 
 namespace UnityPlugins.Common.Logic
 {
 	public class FastBinaryReader
 	{
+		[DebuggerStepThrough]
 		public static implicit operator FastBinaryReader(byte[] buffer) => new FastBinaryReader(buffer);
 
 		public readonly byte[] Buffer;
 		public int Head;
 
+		[DebuggerStepThrough]
 		public FastBinaryReader(byte[] buffer)
 		{
 			Buffer = buffer;

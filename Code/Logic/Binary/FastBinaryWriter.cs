@@ -1,20 +1,24 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text;
 
 namespace UnityPlugins.Common.Logic
 {
 	public class FastBinaryWriter
 	{
+		[DebuggerStepThrough]
 		public static implicit operator FastBinaryWriter(byte[] buffer) => new FastBinaryWriter(buffer);
 
 		public readonly byte[] Buffer;
 		public int Head;
 
+		[DebuggerStepThrough]
 		public FastBinaryWriter(byte[] buffer)
 		{
 			Buffer = buffer;
 		}
 
+		[DebuggerStepThrough]
 		public FastBinaryWriter(int capacity)
 		{
 			Buffer = new byte[capacity];
