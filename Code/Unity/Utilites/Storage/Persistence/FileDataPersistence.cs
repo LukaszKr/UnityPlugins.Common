@@ -50,7 +50,7 @@ namespace UnityPlugins.Common.Unity
 
 		public override void CreateCopy(string sourceFileName, string destinationFileName)
 		{
-			File.Copy(sourceFileName, destinationFileName);
+			File.Copy(sourceFileName, destinationFileName, true);
 		}
 	}
 }

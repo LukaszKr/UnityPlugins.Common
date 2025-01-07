@@ -97,6 +97,20 @@ namespace UnityPlugins.Common.Unity.Storage.Persistence
 		}
 
 		[Test]
+		public void Copy_Create_OverwriteExisting()
+		{
+			const string STR = "123";
+			string testPath = GetMainPath();
+			string copyPath = GetCopyPath();
+
+			m_Persistence.WriteString(testPath, STR);
+			Assert.IsFalse(m_Persistence.PathExists(copyPath));
+			m_Persistence.CreateCopy(testPath, copyPath);
+			Assert.IsTrue(m_Persistence.PathExists(copyPath));
+			m_Persistence.CreateCopy(testPath, copyPath);
+		}
+
+		[Test]
 		public void Copy_ModifyOriginal_CopyNotChanged()
 		{
 			const string STR_A = "123";
