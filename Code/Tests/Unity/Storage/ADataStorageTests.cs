@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
+using NUnit.Framework;
 using UnityEngine.TestTools;
 
 namespace UnityPlugins.Common.Unity.Storage
@@ -35,6 +36,14 @@ namespace UnityPlugins.Common.Unity.Storage
 		}
 
 		protected abstract ADataStorage<TestData> CreateStorage(ADataPersistence persistence, string path);
+
+		[Test]
+		public void BackupPath_SameDirectoryAsMain()
+		{
+			FileInfo file = new FileInfo(m_Storage.FilePath);
+			FileInfo backup = new FileInfo(m_Storage.BackupPath);
+			Assert.AreEqual(file.Directory.FullName, backup.Directory.FullName);
+		}
 
 		[Test]
 		public void Delete()

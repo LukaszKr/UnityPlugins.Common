@@ -22,8 +22,9 @@ namespace UnityPlugins.Common.Unity
 
 			FilePath = filePath;
 			string extension = Path.GetExtension(FilePath);
-			string rawPath = Path.GetFileNameWithoutExtension(FilePath);
-			BackupPath = $"{rawPath}{BackupSufix}{extension}";
+			string fileName = Path.GetFileNameWithoutExtension(FilePath);
+			string directoryName = Path.GetDirectoryName(filePath);
+			BackupPath = $"{directoryName}/{fileName}{BackupSufix}{extension}";
 		}
 
 		public void Delete(bool deleteBackup = true)
