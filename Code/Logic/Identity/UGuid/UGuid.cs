@@ -36,7 +36,7 @@ namespace UnityPlugins.Common.Logic
 			Value = new Guid(guid);
 		}
 
-		#region Serialziation
+		#region Serialization
 		public UGuid(FastBinaryReader reader)
 		{
 			Value = new Guid(reader.ReadString());
