@@ -18,8 +18,7 @@ namespace UnityPlugins.Common.Editor
 			AssetDatabase.StartAssetEditing();
 			foreach(Object target in targets)
 			{
-				EditorUtility.SetDirty(target);
-				AssetDatabase.SaveAssetIfDirty(target);
+				target.Save();
 			}
 			AssetDatabase.StopAssetEditing();
 		}
