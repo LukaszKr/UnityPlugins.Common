@@ -64,7 +64,7 @@ namespace UnityPlugins.Common.Unity.Storage.Paths
 		private readonly static ConstructorTest[] m_UnityPathConstructorTests = new ConstructorTest[]
 		{
 			new ConstructorTest("C:/Folder/", "C:/Folder/"),
-			new ConstructorTest("C:/Folder", "C:/Folder/"),
+			new ConstructorTest("C:/Folder", "C:/Folder"),
 			new ConstructorTest("C:/Folder/File.ext", "C:/Folder/File.ext"),
 		};
 
@@ -101,7 +101,7 @@ namespace UnityPlugins.Common.Unity.Storage.Paths
 
 		private static readonly GetDirectoryTest[] m_GetDirectoryTests = new GetDirectoryTest[]
 		{
-			new GetDirectoryTest("C:/Folder/", "C:\\Folder"),
+			new GetDirectoryTest("C:/Folder/", "C:\\Folder\\"),
 			new GetDirectoryTest("C:/Folder", "C:\\Folder"),
 			new GetDirectoryTest("C:/Folder/File.ext", "C:\\Folder"),
 			new GetDirectoryTest("C:/Folder/File", "C:\\Folder\\File"),
@@ -149,10 +149,10 @@ namespace UnityPlugins.Common.Unity.Storage.Paths
 
 		private static readonly AppendTest[] m_AppendTests = new AppendTest[]
 		{
-			new AppendTest("C:/", "Test", "C:/Test/"),
+			new AppendTest("C:/", "Test", "C:/Test"),
 			new AppendTest("C:/", "Test/", "C:/Test/"),
-			new AppendTest("C:/SubFolder", "Test/", "C:/SubFolder/Test/"),
-			new AppendTest("C:/SubFolder", "Test.ext", "C:/SubFolder/Test.ext"),
+			new AppendTest("C:/SubFolder/", "Test/", "C:/SubFolder/Test/"),
+			new AppendTest("C:/SubFolder/", "Test.ext", "C:/SubFolder/Test.ext"),
 		};
 
 		[Test, TestCaseSource(nameof(m_AppendTests))]

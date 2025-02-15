@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using UnityEngine;
 
 namespace UnityPlugins.Common.Unity
@@ -18,21 +19,18 @@ namespace UnityPlugins.Common.Unity
 		{
 			Type = type;
 			Path = path;
-
-			string ext = System.IO.Path.GetExtension(path);
-			if(string.IsNullOrEmpty(ext))
-			{
-				if(!path.EndsWith("/") && !path.EndsWith("\\"))
-				{
-					Path += "/";
-				}
-			}
 		}
 
 		public string GetDirectory()
 		{
-			string directoryPath = System.IO.Path.GetDirectoryName(ToString());
-			return directoryPath;
+			if(System.IO.Path.HasExtension(Path))
+			{
+				string directoryPath = System.IO.Path.GetDirectoryName(ToString());
+				return directoryPath;
+			}
+
+			DirectoryInfo info = new DirectoryInfo(Path);
+			return info.FullName;
 		}
 
 		public void EnsureDirectory(ADataPersistence persistence)
