@@ -17,16 +17,15 @@
 			m_Value = initialValue;
 		}
 
-		public bool Set(TValue newValue)
+		public void Set(TValue newValue)
 		{
 			if(Equals(m_Value, newValue))
 			{
-				return false;
+				return;
 			}
 
 			m_Value = newValue;
 			OnChanged.Invoke(newValue);
-			return true;
 		}
 
 		public void SetSilient(TValue newValue)
