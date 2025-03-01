@@ -28,7 +28,7 @@ namespace UnityPlugins.Common.Editor
 				}
 			}
 
-			SceneAsset newScene = (SceneAsset)EditorGUILayout.ObjectField(label, scene, typeof(SceneAsset), false);
+			SceneAsset newScene = (SceneAsset)EditorGUI.ObjectField(position, label, scene, typeof(SceneAsset), false);
 			if(newScene != null)
 			{
 				sceneName.stringValue = newScene.name;
@@ -40,6 +40,11 @@ namespace UnityPlugins.Common.Editor
 				sceneName.stringValue = string.Empty;
 				assetGuid.stringValue = string.Empty;
 			}
+		}
+
+		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+		{
+			return base.GetPropertyHeight(property, label);
 		}
 	}
 }
