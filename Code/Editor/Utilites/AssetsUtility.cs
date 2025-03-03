@@ -33,7 +33,7 @@ namespace UnityPlugins.Common.Editor
 			return assets;
 		}
 
-		public static TContainer CreateSubAssetIfNull<TContainer>(ScriptableObject owner, TContainer current, string suffix)
+		public static TContainer CreateSubAssetIfNull<TContainer>(this ScriptableObject owner, TContainer current, string suffix)
 			where TContainer : ScriptableObject
 		{
 			if(current == null)
