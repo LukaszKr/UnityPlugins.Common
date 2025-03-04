@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace UnityPlugins.Common.Logic
@@ -8,6 +9,32 @@ namespace UnityPlugins.Common.Logic
 		public const string CONDITIONAL = "UNITY_EDITOR";
 
 		private const float APPROX = 0.00001f;
+
+		#region Comparable
+		public static void IsLarger<T>(T a, T b, string message = default)
+			where T : IComparable<T>
+		{
+			GameAssert.IsLarger(a, b, message);
+		}
+
+		public static void IsLargerEqual<T>(T a, T b, string message = default)
+			where T : IComparable<T>
+		{
+			GameAssert.IsLargerEqual(a, b, message);
+		}
+
+		public static void IsSmaller<T>(T a, T b, string message = default)
+			where T : IComparable<T>
+		{
+			GameAssert.IsSmaller(a, b, message);
+		}
+
+		public static void IsSmallerEqual<T>(T a, T b, string message = default)
+			where T : IComparable<T>
+		{
+			GameAssert.IsSmallerEqual(a, b, message);
+		}
+		#endregion
 
 		#region IsTrue
 		[Conditional(CONDITIONAL)]

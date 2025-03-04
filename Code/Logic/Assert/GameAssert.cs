@@ -47,7 +47,6 @@ namespace UnityPlugins.Common.Logic
 				throw new AssertException($"[IsTrue, {string.Format(message, arg0, arg1, arg2, arg3)}]");
 			}
 		}
-
 		#endregion
 
 		#region IsFalse
@@ -187,6 +186,44 @@ namespace UnityPlugins.Common.Logic
 			}
 		}
 
+		#endregion
+
+		#region Comparable
+		public static void IsLarger<T>(T a, T b, string message = default)
+			where T : IComparable<T>
+		{
+			if(a.CompareTo(b) <= 0)
+			{
+				throw new AssertException($"[IsLarger, {typeof(T).Name}, {a} > {b}, {message}]");
+			}
+		}
+
+		public static void IsLargerEqual<T>(T a, T b, string message = default)
+				where T : IComparable<T>
+		{
+			if(a.CompareTo(b) < 0)
+			{
+				throw new AssertException($"[IsLargerEqual, {typeof(T).Name}, {a} >= {b}, {message}]");
+			}
+		}
+
+		public static void IsSmaller<T>(T a, T b, string message = default)
+			where T : IComparable<T>
+		{
+			if(a.CompareTo(b) >= 0)
+			{
+				throw new AssertException($"[IsSmaller, {typeof(T).Name}, {a} < {b}, {message}]");
+			}
+		}
+
+		public static void IsSmallerEqual<T>(T a, T b, string message = default)
+			where T : IComparable<T>
+		{
+			if(a.CompareTo(b) > 0)
+			{
+				throw new AssertException($"[IsSmallerEqual, {typeof(T).Name}, {a} <= {b}, {message}]");
+			}
+		}
 		#endregion
 
 		#region AreEqual
