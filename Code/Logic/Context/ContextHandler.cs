@@ -31,15 +31,16 @@
 				m_ContextIsSet = false;
 				m_Current = default;
 				m_OnDetach();
+				m_ContextBinder.UnbindAll();
 			}
 		}
 
 		public void SetContext(TContext context)
 		{
-			m_ContextBinder.UnbindAll();
-
 			if(m_ContextIsSet)
 			{
+				m_ContextBinder.UnbindAll();
+
 				TContext oldContext = m_Current;
 				m_Current = context;
 				if(m_OnReplace != null)

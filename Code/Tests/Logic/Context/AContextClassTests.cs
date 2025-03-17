@@ -13,6 +13,8 @@ namespace UnityPlugins.Common.Logic.Context
 			public int DetachCallCount;
 			public int ReplaceCallCount;
 
+			public EventBinder ContextBinder;
+
 			public TestContextClass(bool willChangeContext = false)
 			{
 				ContextWillBeDifferent = willChangeContext;
@@ -20,6 +22,7 @@ namespace UnityPlugins.Common.Logic.Context
 
 			protected override void OnAttach(EventBinder binder)
 			{
+				ContextBinder = binder;
 				AttachCallCount++;
 			}
 
@@ -85,6 +88,18 @@ namespace UnityPlugins.Common.Logic.Context
 			TestContextClass test = new TestContextClass();
 			test.ClearContext();
 			AssertTestClass(test, 0, 0, 0);
+		}
+
+		[Test]
+		public void ClearContext_EventBinderCleared()
+		{
+			TestContextClass test = new TestContextClass();
+			test.SetContext(5);
+			CustomEvent evt = new CustomEvent();
+			test.ContextBinder.Bind(evt, () => { });
+			Assert.AreEqual(1, evt.Count);
+			test.ClearContext();
+			Assert.AreEqual(0, evt.Count);
 		}
 
 		#region Helpers
