@@ -18,15 +18,7 @@ namespace UnityPlugins.Common.Unity
 		public TValue Value
 		{
 			get { return m_Value; }
-			set
-			{
-				if(!Equals(m_Value, value))
-				{
-					m_Modified = true;
-					m_Value = value;
-					OnChanged.Invoke(m_Value);
-				}
-			}
+			set { Set(value); }
 		}
 
 		[JsonIgnore]
@@ -44,6 +36,18 @@ namespace UnityPlugins.Common.Unity
 		public static implicit operator TValue(StorageEntry<TValue> entry)
 		{
 			return entry.Value;
+		}
+
+		public bool Set(TValue value)
+		{
+			if(!Equals(m_Value, value))
+			{
+				m_Modified = true;
+				m_Value = value;
+				OnChanged.Invoke(m_Value);
+				return true;
+			}
+			return false;
 		}
 
 		[OnDeserialized]
