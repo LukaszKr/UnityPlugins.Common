@@ -8,12 +8,14 @@ namespace UnityPlugins.Common.Unity
 		where TData : class
 	{
 		public static string BackupSufix = "_backup";
+		public static string DeletedSufix = "_deleted";
 
 		private readonly ADataPersistence m_Persistence;
 
 		public readonly bool UseBackup;
 		public readonly string FilePath;
 		public readonly string BackupPath;
+		public readonly string DeletedPath;
 
 		protected ADataStorage(ADataPersistence persistence, string filePath, bool useBackup)
 		{
@@ -25,10 +27,15 @@ namespace UnityPlugins.Common.Unity
 			string fileName = Path.GetFileNameWithoutExtension(FilePath);
 			string directoryName = Path.GetDirectoryName(filePath);
 			BackupPath = $"{directoryName}/{fileName}{BackupSufix}{extension}";
+			DeletedPath = $"{directoryName}/{fileName}{DeletedSufix}{extension}";
 		}
 
-		public void Delete(bool deleteBackup = true)
+		public void Delete(bool deleteBackup = true, bool createRestoreBackup = true)
 		{
+			if(createRestoreBackup && m_Persistence.PathExists(FilePath))
+			{
+				m_Persistence.CreateCopy(FilePath, DeletedPath);
+			}
 			m_Persistence.Delete(FilePath);
 
 			if(UseBackup && deleteBackup)

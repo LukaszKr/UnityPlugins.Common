@@ -38,6 +38,12 @@ namespace UnityPlugins.Common.Unity
 			return entry.Value;
 		}
 
+		public void Reset()
+		{
+			m_Value = m_DefaultValue;
+			m_Modified = false;
+		}
+
 		public bool Set(TValue value)
 		{
 			if(!Equals(m_Value, value))
