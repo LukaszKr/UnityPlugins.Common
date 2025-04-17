@@ -13,14 +13,18 @@ namespace UnityPlugins.Common.Unity
 			m_ContextHandler = new ContextHandler<TContext>(OnAttach, OnDetach, Replace);
 		}
 
-		public void SetContext(TContext context)
+		public void TryInitialize()
 		{
 			if(!m_IsInitialized)
 			{
 				m_IsInitialized = true;
 				OnInitialize();
 			}
+		}
 
+		public void SetContext(TContext context)
+		{
+			TryInitialize();
 			m_ContextHandler.SetContext(context);
 		}
 
