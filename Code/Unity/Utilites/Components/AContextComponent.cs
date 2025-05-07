@@ -31,6 +31,7 @@ namespace UnityPlugins.Common.Unity
 		public void ClearContext()
 		{
 			m_ContextHandler.ClearContext();
+			m_Context = default;
 		}
 
 		private void OnAttach(TContext context, EventBinder binder)
