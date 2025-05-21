@@ -7,6 +7,16 @@ namespace UnityPlugins.Common.Unity
 	{
 		private readonly Dictionary<string, byte[]> m_Storage = new Dictionary<string, byte[]>();
 
+		public override bool MoveFile(string sourceFileName, string destinationFileName)
+		{
+			if(PathExists(sourceFileName))
+			{
+				m_Storage[destinationFileName] = m_Storage[sourceFileName];
+				return true;
+			}
+			return false;
+		}
+
 		public override bool Delete(string path)
 		{
 			return m_Storage.Remove(path);

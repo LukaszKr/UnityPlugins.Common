@@ -14,6 +14,16 @@ namespace UnityPlugins.Common.Unity
 			return false;
 		}
 
+		public override bool MoveFile(string sourceFileName, string destinationFileName)
+		{
+			if(PathExists(sourceFileName))
+			{
+				File.Move(sourceFileName, destinationFileName);
+				return PathExists(destinationFileName);
+			}
+			return false;
+		}
+
 		public override bool PathExists(string path)
 		{
 			return File.Exists(path);

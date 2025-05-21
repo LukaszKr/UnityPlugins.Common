@@ -19,6 +19,7 @@ namespace UnityPlugins.Common.Unity
 			return Encoding.UTF8.GetString(rawData);
 		}
 
+		public abstract bool MoveFile(string sourceFileName, string destinationFileName);
 		public abstract bool Delete(string path);
 		public abstract bool PathExists(string path);
 		public abstract void EnsureDirectory(string directoryPath);
