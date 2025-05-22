@@ -10,7 +10,7 @@ namespace UnityPlugins.Common.Unity
 		public static string BackupSufix = "_backup";
 		public static string DeletedSufix = "_deleted";
 
-		private readonly ADataPersistence m_Persistence;
+		public readonly ADataPersistence Persistence;
 
 		public readonly bool UseBackup;
 		public readonly string FilePath;
@@ -19,7 +19,7 @@ namespace UnityPlugins.Common.Unity
 
 		protected ADataStorage(ADataPersistence persistence, string filePath, bool useBackup)
 		{
-			m_Persistence = persistence;
+			Persistence = persistence;
 			UseBackup = useBackup;
 
 			FilePath = filePath;
@@ -32,16 +32,21 @@ namespace UnityPlugins.Common.Unity
 
 		public void Delete(bool deleteBackup = true, bool createRestoreBackup = true)
 		{
-			if(createRestoreBackup && m_Persistence.PathExists(FilePath))
+			if(createRestoreBackup && Persistence.PathExists(FilePath))
 			{
-				m_Persistence.CreateCopy(FilePath, DeletedPath);
+				Persistence.CreateCopy(FilePath, DeletedPath);
 			}
-			m_Persistence.Delete(FilePath);
+			Persistence.Delete(FilePath);
 
 			if(UseBackup && deleteBackup)
 			{
-				m_Persistence.Delete(BackupPath);
+				Persistence.Delete(BackupPath);
 			}
+		}
+
+		public bool Exists()
+		{
+			return Persistence.PathExists(FilePath);
 		}
 
 		public TData Load(TData current)
@@ -62,7 +67,7 @@ namespace UnityPlugins.Common.Unity
 		{
 			try
 			{
-				byte[] rawData = m_Persistence.TryReadBytes(filePath);
+				byte[] rawData = Persistence.TryReadBytes(filePath);
 				if(rawData != null && rawData.Length > 0)
 				{
 					return FromBytes(current, rawData);
@@ -78,15 +83,15 @@ namespace UnityPlugins.Common.Unity
 
 		public void Save(TData data)
 		{
-			m_Persistence.EnsureDirectory(FilePath);
+			Persistence.EnsureDirectory(FilePath);
 
-			if(UseBackup && m_Persistence.PathExists(FilePath))
+			if(UseBackup && Persistence.PathExists(FilePath))
 			{
-				m_Persistence.CreateCopy(FilePath, BackupPath);
+				Persistence.CreateCopy(FilePath, BackupPath);
 			}
 
 			byte[] saveData = ToBytes(data);
-			m_Persistence.WriteBytes(FilePath, saveData);
+			Persistence.WriteBytes(FilePath, saveData);
 		}
 
 		protected abstract TData FromBytes(TData current, byte[] saveData);
