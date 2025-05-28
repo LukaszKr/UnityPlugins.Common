@@ -82,7 +82,16 @@ namespace UnityPlugins.Common.Unity
 					return string.Empty;
 				case EUnityPathType.Project:
 					string dataPath = Application.dataPath;
-					return dataPath.Substring(0, dataPath.Length-7)+"/"; //7 = "Assets/"
+					string suffix = "Assets";
+					if(dataPath.EndsWith(suffix))
+					{
+						return dataPath.Substring(0, dataPath.Length-suffix.Length);
+					}
+					if(!dataPath.EndsWith("/"))
+					{
+						return dataPath+"/";
+					}
+					return dataPath;
 				default:
 					throw new NotImplementedException(Type.ToString());
 			}
