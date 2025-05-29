@@ -15,6 +15,24 @@ namespace UnityPlugins.Common.Unity
 
 		public static implicit operator string(UnityPath path) => path.ToString();
 
+		public UnityPath(DirectoryInfo directory)
+		{
+			Type = EUnityPathType.Absolute;
+			Path = directory.FullName+"/";
+		}
+
+		public UnityPath(FileInfo file)
+		{
+			Type = EUnityPathType.Absolute;
+			Path = file.FullName;
+		}
+
+		public UnityPath(string path)
+		{
+			Type = EUnityPathType.Absolute;
+			Path = path;
+		}
+
 		public UnityPath(EUnityPathType type, string path)
 		{
 			Type = type;
