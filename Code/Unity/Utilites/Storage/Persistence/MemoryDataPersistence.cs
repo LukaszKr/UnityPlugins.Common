@@ -27,7 +27,7 @@ namespace UnityPlugins.Common.Unity
 			return m_Storage.ContainsKey(path);
 		}
 
-		public override void EnsureDirectory(string directoryPath)
+		public override void EnsureDirectory(string path)
 		{
 			//Do nothing
 		}

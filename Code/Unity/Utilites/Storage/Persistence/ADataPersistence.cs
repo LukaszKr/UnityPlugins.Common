@@ -22,7 +22,7 @@ namespace UnityPlugins.Common.Unity
 		public abstract bool MoveFile(string sourceFileName, string destinationFileName);
 		public abstract bool Delete(string path);
 		public abstract bool PathExists(string path);
-		public abstract void EnsureDirectory(string directoryPath);
+		public abstract void EnsureDirectory(string path);
 		public abstract void WriteBytes(string path, byte[] bytes);
 		public abstract byte[] TryReadBytes(string path);
 		public abstract void CreateCopy(string sourceFileName, string destinationFileName);
