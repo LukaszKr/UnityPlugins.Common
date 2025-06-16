@@ -40,8 +40,12 @@ namespace UnityPlugins.Common.Unity
 
 		public void Reset()
 		{
-			m_Value = m_DefaultValue;
-			m_Modified = false;
+			if(!Equals(m_Value, m_DefaultValue))
+			{
+				m_Value = m_DefaultValue;
+				m_Modified = false;
+				OnChanged.Invoke(m_Value);
+			}
 		}
 
 		public bool Set(TValue value)
