@@ -67,5 +67,22 @@ namespace UnityPlugins.Common.Unity.Storage.Utilities
 			Assert.IsTrue(container.Stored.Modified);
 			Assert.IsTrue(deserialized.Stored.Modified);
 		}
+
+		[Test]
+		public void Deserialization_VersionChanged_RestoreToDefault()
+		{
+			Container container = new Container();
+			container.Stored.Value = 3;
+			m_Storage.Save(container);
+
+			Container loadInto = new Container();
+			loadInto.Stored = new StorageEntry<int>(4, 2);
+			Container deserialized = m_Storage.Load(loadInto);
+
+			Assert.AreNotEqual(container.Stored.Value, deserialized.Stored.Value);
+			Assert.AreEqual(4, deserialized.Stored.Value);
+			Assert.IsTrue(container.Stored.Modified);
+			Assert.IsFalse(deserialized.Stored.Modified);
+		}
 	}
 }

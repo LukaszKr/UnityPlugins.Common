@@ -6,10 +6,14 @@ namespace UnityPlugins.Common.Unity
 {
 	public class StorageEntry<TValue>
 	{
+		private int m_ExpectedVersion;
+
 		[JsonProperty]
 		private TValue m_Value;
 		[JsonProperty]
 		private bool m_Modified = false;
+		[JsonProperty("v")]
+		private int m_Version = 1;
 
 		[JsonIgnore]
 		private readonly TValue m_DefaultValue;
@@ -27,10 +31,11 @@ namespace UnityPlugins.Common.Unity
 		[JsonIgnore]
 		public readonly CustomEvent<TValue> OnChanged = new CustomEvent<TValue>();
 
-		public StorageEntry(TValue defaultValue)
+		public StorageEntry(TValue defaultValue, int expectedVersion = 1)
 		{
 			m_DefaultValue = defaultValue;
 			m_Value = defaultValue;
+			m_ExpectedVersion = expectedVersion;
 		}
 
 		public static implicit operator TValue(StorageEntry<TValue> entry)
@@ -54,6 +59,7 @@ namespace UnityPlugins.Common.Unity
 			{
 				m_Modified = true;
 				m_Value = value;
+				m_Version = m_ExpectedVersion;
 				OnChanged.Invoke(m_Value);
 				return true;
 			}
@@ -63,11 +69,12 @@ namespace UnityPlugins.Common.Unity
 		[OnDeserialized]
 		internal void OnAfterDeserialize(StreamingContext context)
 		{
-			if(m_Modified)
+			if(m_Modified && m_ExpectedVersion == m_Version)
 			{
 				return;
 			}
 			m_Value = m_DefaultValue;
+			m_Modified = false;
 		}
 
 		public override string ToString()
