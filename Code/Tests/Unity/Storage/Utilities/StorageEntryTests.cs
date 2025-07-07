@@ -15,7 +15,7 @@ namespace UnityPlugins.Common.Unity.Storage.Utilities
 		[SetUp]
 		public void SetUp()
 		{
-			m_Storage = new BinaryJsonStorage<Container>(new MemoryDataPersistence(), "Test", false);
+			m_Storage = new TextJsonStorage<Container>(new MemoryDataPersistence(), "Test", false);
 		}
 
 		[Test]

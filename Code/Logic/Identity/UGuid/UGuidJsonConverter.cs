@@ -1,17 +1,11 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Shims;
 
 namespace UnityPlugins.Common.Logic
 {
 	[JsonConverter(typeof(UGuid<>))]
 	internal class UGuidJsonConverter : JsonConverter
 	{
-		[Preserve]
-		public UGuidJsonConverter()
-		{
-		}
-
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			string strValue = value.ToString();

@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Shims;
 
 namespace UnityPlugins.Common.Logic
 {
@@ -18,19 +17,16 @@ namespace UnityPlugins.Common.Logic
 			return new UGuid<T>(guid);
 		}
 
-		[Preserve]
 		public UGuid(Guid guid)
 		{
 			Value = guid;
 		}
 
-		[Preserve]
 		public UGuid(UGuid<T> uguid)
 		{
 			Value = uguid.Value;
 		}
 
-		[Preserve]
 		public UGuid(string guid)
 		{
 			Value = new Guid(guid);
