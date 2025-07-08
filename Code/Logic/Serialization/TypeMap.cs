@@ -38,6 +38,16 @@ namespace UnityPlugins.Common.Logic
 			return m_IDToType[id];
 		}
 
+		public bool TryAdd(Type type, ID<Type> id)
+		{
+			if(m_TypeToID.ContainsKey(type))
+			{
+				return false;
+			}
+			Add(type, id);
+			return true;
+		}
+
 		public void Add(Type type, ID<Type> id)
 		{
 			m_TypeToID.Add(type, id);
