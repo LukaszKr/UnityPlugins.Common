@@ -12,7 +12,7 @@ namespace UnityPlugins.Common.Logic.Serialization
 		{
 			string key = "key1";
 			TypeMap map = new TypeMap();
-			map.Add(typeof(int), key);
+			map.Add(key, typeof(int));
 
 			Assert.IsTrue(map.Contains(typeof(int)));
 			Assert.IsTrue(map.Contains(key));
@@ -26,9 +26,9 @@ namespace UnityPlugins.Common.Logic.Serialization
 		{
 			string key = "key";
 			TypeMap map = new TypeMap();
-			map.Add(typeof(int), key);
+			map.Add(key, typeof(int));
 
-			Assert.Throws<ArgumentException>(() => map.Add(typeof(int), key));
+			Assert.Throws<ArgumentException>(() => map.Add(key, typeof(int)));
 		}
 
 		[Test]
@@ -37,9 +37,9 @@ namespace UnityPlugins.Common.Logic.Serialization
 			string key1 = "key1";
 			string key2 = "key2";
 			TypeMap map = new TypeMap();
-			map.Add(typeof(int), key1);
+			map.Add(key1, typeof(int));
 
-			Assert.Throws<ArgumentException>(() => map.Add(typeof(int), key2));
+			Assert.Throws<ArgumentException>(() => map.Add(key2, typeof(int)));
 		}
 
 		[Test]
@@ -47,9 +47,9 @@ namespace UnityPlugins.Common.Logic.Serialization
 		{
 			string key = "key1";
 			TypeMap map = new TypeMap();
-			map.Add(typeof(int), key);
+			map.Add(key, typeof(int));
 
-			Assert.Throws<ArgumentException>(() => map.Add(typeof(float), key));
+			Assert.Throws<ArgumentException>(() => map.Add(key, typeof(float)));
 		}
 
 		[Test]
@@ -57,8 +57,8 @@ namespace UnityPlugins.Common.Logic.Serialization
 		{
 			string key = "key1";
 			TypeMap map = new TypeMap();
-			Assert.IsTrue(map.TryAdd(typeof(int), key));
-			Assert.IsFalse(map.TryAdd(typeof(int), key));
+			Assert.IsTrue(map.TryAdd(key, typeof(int)));
+			Assert.IsFalse(map.TryAdd(key, typeof(int)));
 		}
 
 		[Test]
@@ -67,8 +67,8 @@ namespace UnityPlugins.Common.Logic.Serialization
 			string key = "key1";
 			TypeMap map = new TypeMap();
 
-			Assert.IsTrue(map.TryAdd(typeof(int), key));
-			Assert.Throws<ArgumentException>(() => map.TryAdd(typeof(float), key));
+			Assert.IsTrue(map.TryAdd(key, typeof(int)));
+			Assert.Throws<ArgumentException>(() => map.TryAdd(key, typeof(float)));
 		}
 
 		[Test]
@@ -78,8 +78,8 @@ namespace UnityPlugins.Common.Logic.Serialization
 			string key2 = "key2";
 			TypeMap map = new TypeMap();
 			
-			Assert.IsTrue(map.TryAdd(typeof(int), key));
-			Assert.Throws<ArgumentException>(() => map.TryAdd(typeof(int), key2));
+			Assert.IsTrue(map.TryAdd(key, typeof(int)));
+			Assert.Throws<ArgumentException>(() => map.TryAdd(key2, typeof(int)));
 		}
 
 		[Test]
@@ -104,7 +104,7 @@ namespace UnityPlugins.Common.Logic.Serialization
 		{
 			string key = "key1";
 			TypeMap map = new TypeMap();
-			map.Add(typeof(int), key);
+			map.Add(key, typeof(int));
 
 			Assert.IsTrue(map.Contains(typeof(int)));
 			Assert.IsTrue(map.Contains(key));
@@ -120,7 +120,7 @@ namespace UnityPlugins.Common.Logic.Serialization
 		{
 			string key = "key1";
 			TypeMap map = new TypeMap();
-			map.Add(typeof(int), key);
+			map.Add(key, typeof(int));
 
 			Assert.IsTrue(map.Contains(typeof(int)));
 			Assert.IsTrue(map.Contains(key));

@@ -24,6 +24,11 @@ namespace UnityPlugins.Common.Logic
 			return m_KeyToType.ContainsKey(key);
 		}
 
+		public string Get<TType>()
+		{
+			return Get(typeof(TType));
+		}
+
 		public string Get(Type type)
 		{
 			return m_TypeToKey[type];
@@ -34,7 +39,7 @@ namespace UnityPlugins.Common.Logic
 			return m_KeyToType[id];
 		}
 
-		public bool TryAdd(Type type, string key)
+		public bool TryAdd(string key, Type type)
 		{
 			string existingKey;
 			if(m_TypeToKey.TryGetValue(type, out existingKey))
@@ -45,11 +50,11 @@ namespace UnityPlugins.Common.Logic
 				}
 				return false;
 			}
-			Add(type, key);
+			Add(key, type);
 			return true;
 		}
 
-		public void Add(Type type, string key)
+		public void Add(string key, Type type)
 		{
 			m_TypeToKey.Add(type, key);
 			m_KeyToType.Add(key, type);
