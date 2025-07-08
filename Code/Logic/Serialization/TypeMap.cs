@@ -40,8 +40,13 @@ namespace UnityPlugins.Common.Logic
 
 		public bool TryAdd(Type type, ID<Type> id)
 		{
-			if(m_TypeToID.ContainsKey(type))
+			ID<Type> existingId;
+			if(m_TypeToID.TryGetValue(type, out existingId))
 			{
+				if(existingId != id)
+				{
+					throw new ArgumentException($"{type.Name}: {existingId} =/= {id}");
+				}
 				return false;
 			}
 			Add(type, id);

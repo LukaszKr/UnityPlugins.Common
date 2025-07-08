@@ -53,6 +53,36 @@ namespace UnityPlugins.Common.Logic.Serialization
 		}
 
 		[Test]
+		public void TryAdd_Duplicate()
+		{
+			ID<Type> id = new ID<Type>(1);
+			TypeMap map = new TypeMap();
+			Assert.IsTrue(map.TryAdd(typeof(int), id));
+			Assert.IsFalse(map.TryAdd(typeof(int), id));
+		}
+
+		[Test]
+		public void TryAdd_Duplicate_DifferentType()
+		{
+			ID<Type> id = new ID<Type>(1);
+			TypeMap map = new TypeMap();
+
+			Assert.IsTrue(map.TryAdd(typeof(int), id));
+			Assert.Throws<ArgumentException>(() => map.TryAdd(typeof(float), id));
+		}
+
+		[Test]
+		public void TryAdd_Duplicate_DifferentID()
+		{
+			ID<Type> id = new ID<Type>(1);
+			ID<Type> id2 = new ID<Type>(2);
+			TypeMap map = new TypeMap();
+			
+			Assert.IsTrue(map.TryAdd(typeof(int), id));
+			Assert.Throws<ArgumentException>(() => map.TryAdd(typeof(int), id2));
+		}
+
+		[Test]
 		public void Get_Missing_ID()
 		{
 			ID<Type> id = new ID<Type>(1);
