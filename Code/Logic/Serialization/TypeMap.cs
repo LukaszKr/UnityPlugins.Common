@@ -12,6 +12,12 @@ namespace UnityPlugins.Common.Logic
 		{
 		}
 
+		public void Clear()
+		{
+			m_TypeToID.Clear();
+			m_IDToType.Clear();
+		}
+
 		public bool Contains(Type type)
 		{
 			return m_TypeToID.ContainsKey(type);
