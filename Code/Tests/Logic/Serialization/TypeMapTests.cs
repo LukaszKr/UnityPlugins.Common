@@ -10,85 +10,85 @@ namespace UnityPlugins.Common.Logic.Serialization
 		[Test]
 		public void Add()
 		{
-			ID<Type> id = new ID<Type>(1);
+			string key = "key1";
 			TypeMap map = new TypeMap();
-			map.Add(typeof(int), id);
+			map.Add(typeof(int), key);
 
 			Assert.IsTrue(map.Contains(typeof(int)));
-			Assert.IsTrue(map.Contains(id));
+			Assert.IsTrue(map.Contains(key));
 
-			Assert.AreEqual(id, map.Get(typeof(int)));
-			Assert.AreEqual(typeof(int), map.Get(id));
+			Assert.AreEqual(key, map.Get(typeof(int)));
+			Assert.AreEqual(typeof(int), map.Get(key));
 		}
 
 		[Test]
 		public void Add_Duplicate()
 		{
-			ID<Type> id = new ID<Type>(1);
+			string key = "key";
 			TypeMap map = new TypeMap();
-			map.Add(typeof(int), id);
+			map.Add(typeof(int), key);
 
-			Assert.Throws<ArgumentException>(() => map.Add(typeof(int), id));
+			Assert.Throws<ArgumentException>(() => map.Add(typeof(int), key));
 		}
 
 		[Test]
-		public void Add_Duplicate_DifferentID()
+		public void Add_Duplicate_DifferentKey()
 		{
-			ID<Type> id1 = new ID<Type>(1);
-			ID<Type> id2 = new ID<Type>(2);
+			string key1 = "key1";
+			string key2 = "key2";
 			TypeMap map = new TypeMap();
-			map.Add(typeof(int), id1);
+			map.Add(typeof(int), key1);
 
-			Assert.Throws<ArgumentException>(() => map.Add(typeof(int), id2));
+			Assert.Throws<ArgumentException>(() => map.Add(typeof(int), key2));
 		}
 
 		[Test]
 		public void Add_Duplicate_DifferentType()
 		{
-			ID<Type> id = new ID<Type>(1);
+			string key = "key1";
 			TypeMap map = new TypeMap();
-			map.Add(typeof(int), id);
+			map.Add(typeof(int), key);
 
-			Assert.Throws<ArgumentException>(() => map.Add(typeof(float), id));
+			Assert.Throws<ArgumentException>(() => map.Add(typeof(float), key));
 		}
 
 		[Test]
 		public void TryAdd_Duplicate()
 		{
-			ID<Type> id = new ID<Type>(1);
+			string key = "key1";
 			TypeMap map = new TypeMap();
-			Assert.IsTrue(map.TryAdd(typeof(int), id));
-			Assert.IsFalse(map.TryAdd(typeof(int), id));
+			Assert.IsTrue(map.TryAdd(typeof(int), key));
+			Assert.IsFalse(map.TryAdd(typeof(int), key));
 		}
 
 		[Test]
 		public void TryAdd_Duplicate_DifferentType()
 		{
-			ID<Type> id = new ID<Type>(1);
+			string key = "key1";
 			TypeMap map = new TypeMap();
 
-			Assert.IsTrue(map.TryAdd(typeof(int), id));
-			Assert.Throws<ArgumentException>(() => map.TryAdd(typeof(float), id));
+			Assert.IsTrue(map.TryAdd(typeof(int), key));
+			Assert.Throws<ArgumentException>(() => map.TryAdd(typeof(float), key));
 		}
 
 		[Test]
-		public void TryAdd_Duplicate_DifferentID()
+		public void TryAdd_Duplicate_DifferentKey()
 		{
-			ID<Type> id = new ID<Type>(1);
-			ID<Type> id2 = new ID<Type>(2);
+			string key = "key1";
+			string key2 = "key2";
 			TypeMap map = new TypeMap();
 			
-			Assert.IsTrue(map.TryAdd(typeof(int), id));
-			Assert.Throws<ArgumentException>(() => map.TryAdd(typeof(int), id2));
+			Assert.IsTrue(map.TryAdd(typeof(int), key));
+			Assert.Throws<ArgumentException>(() => map.TryAdd(typeof(int), key2));
 		}
 
 		[Test]
-		public void Get_Missing_ID()
+		public void Get_Missing_Key()
 		{
-			ID<Type> id = new ID<Type>(1);
+			string key = "key1";
 			TypeMap map = new TypeMap();
 
-			Assert.Throws<KeyNotFoundException>(() => map.Get(id));
+			Assert.Throws<KeyNotFoundException>(() => map.Get(key));
 		}
 
 		[Test]
@@ -100,43 +100,43 @@ namespace UnityPlugins.Common.Logic.Serialization
 		}
 
 		[Test]
-		public void Remove_ID()
+		public void Remove_Key()
 		{
-			ID<Type> id = new ID<Type>(1);
+			string key = "key1";
 			TypeMap map = new TypeMap();
-			map.Add(typeof(int), id);
+			map.Add(typeof(int), key);
 
 			Assert.IsTrue(map.Contains(typeof(int)));
-			Assert.IsTrue(map.Contains(id));
+			Assert.IsTrue(map.Contains(key));
 
-			map.Remove(id);
+			map.Remove(key);
 
 			Assert.IsFalse(map.Contains(typeof(int)));
-			Assert.IsFalse(map.Contains(id));
+			Assert.IsFalse(map.Contains(key));
 		}
 
 		[Test]
 		public void Remove_Type()
 		{
-			ID<Type> id = new ID<Type>(1);
+			string key = "key1";
 			TypeMap map = new TypeMap();
-			map.Add(typeof(int), id);
+			map.Add(typeof(int), key);
 
 			Assert.IsTrue(map.Contains(typeof(int)));
-			Assert.IsTrue(map.Contains(id));
+			Assert.IsTrue(map.Contains(key));
 
 			map.Remove(typeof(int));
 
 			Assert.IsFalse(map.Contains(typeof(int)));
-			Assert.IsFalse(map.Contains(id));
+			Assert.IsFalse(map.Contains(key));
 		}
 
 		[Test]
-		public void Remove_Missing_ID()
+		public void Remove_Missing_Key()
 		{
-			ID<Type> id = new ID<Type>(1);
+			string key = "key1";
 			TypeMap map = new TypeMap();
-			Assert.Throws<KeyNotFoundException>(() => map.Remove(id));
+			Assert.Throws<KeyNotFoundException>(() => map.Remove(key));
 		}
 
 		[Test]

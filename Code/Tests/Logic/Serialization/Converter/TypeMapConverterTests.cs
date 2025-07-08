@@ -40,8 +40,8 @@ namespace UnityPlugins.Common.Logic.Serialization.Converter
 		{
 			TypeMap map = new TypeMap();
 			TestTypeMapConverter.TypeMap = map;
-			map.Add(typeof(Container), new ID<Type>(1));
-			map.Add(typeof(TestClass), new ID<Type>(2));
+			map.Add(typeof(Container), "key1");
+			map.Add(typeof(TestClass), "key2");
 
 			Container container = new Container();
 			TestClass expected = new TestClass()
@@ -67,8 +67,8 @@ namespace UnityPlugins.Common.Logic.Serialization.Converter
 		{
 			TypeMap map = new TypeMap();
 			TestTypeMapConverter.TypeMap = map;
-			map.Add(typeof(Container), new ID<Type>(1));
-			map.Add(typeof(TestClass), new ID<Type>(2));
+			map.Add(typeof(Container), "key1");
+			map.Add(typeof(TestClass), "key2");
 
 			Container container = new Container();
 			TestClass expected = new TestClass()

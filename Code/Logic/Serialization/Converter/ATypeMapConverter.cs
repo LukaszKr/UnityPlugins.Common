@@ -16,8 +16,9 @@ namespace UnityPlugins.Common.Logic
 
 		private Type GetType(JObject jObject)
 		{
-			int typeID = (int)jObject.Property(TYPE_FIELD);
-			Type simpleType = GetTypeMap().Get(new ID<Type>(typeID));
+			JProperty property = jObject.Property(TYPE_FIELD);
+			string typeKey = (string)property;
+			Type simpleType = GetTypeMap().Get(typeKey);
 			return simpleType;
 		}
 
@@ -30,7 +31,7 @@ namespace UnityPlugins.Common.Logic
 		{
 			_canWrite = false;
 			JObject obj = JObject.FromObject(value);
-			obj[TYPE_FIELD] = GetTypeMap().Get(value.GetType()).Value;
+			obj[TYPE_FIELD] = GetTypeMap().Get(value.GetType());
 			obj.WriteTo(writer);
 			_canWrite = true;
 		}

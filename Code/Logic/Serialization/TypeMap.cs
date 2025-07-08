@@ -5,72 +5,68 @@ namespace UnityPlugins.Common.Logic
 {
 	public class TypeMap
 	{
-		private readonly Dictionary<Type, ID<Type>> m_TypeToID = new Dictionary<Type, ID<Type>>();
-		private readonly Dictionary<ID<Type>, Type> m_IDToType = new Dictionary<ID<Type>, Type>();
-
-		public TypeMap()
-		{
-		}
+		private readonly Dictionary<Type, string> m_TypeToKey = new Dictionary<Type, string>(GenericEqualityComparer<Type>.Instance);
+		private readonly Dictionary<string, Type> m_KeyToType = new Dictionary<string, Type>(GenericEqualityComparer<string>.Instance);
 
 		public void Clear()
 		{
-			m_TypeToID.Clear();
-			m_IDToType.Clear();
+			m_TypeToKey.Clear();
+			m_KeyToType.Clear();
 		}
 
 		public bool Contains(Type type)
 		{
-			return m_TypeToID.ContainsKey(type);
+			return m_TypeToKey.ContainsKey(type);
 		}
 
-		public bool Contains(ID<Type> id)
+		public bool Contains(string key)
 		{
-			return m_IDToType.ContainsKey(id);
+			return m_KeyToType.ContainsKey(key);
 		}
 
-		public ID<Type> Get(Type type)
+		public string Get(Type type)
 		{
-			return m_TypeToID[type];
+			return m_TypeToKey[type];
 		}
 
-		public Type Get(ID<Type> id)
+		public Type Get(string id)
 		{
-			return m_IDToType[id];
+			return m_KeyToType[id];
 		}
 
-		public bool TryAdd(Type type, ID<Type> id)
+		public bool TryAdd(Type type, string key)
 		{
-			ID<Type> existingId;
-			if(m_TypeToID.TryGetValue(type, out existingId))
+			string existingKey;
+			if(m_TypeToKey.TryGetValue(type, out existingKey))
 			{
-				if(existingId != id)
+				if(!existingKey.Equals(key))
 				{
-					throw new ArgumentException($"{type.Name}: {existingId} =/= {id}");
+					throw new ArgumentException($"{type.Name}: {existingKey} =/= {key}");
 				}
 				return false;
 			}
-			Add(type, id);
+			Add(type, key);
 			return true;
 		}
 
-		public void Add(Type type, ID<Type> id)
+		public void Add(Type type, string key)
 		{
-			m_TypeToID.Add(type, id);
-			m_IDToType.Add(id, type);
+			m_TypeToKey.Add(type, key);
+			m_KeyToType.Add(key, type);
 		}
 
 		public void Remove(Type type)
 		{
-			ID<Type> id = Get(type);
-			m_IDToType.Remove(id);
-			m_TypeToID.Remove(type);
+			string key = Get(type);
+			m_KeyToType.Remove(key);
+			m_TypeToKey.Remove(type);
 		}
 
-		public void Remove(ID<Type> id)
+		public void Remove(string key)
 		{
-			Type type = Get(id);
-			m_IDToType.Remove(id);
-			m_TypeToID.Remove(type);
+			Type type = Get(key);
+			m_KeyToType.Remove(key);
+			m_TypeToKey.Remove(type);
 		}
 	}
 }
