@@ -31,7 +31,8 @@ namespace UnityPlugins.Common.Logic
 		{
 			_canWrite = false;
 			JObject obj = JObject.FromObject(value);
-			obj[TYPE_FIELD] = GetTypeMap().Get(value.GetType());
+			string typeStr = GetTypeMap().Get(value.GetType());
+			obj.AddFirst(new JProperty(TYPE_FIELD, typeStr));
 			obj.WriteTo(writer);
 			_canWrite = true;
 		}
