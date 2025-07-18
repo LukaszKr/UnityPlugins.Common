@@ -57,7 +57,7 @@ namespace UnityPlugins.Common.Editor
 				EditorGUI.BeginChangeCheck();
 				if(DrawDefault)
 				{
-					base.OnInspectorGUI();
+					DrawDefaultGUI();
 				}
 				Draw();
 
@@ -80,6 +80,11 @@ namespace UnityPlugins.Common.Editor
 			{
 				DrawCompilationScreen();
 			}
+		}
+
+		protected void DrawDefaultGUI()
+		{
+			base.OnInspectorGUI();
 		}
 
 		protected virtual void OnCompilationStart()
