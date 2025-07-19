@@ -33,6 +33,12 @@ namespace UnityPlugins.Common.Unity
 			Path = path;
 		}
 
+		public UnityPath(EUnityPathType type)
+		{
+			Type = type;
+			Path = string.Empty;
+		}
+
 		public UnityPath(EUnityPathType type, string path)
 		{
 			Type = type;
