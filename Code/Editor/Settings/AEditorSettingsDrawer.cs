@@ -25,13 +25,13 @@ namespace UnityPlugins.Common.Editor
 		{
 			EditorGUILayout.BeginHorizontal("helpbox");
 			{
-				if(GUILayout.Button("Load"))
-				{
-					settings.Load();
-				}
 				if(GUILayout.Button("Save"))
 				{
 					settings.Save();
+				}
+				if(GUILayout.Button("Load"))
+				{
+					settings.Load();
 				}
 			}
 			EditorGUILayout.EndHorizontal();
