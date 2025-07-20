@@ -39,12 +39,8 @@ namespace UnityPlugins.Common.Unity
 			m_Storage[path] = bytesCopy;
 		}
 
-		public override byte[] TryReadBytes(string path)
+		public override byte[] ReadBytes(string path)
 		{
-			if(!m_Storage.ContainsKey(path))
-			{
-				return null;
-			}
 			return m_Storage[path];
 		}
 

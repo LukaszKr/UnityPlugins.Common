@@ -49,12 +49,8 @@ namespace UnityPlugins.Common.Unity
 			}
 		}
 
-		public override byte[] TryReadBytes(string path)
+		public override byte[] ReadBytes(string path)
 		{
-			if(!PathExists(path))
-			{
-				return null;
-			}
 			return File.ReadAllBytes(path);
 		}
 
