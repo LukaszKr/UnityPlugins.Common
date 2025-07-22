@@ -5,15 +5,19 @@ namespace UnityPlugins.Common.Editor
 {
 	public static class GUILayoutExt
 	{
-		public static bool Button(string label, bool disabled)
+		public static bool ConditionalButton(string label, bool condition, params GUILayoutOption[] options)
 		{
 			bool clicked = false;
 
-			EditorGUI.BeginDisabledGroup(disabled);
+			EditorGUI.BeginDisabledGroup(!condition);
 			{
-				if(GUILayout.Button(label))
+				if(options.Length > 0)
 				{
-					clicked = true;
+					clicked = GUILayout.Button(label, options);
+				}
+				else
+				{
+					clicked = GUILayout.Button(label);
 				}
 			}
 			EditorGUI.EndDisabledGroup();
