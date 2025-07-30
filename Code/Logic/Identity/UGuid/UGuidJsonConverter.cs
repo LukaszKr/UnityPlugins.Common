@@ -3,8 +3,7 @@ using Newtonsoft.Json;
 
 namespace UnityPlugins.Common.Logic
 {
-	[JsonConverter(typeof(UGuid<>))]
-	internal class UGuidJsonConverter : JsonConverter
+	public class UGuidJsonConverter : JsonConverter
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
