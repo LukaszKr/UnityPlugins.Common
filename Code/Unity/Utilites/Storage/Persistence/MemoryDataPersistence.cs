@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace UnityPlugins.Common.Unity
 {
@@ -41,7 +42,12 @@ namespace UnityPlugins.Common.Unity
 
 		public override byte[] ReadBytes(string path)
 		{
-			return m_Storage[path];
+			byte[] result;
+			if(!m_Storage.TryGetValue(path, out result))
+			{
+				throw new FileNotFoundException(path);
+			}
+			return result;
 		}
 
 		public override void CreateCopy(string sourceFileName, string destinationFileName)
