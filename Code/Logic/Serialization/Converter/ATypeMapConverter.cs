@@ -46,9 +46,12 @@ namespace UnityPlugins.Common.Logic
 
 			JObject jObject = JObject.Load(reader);
 			Type targetType = GetType(jObject);
-			object target = Activator.CreateInstance(targetType, true);
-			serializer.Populate(jObject.CreateReader(), target);
-			return target;
+			if(existingValue == null || existingValue.GetType() == targetType)
+			{
+				existingValue = Activator.CreateInstance(targetType, true);
+			}
+			serializer.Populate(jObject.CreateReader(), existingValue);
+			return existingValue;
 		}
 	}
 }
