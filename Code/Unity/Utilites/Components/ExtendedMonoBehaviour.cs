@@ -5,9 +5,7 @@ namespace UnityPlugins.Common.Unity
 {
 	public abstract class ExtendedMonoBehaviour : MonoBehaviour
 	{
-		[NonSerialized]
 		private Transform m_Transform;
-		[NonSerialized]
 		private GameObject m_GameObject;
 
 		public Transform Transform
