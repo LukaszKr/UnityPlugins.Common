@@ -5,12 +5,12 @@ using UnityPlugins.Common.Unity;
 
 namespace UnityPlugins.Common.Editor
 {
-	[CustomPropertyDrawer(typeof(FolderReference))]
-	public class FolderReferencePropertyDrawer : AExtendedPropertyDrawer
+	[CustomPropertyDrawer(typeof(FolderRef))]
+	public class FolderRefPropertyDrawer : AExtendedPropertyDrawer
 	{
 		protected override void Draw(Rect position, SerializedProperty property, GUIContent label)
 		{
-			SerializedProperty valueProperty = property.FindPropertyRelative(nameof(FolderReference.Value));
+			SerializedProperty valueProperty = property.FindPropertyRelative(nameof(FolderRef.Value));
 			Object oldValue = valueProperty.objectReferenceValue;
 			EditorGUI.PropertyField(position, valueProperty);
 			Object newValue = valueProperty.objectReferenceValue;
