@@ -5,39 +5,39 @@ using Object = UnityEngine.Object;
 namespace UnityPlugins.Common.Unity.Components
 {
 	[Category(CommonTestsConsts.CATEGORY_ASSEMBLY)]
-	internal class AUnitySingletonTests
+	internal class ASingletonComponentTests
 	{
-		private class TestSingleton : AUnitySingleton<TestSingleton>
+		private class TestSingletonComponent : ASingletonComponent<TestSingletonComponent>
 		{
 		}
 
 		[Test]
 		public void NotYetCreated_InstanceIsNull()
 		{
-			Assert.IsTrue(null == TestSingleton.Instance);
+			Assert.IsTrue(null == TestSingletonComponent.Instance);
 		}
 
 		[Test]
 		public void Created_InstanceIsNotNull()
 		{
-			TestSingleton singleton = Spawn();
+			TestSingletonComponent singleton = Spawn();
 
-			Assert.AreEqual(singleton, TestSingleton.Instance);
+			Assert.AreEqual(singleton, TestSingletonComponent.Instance);
 			Object.DestroyImmediate(singleton);
 		}
 
 		[Test]
 		public void DestroySingleton_InstanceIsNull()
 		{
-			TestSingleton singleton = Spawn();
+			TestSingletonComponent singleton = Spawn();
 			Object.DestroyImmediate(singleton);
-			Assert.IsTrue(null == TestSingleton.Instance);
+			Assert.IsTrue(null == TestSingletonComponent.Instance);
 		}
 
-		private TestSingleton Spawn()
+		private TestSingletonComponent Spawn()
 		{
 			GameObject go = new GameObject();
-			return go.AddComponent<TestSingleton>();
+			return go.AddComponent<TestSingletonComponent>();
 		}
 	}
 }
