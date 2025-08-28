@@ -18,6 +18,15 @@ namespace UnityPlugins.Common.Unity
 			string path = AssetDatabase.GetAssetPath(target);
 			return AssetDatabase.AssetPathToGUID(path);
 		}
+
+		public static string GetEditorAssetPath(this Object target)
+		{
+			if(target == null)
+			{
+				throw new NullReferenceException();
+			}
+			return AssetDatabase.GetAssetPath(target);
+		}
 #endif
 	}
 }
