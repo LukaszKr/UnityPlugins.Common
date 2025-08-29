@@ -5,7 +5,7 @@ namespace UnityPlugins.Common.Editor
 {
 	public static class ResaveAssetsTool
 	{
-		[MenuItem("Assets/Resave")]
+		[MenuItem("Assets/Resave", priority = 1100)]
 		private static void ResaveSelected()
 		{
 			Object[] selectedObjects = Selection.GetFiltered<Object>(SelectionMode.DeepAssets);
