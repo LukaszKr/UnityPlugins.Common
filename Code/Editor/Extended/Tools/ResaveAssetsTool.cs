@@ -5,13 +5,12 @@ namespace UnityPlugins.Common.Editor
 {
 	public static class ResaveAssetsTool
 	{
-		[MenuItem("Assets/Resave", priority = 1100)]
+		[MenuItem("Assets/Resave Selected Assets", priority = 1100)]
 		private static void ResaveSelected()
 		{
 			Object[] selectedObjects = Selection.GetFiltered<Object>(SelectionMode.DeepAssets);
 			Resave(selectedObjects);
 		}
-
 
 		public static void Resave(params Object[] targets)
 		{
