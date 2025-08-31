@@ -8,10 +8,9 @@ using UnityPlugins.Common.Unity;
 
 namespace UnityPlugins.Common.Editor
 {
-	public abstract class ACreateScriptableObjectDropdown<TAsset> : AdvancedDropdown
+	public abstract class ACreateScriptableObjectDropdown<TAsset> : ExtendedAdvancedDropdown
 		where TAsset : ScriptableObject
 	{
-		private readonly Dictionary<AdvancedDropdownItem, Type> m_Map = new Dictionary<AdvancedDropdownItem, Type>();
 		private readonly Dictionary<string, AdvancedDropdownItem> m_Namespaces = new Dictionary<string, AdvancedDropdownItem>();
 
 		public ACreateScriptableObjectDropdown()
@@ -32,16 +31,15 @@ namespace UnityPlugins.Common.Editor
 					root.AddChild(parent);
 					m_Namespaces[assemblyName] = parent;
 				}
-				AdvancedDropdownItem item = new AdvancedDropdownItem(validType.Name);
+				DropdownDataItem<Type> item = new DropdownDataItem<Type>(validType.Name, validType);
 				parent.AddChild(item);
-				m_Map[item] = validType;
 			}
 			return root;
 		}
 
 		protected override void ItemSelected(AdvancedDropdownItem item)
 		{
-			Type type = m_Map[item];
+			Type type = ((DropdownDataItem<Type>)item).Value;
 			CreateSO(type);
 		}
 

@@ -12,12 +12,13 @@ namespace UnityPlugins.Common.Editor
 			if(Event.current != null)
 			{
 				rect = GUILayoutUtility.GetLastRect();
-				rect.width = Screen.width;
+				rect.width = 400f;
 				rect.position = Event.current.mousePosition;
 			}
 			else
 			{
-				rect = new Rect(0, 0, Screen.width/4f, Screen.height/2f);
+				rect = new Rect();
+				rect.width = 400f;
 
 				Vector2 mousePosition = Mouse.current.position.ReadValue();
 				//Unity! Left most corner is on 0, BUT vertical 0 is in middle of height.
