@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace UnityPlugins.Common.Editor
@@ -11,7 +12,14 @@ namespace UnityPlugins.Common.Editor
 			SelectPrefabDropdown dropdown = new SelectPrefabDropdown();
 			dropdown.OnPrefabSelected.AddListener((prefab) =>
 			{
-				Object createdObject = Object.Instantiate(prefab, null);
+			 	GameObject parent = Selection.activeGameObject;
+				Transform parentTransform = (parent? parent.transform: null);
+				Object createdObject = PrefabUtility.InstantiatePrefab(prefab, parentTransform);
+				int cloneIndex = createdObject.name.LastIndexOf("(Clone)");
+				if(cloneIndex > 0)
+				{
+					createdObject.name = createdObject.name.Substring(0, cloneIndex);
+				}
 				Undo.RegisterCreatedObjectUndo(createdObject, $"Instantiate: '{prefab.name}'");
 			});
 			dropdown.ShowAtCurrentMousePosition();
