@@ -5,13 +5,14 @@ namespace UnityPlugins.Common.Editor
 {
 	public static class InstantiatePrefabTool
 	{
-		[MenuItem("GameObject/Instantiate Prefab", priority = -1000)]
+		[MenuItem("GameObject/Instantiate Prefab %q", priority = -1000)]
 		public static void InstantiatePrefab()
 		{
 			SelectPrefabDropdown dropdown = new SelectPrefabDropdown();
 			dropdown.OnPrefabSelected.AddListener((prefab) =>
 			{
-				Object.Instantiate(prefab, null);
+				Object createdObject = Object.Instantiate(prefab, null);
+				Undo.RegisterCreatedObjectUndo(createdObject, $"Instantiate: '{prefab.name}'");
 			});
 			dropdown.ShowAtCurrentMousePosition();
 		}

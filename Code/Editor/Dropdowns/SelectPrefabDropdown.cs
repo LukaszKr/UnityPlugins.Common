@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
@@ -11,7 +10,6 @@ namespace UnityPlugins.Common.Editor
 	public class SelectPrefabDropdown : ExtendedAdvancedDropdown
 	{
 		public readonly CustomEvent<GameObject> OnPrefabSelected = new CustomEvent<GameObject>();
-		private readonly Dictionary<Type, AdvancedDropdownItem> m_Groups = new Dictionary<Type, AdvancedDropdownItem>();
 
 		public SelectPrefabDropdown()
 			: base(new AdvancedDropdownState())
@@ -26,16 +24,9 @@ namespace UnityPlugins.Common.Editor
 			{
 				string path = AssetDatabase.GUIDToAssetPath(guid);
 				Type mainAssetType = AssetDatabase.GetMainAssetTypeAtPath(path);
-				AdvancedDropdownItem parent;
-				if(!m_Groups.TryGetValue(mainAssetType, out parent))
-				{
-					parent = new AdvancedDropdownItem(mainAssetType.Name);
-					m_Groups[mainAssetType] = parent;
-					root.AddChild(parent);
-				}
 				string fileName = Path.GetFileNameWithoutExtension(path);
 				DropdownDataItem<string> dataItem = new DropdownDataItem<string>(fileName, path);
-				parent.AddChild(dataItem);
+				root.AddChild(dataItem);
 			}
 			return root;
 		}
