@@ -14,7 +14,7 @@ namespace UnityPlugins.Common.Editor
 		[MenuItem(MENU_REVERT_RECT_TRANSFORM)]
 		private static void Revert(MenuCommand command)
 		{
-			Revert(command.context);
+			Revert(command.context, InteractionMode.UserAction);
 
 		}
 
@@ -26,18 +26,18 @@ namespace UnityPlugins.Common.Editor
 			return PrefabUtility.IsPartOfPrefabInstance(obj);
 		}
 
-		public static void Revert(Object target)
+		public static void Revert(Object target, InteractionMode mode)
 		{
 			SerializedObject serializedObject = new SerializedObject(target);
-			Revert(serializedObject);
+			Revert(serializedObject, InteractionMode.AutomatedAction);
 		}
 
-		public static void Revert(SerializedObject target)
+		public static void Revert(SerializedObject target, InteractionMode mode)
 		{
 			SerializedProperty prop = target.GetIterator();
 			while(prop.NextVisible(true))
 			{
-				PrefabUtility.RevertPropertyOverride(prop, InteractionMode.UserAction);
+				PrefabUtility.RevertPropertyOverride(prop, mode);
 			}
 		}
 	}
