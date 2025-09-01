@@ -22,7 +22,10 @@ namespace UnityPlugins.Common.Editor
 			if(parentTransform == null)
 			{
 				PrefabStage stage = PrefabStageUtility.GetCurrentPrefabStage();
-				parentTransform = stage.prefabContentsRoot.transform;
+				if(stage != null)
+				{
+					parentTransform = stage.prefabContentsRoot.transform;
+				}
 			}
 			Object createdObject = PrefabUtility.InstantiatePrefab(prefab, parentTransform);
 			int cloneIndex = createdObject.name.LastIndexOf("(Clone)");
