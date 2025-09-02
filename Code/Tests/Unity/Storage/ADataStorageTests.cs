@@ -82,9 +82,7 @@ namespace UnityPlugins.Common.Unity.Storage
 			m_Persistence.Delete(m_Storage.FilePath);
 			Assert.IsFalse(m_Persistence.PathExists(m_Storage.FilePath));
 
-			LogAssert.ignoreFailingMessages = true;
 			TestData loaded = m_Storage.Load(null);
-			LogAssert.ignoreFailingMessages = false;
 			AssertData(toSave, loaded);
 		}
 
