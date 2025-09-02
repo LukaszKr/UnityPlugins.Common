@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace UnityPlugins.Common.Unity.Storage
+namespace UnityPlugins.Common.Unity.Serialization.Storage
 {
 	[Category(CommonTestsConsts.CATEGORY_ASSEMBLY)]
 	internal class TextJsonStorageTests : ADataStorageTests

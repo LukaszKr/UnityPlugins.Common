@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace UnityPlugins.Common.Unity.Storage.Persistence
+namespace UnityPlugins.Common.Unity.Serialization.Storage.Persistence
 {
 	[Category(CommonTestsConsts.CATEGORY_ASSEMBLY)]
 	public class FileDataPersistenceTests : ADataPersistenceTests

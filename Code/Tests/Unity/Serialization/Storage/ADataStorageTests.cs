@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using UnityEngine.TestTools;
 
-namespace UnityPlugins.Common.Unity.Storage
+namespace UnityPlugins.Common.Unity.Serialization.Storage
 {
 	[Category(CommonTestsConsts.CATEGORY_ASSEMBLY)]
 	public abstract class ADataStorageTests

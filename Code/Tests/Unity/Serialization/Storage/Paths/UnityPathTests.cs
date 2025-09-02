@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using UnityPlugins.Common.Tests;
 
-namespace UnityPlugins.Common.Unity.Storage.Paths
+namespace UnityPlugins.Common.Unity.Serialization.Storage.Paths
 {
 	[Category(CommonTestsConsts.CATEGORY_ASSEMBLY)]
 	internal class UnityPathTests

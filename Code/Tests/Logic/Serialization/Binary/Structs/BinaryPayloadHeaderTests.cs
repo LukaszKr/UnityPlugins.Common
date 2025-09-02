@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using UnityPlugins.Common.Tests;
 
-namespace UnityPlugins.Common.Logic.Binary.Structs
+namespace UnityPlugins.Common.Logic.Serialization.Binary.Structs
 {
 	[Category(CommonTestsConsts.CATEGORY_ASSEMBLY)]
 	internal class BinaryPayloadHeaderTests

@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using NUnit.Framework;
 
-namespace UnityPlugins.Common.Unity.Storage.Persistence
+namespace UnityPlugins.Common.Unity.Serialization.Storage.Persistence
 {
 	[Category(CommonTestsConsts.CATEGORY_ASSEMBLY)]
 	public abstract class ADataPersistenceTests

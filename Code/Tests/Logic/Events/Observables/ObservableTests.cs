@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace UnityPlugins.Common.Logic.Observables
+namespace UnityPlugins.Common.Logic.Events.Observables
 {
 	[Category(CommonTestsConsts.CATEGORY_ASSEMBLY)]
 	internal class ObservableTests

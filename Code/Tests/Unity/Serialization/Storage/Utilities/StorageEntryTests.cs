@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace UnityPlugins.Common.Unity.Storage.Utilities
+namespace UnityPlugins.Common.Unity.Serialization.Storage.Utilities
 {
 	[Category(CommonTestsConsts.CATEGORY_ASSEMBLY)]
 	internal class StorageEntryTests

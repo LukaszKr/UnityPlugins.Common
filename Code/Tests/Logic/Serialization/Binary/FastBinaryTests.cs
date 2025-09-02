@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace UnityPlugins.Common.Logic.Binary
+namespace UnityPlugins.Common.Logic.Serialization.Binary
 {
 	[Category(CommonTestsConsts.CATEGORY_ASSEMBLY)]
 	internal class FastBinaryTests
