@@ -2,7 +2,7 @@
 
 namespace UnityPlugins.Common.Unity
 {
-	public abstract class AExtendedSO : ScriptableObject
+	public abstract class ADataContainer : ScriptableObject
 	{
 	}
 }
