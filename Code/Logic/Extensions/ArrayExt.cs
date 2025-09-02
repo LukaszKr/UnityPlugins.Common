@@ -4,6 +4,14 @@ namespace UnityPlugins.Common.Logic
 {
 	public static class ArrayExt
 	{
+		public static Array Resize(this Array array, int newSize)
+		{
+			Type elementType = array.GetType().GetElementType();
+			Array newArray = Array.CreateInstance(elementType, newSize);
+			Array.Copy(array, newArray, Math.Min(array.Length, newArray.Length));
+			return newArray;
+		}
+
 		public static TData[][] Create<TData>(int width, int height)
 		{
 			TData[][] array = new TData[width][];
