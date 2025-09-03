@@ -4,37 +4,50 @@ namespace UnityPlugins.Common.Logic
 {
 	public static class ArrayExt
 	{
+		#region Create
+		public static TData[][] Create<TData>(GridSize2D size)
+		{
+			return Create<TData>(size.X, size.Y);
+		}
+
+		public static TData[][] Create<TData>(int sizeX, int sizeY)
+		{
+			TData[][] array = new TData[sizeX][];
+			for(int x = 0; x < array.Length; ++x)
+			{
+				array[x] = new TData[sizeY];
+			}
+			return array;
+		}
+
+		public static TData[][][] Create<TData>(GridSize3D size)
+		{
+			return Create<TData>(size.X, size.Y, size.Z);
+		}
+
+		public static TData[][][] Create<TData>(int sizeX, int sizeY, int sizeZ)
+		{
+			TData[][][] array = new TData[sizeX][][];
+			for(int x = 0; x < array.Length; ++x)
+			{
+				TData[][] column = new TData[sizeY][];
+				array[x] = column;
+				for(int y = 0; y < column.Length; ++y)
+				{
+					column[y] = new TData[sizeZ];
+				}
+			}
+			return array;
+		}
+		#endregion
+
+		#region Resize
 		public static Array Resize(this Array array, int newSize)
 		{
 			Type elementType = array.GetType().GetElementType();
 			Array newArray = Array.CreateInstance(elementType, newSize);
 			Array.Copy(array, newArray, Math.Min(array.Length, newArray.Length));
 			return newArray;
-		}
-
-		public static TData[][] Create<TData>(int width, int height)
-		{
-			TData[][] array = new TData[width][];
-			for(int x = 0; x < array.Length; ++x)
-			{
-				array[x] = new TData[height];
-			}
-			return array;
-		}
-
-		public static TData[][][] Create<TData>(int width, int height, int depth)
-		{
-			TData[][][] array = new TData[width][][];
-			for(int x = 0; x < array.Length; ++x)
-			{
-				TData[][] column = new TData[height][];
-				array[x] = column;
-				for(int y = 0; y < column.Length; ++y)
-				{
-					column[y] = new TData[depth];
-				}
-			}
-			return array;
 		}
 
 		public static TData[] Resize<TData>(this TData[] array, int length)
@@ -51,6 +64,11 @@ namespace UnityPlugins.Common.Logic
 				newArray[x] = array[x];
 			}
 			return newArray;
+		}
+
+		public static TData[][] Resize<TData>(this TData[][] array, GridSize2D size)
+		{
+			return array.Resize(size.X, size.Y);
 		}
 
 		public static TData[][] Resize<TData>(this TData[][] array, int sizeX, int sizeY)
@@ -73,6 +91,11 @@ namespace UnityPlugins.Common.Logic
 				}
 			}
 			return newArray;
+		}
+
+		public static TData[][][] Resize<TData>(this TData[][][] array, GridSize3D size)
+		{
+			return array.Resize(size.X, size.Y, size.Z);
 		}
 
 		public static TData[][][] Resize<TData>(this TData[][][] array, int sizeX, int sizeY, int sizeZ)
@@ -102,5 +125,6 @@ namespace UnityPlugins.Common.Logic
 			}
 			return newArray;
 		}
+		#endregion
 	}
 }
