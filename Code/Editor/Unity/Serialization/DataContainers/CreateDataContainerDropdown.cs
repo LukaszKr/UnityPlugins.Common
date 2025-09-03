@@ -2,7 +2,7 @@
 
 namespace UnityPlugins.Common.Editor
 {
-	public class CreateDataContainerDropdown : ACreateScriptableObjectDropdown<ADataContainer>
+	public class CreateDataContainerDropdown : CreateScriptableObjectDropdown<ADataContainer>
 	{
 		public CreateDataContainerDropdown()
 			: base()

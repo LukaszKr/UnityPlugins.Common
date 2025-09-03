@@ -8,12 +8,11 @@ using UnityPlugins.Common.Unity;
 
 namespace UnityPlugins.Common.Editor
 {
-	public abstract class ACreateScriptableObjectDropdown<TAsset> : ExtendedAdvancedDropdown
-		where TAsset : ScriptableObject
+	public abstract class ACreateDropdown<TAsset> : ExtendedAdvancedDropdown
 	{
 		private readonly Dictionary<string, AdvancedDropdownItem> m_Namespaces = new Dictionary<string, AdvancedDropdownItem>();
 
-		public ACreateScriptableObjectDropdown()
+		public ACreateDropdown()
 			: base(new AdvancedDropdownState())
 		{
 		}
@@ -40,16 +39,10 @@ namespace UnityPlugins.Common.Editor
 		protected override void ItemSelected(AdvancedDropdownItem item)
 		{
 			Type type = ((DropdownDataItem<Type>)item).Value;
-			CreateSO(type);
+			CreateSelected(type);
 		}
 
-		protected virtual void CreateSO(Type assetType)
-		{
-			ScriptableObject so = ScriptableObject.CreateInstance(assetType);
-			string path = EditorAssetsUtility.GetSelectedFolderPath();
-			path = $"{path}/{assetType.Name}.asset";
-			AssetDatabase.CreateAsset(so, path);
-		}
+		protected abstract void CreateSelected(Type assetType);
 
 		protected virtual IEnumerable<Type> GetValidTypes(Type type)
 		{
@@ -68,6 +61,10 @@ namespace UnityPlugins.Common.Editor
 						continue;
 					}
 					if(!type.IsAssignableFrom(typeToCheck))
+					{
+						continue;
+					}
+					if(typeToCheck.IsNestedPrivate)
 					{
 						continue;
 					}
