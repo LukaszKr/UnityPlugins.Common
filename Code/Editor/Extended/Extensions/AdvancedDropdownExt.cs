@@ -6,7 +6,7 @@ namespace UnityPlugins.Common.Editor
 {
 	public static class AdvancedDropdownExt
 	{
-		public static void ShowAtCurrentMousePosition(this AdvancedDropdown dropdown)
+		public static void ShowAsContext(this AdvancedDropdown dropdown)
 		{
 			Rect rect;
 			if(Event.current != null)

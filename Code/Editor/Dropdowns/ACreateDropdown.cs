@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using UnityEditor;
 using UnityEditor.IMGUI.Controls;
-using UnityEngine;
-using UnityPlugins.Common.Unity;
 
 namespace UnityPlugins.Common.Editor
 {

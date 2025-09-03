@@ -8,7 +8,7 @@ namespace UnityPlugins.Common.Editor
 		public static void ShowCreateDropdown()
 		{
 			CreateDataContainerDropdown dropdown = new CreateDataContainerDropdown();
-			dropdown.ShowAtCurrentMousePosition();
+			dropdown.ShowAsContext();
 		}
 	}
 }

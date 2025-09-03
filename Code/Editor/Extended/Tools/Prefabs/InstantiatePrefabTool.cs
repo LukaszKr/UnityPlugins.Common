@@ -12,7 +12,7 @@ namespace UnityPlugins.Common.Editor
 		{
 			SelectPrefabDropdown dropdown = new SelectPrefabDropdown();
 			dropdown.OnPrefabSelected.AddListener(InstantiatePrefab);
-			dropdown.ShowAtCurrentMousePosition();
+			dropdown.ShowAsContext();
 		}
 
 		public static void InstantiatePrefab(GameObject prefab)
