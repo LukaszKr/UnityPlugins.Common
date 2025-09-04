@@ -32,5 +32,10 @@
 		{
 			m_Value = Value;
 		}
+
+		public void Notify()
+		{
+			OnChanged.Invoke(m_Value);
+		}
 	}
 }

@@ -34,5 +34,17 @@ namespace UnityPlugins.Common.Logic.Events.Observables
 			target.SetSilient(1);
 			Assert.IsFalse(wasCalled);
 		}
+
+		[Test]
+		public void SetSilient_ThenNotify()
+		{
+			bool wasCalled = false;
+			Observable<int> target = new Observable<int>();
+			target.OnChanged.AddListener((v) => { wasCalled = true; });
+			target.SetSilient(1);
+			Assert.IsFalse(wasCalled);
+			target.Notify();
+			Assert.IsTrue(wasCalled);
+		}
 	}
 }
