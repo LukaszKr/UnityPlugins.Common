@@ -13,6 +13,14 @@ namespace UnityPlugins.Common.Unity
 			return v;
 		}
 
+		public static Vector3 ToGridVector2(this GridPoint2D point)
+		{
+			Vector2 v = default;
+			v.x = point.X+0.5f;
+			v.y = point.Y+0.5f;
+			return v;
+		}
+
 		public static Vector2Int ToVector2Int(this GridPoint2D point)
 		{
 			Vector2Int v = default;
