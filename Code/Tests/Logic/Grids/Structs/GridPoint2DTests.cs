@@ -7,6 +7,24 @@ namespace UnityPlugins.Common.Logic.Grids.Structs
 	[Category(CommonTestsConsts.CATEGORY_ASSEMBLY)]
 	internal class GridPoint2DTests
 	{
+		#region Constructor
+		[Test]
+		public void Constructor_AxisX()
+		{
+			GridPoint2D p = new GridPoint2D(EGridAxis2D.X, 1, 2);
+			Assert.AreEqual(p.X, 1);
+			Assert.AreEqual(p.Y, 2);
+		}
+
+		[Test]
+		public void Constructor_AxisY()
+		{
+			GridPoint2D p = new GridPoint2D(EGridAxis2D.Y, 1, 2);
+			Assert.AreEqual(p.X, 2);
+			Assert.AreEqual(p.Y, 1);
+		}
+		#endregion
+
 		#region Equals
 		public class EqualsTest : EqualsTest<GridPoint2D>
 		{

@@ -26,6 +26,21 @@ namespace UnityPlugins.Common.Logic
 			Y = size.Y;
 		}
 
+		[DebuggerStepThrough]
+		public GridPoint2D(EGridAxis2D axisA, int valueA, int valueB)
+		{
+			if(axisA == EGridAxis2D.X)
+			{
+				X = valueA;
+				Y = valueB;
+			}
+			else
+			{
+				X = valueB;
+				Y = valueA;
+			}
+		}
+
 		public int Get(EGridAxis2D axis)
 		{
 			switch(axis)
