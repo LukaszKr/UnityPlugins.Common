@@ -32,8 +32,8 @@
 		#region Iterator
 		private static readonly GridPoint2D[] m_Iterator = new GridPoint2D[]
 		{
-			new GridPoint2D(0, 1),
-			new GridPoint2D(1, 0)
+			new GridPoint2D(1, 0),
+			new GridPoint2D(0, 1)
 		};
 
 		public static GridPoint2D GetIterator(this EGridAxis2D axis)
