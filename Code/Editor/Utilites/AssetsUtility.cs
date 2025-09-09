@@ -6,7 +6,7 @@ namespace UnityPlugins.Common.Editor
 {
 	public static class AssetsUtility
 	{
-		public static void Save(this Object target)
+		public static void SaveAsset(this Object target)
 		{
 			EditorUtility.SetDirty(target);
 			AssetDatabase.SaveAssetIfDirty(target);

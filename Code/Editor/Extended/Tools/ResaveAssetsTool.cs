@@ -17,7 +17,7 @@ namespace UnityPlugins.Common.Editor
 			AssetDatabase.StartAssetEditing();
 			foreach(Object target in targets)
 			{
-				target.Save();
+				target.SaveAsset();
 			}
 			AssetDatabase.StopAssetEditing();
 		}
