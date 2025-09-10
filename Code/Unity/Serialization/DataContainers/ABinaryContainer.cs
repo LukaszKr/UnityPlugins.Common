@@ -14,7 +14,7 @@ namespace UnityPlugins.Common.Unity
 
 		public static implicit operator TValue(ABinaryContainer<TValue> container) => container?.Value;
 
-		public virtual void Load()
+		public void Load()
 		{
 			if(RawData != null && RawData.Length > 0)
 			{
