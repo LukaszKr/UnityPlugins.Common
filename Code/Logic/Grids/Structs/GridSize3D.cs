@@ -6,9 +6,9 @@ namespace UnityPlugins.Common.Logic
 {
 	public readonly struct GridSize3D : IEquatable<GridSize3D>, IBinarySerializable
 	{
-		public readonly byte X;
-		public readonly byte Y;
-		public readonly byte Z;
+		public readonly int X;
+		public readonly int Y;
+		public readonly int Z;
 
 		public static bool operator ==(GridSize3D l, GridSize3D r) => l.Equals(r);
 		public static bool operator !=(GridSize3D l, GridSize3D r) => !l.Equals(r);
@@ -16,16 +16,16 @@ namespace UnityPlugins.Common.Logic
 		[DebuggerStepThrough, JsonConstructor]
 		public GridSize3D(int x, int y, int z)
 		{
-			X = (byte)x;
-			Y = (byte)y;
-			Z = (byte)z;
+			X = x;
+			Y = y;
+			Z = z;
 		}
 
 		public GridSize3D(FastBinaryReader reader)
 		{
-			X = reader.ReadByte();
-			Y = reader.ReadByte();
-			Z = reader.ReadByte();
+			X = reader.ReadInt();
+			Y = reader.ReadInt();
+			Z = reader.ReadInt();
 		}
 
 		public void WriteToBuffer(FastBinaryWriter writer)

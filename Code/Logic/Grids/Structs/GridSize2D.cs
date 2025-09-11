@@ -5,8 +5,8 @@ namespace UnityPlugins.Common.Logic
 {
 	public readonly struct GridSize2D : IEquatable<GridSize2D>, IBinarySerializable
 	{
-		public readonly byte X;
-		public readonly byte Y;
+		public readonly int X;
+		public readonly int Y;
 
 		public static bool operator ==(GridSize2D l, GridSize2D r) => l.Equals(r);
 		public static bool operator !=(GridSize2D l, GridSize2D r) => !l.Equals(r);
@@ -14,14 +14,29 @@ namespace UnityPlugins.Common.Logic
 		[DebuggerStepThrough]
 		public GridSize2D(int x, int y)
 		{
-			X = (byte)x;
-			Y = (byte)y;
+			X = x;
+			Y = y;
+		}
+
+		[DebuggerStepThrough]
+		public GridSize2D(EGridAxis2D axis, int a, int b)
+		{
+			if(axis == EGridAxis2D.X)
+			{
+				X = a;
+				Y = b;
+			}
+			else
+			{
+				X = b;
+				Y = a;
+			}
 		}
 
 		public GridSize2D(FastBinaryReader reader)
 		{
-			X = reader.ReadByte();
-			Y = reader.ReadByte();
+			X = reader.ReadInt();
+			Y = reader.ReadInt();
 		}
 
 		public void WriteToBuffer(FastBinaryWriter writer)
