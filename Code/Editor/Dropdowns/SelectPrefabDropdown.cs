@@ -39,7 +39,7 @@ namespace UnityPlugins.Common.Editor
 				}
 				else
 				{
-					root.AddChild(dataItem);
+					GetCategory(root, "Others").AddChild(dataItem);
 				}
 			}
 			return root;
