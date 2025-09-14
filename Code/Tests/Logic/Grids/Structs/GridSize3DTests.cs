@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
 using UnityPlugins.Common.Tests;
 
 namespace UnityPlugins.Common.Logic.Grids.Structs
@@ -36,6 +37,54 @@ namespace UnityPlugins.Common.Logic.Grids.Structs
 
 		[Test, TestCaseSource(nameof(m_EqualsTests))]
 		public void Equals(EqualsTest test)
+		{
+			test.Run();
+		}
+		#endregion
+
+		#region Clamp
+		public class ClampTest
+		{
+			public readonly GridSize3D Size;
+			public readonly GridPoint3D PointToClamp;
+			public readonly GridPoint3D Expected;
+
+			public ClampTest(GridSize3D size, int pX, int pY, int pZ, int eX, int eY, int eZ)
+			{
+				Size = size;
+				PointToClamp = new GridPoint3D(pX, pY, pZ);
+				Expected = new GridPoint3D(eX, eY, eZ);
+			}
+
+			public void Run()
+			{
+				GridPoint3D result = Size.Clamp(PointToClamp);
+				Assert.AreEqual(Expected, result);
+			}
+
+			public override string ToString()
+			{
+				return $"{nameof(Size)}: {Size}, {PointToClamp} -> {Expected}";
+			}
+		}
+
+		private static IEnumerable<ClampTest> GetClampTests()
+		{
+			GridSize3D size = new GridSize3D(4, 5, 6);
+			int maxX = size.X-1;
+			int maxY = size.Y-1;
+			int maxZ = size.Z-1;
+			yield return new ClampTest(size, 100, 3, 2, maxX, 3, 2);
+			yield return new ClampTest(size, 3, 100, 2, 3, maxY, 2);
+			yield return new ClampTest(size, 3, 2, 100, 3, 2, maxZ);
+			yield return new ClampTest(size, -1, 3, 2, 0, 3, 2);
+			yield return new ClampTest(size, 3, -3, 2, 3, 0, 2);
+			yield return new ClampTest(size, 3, 2, -3, 3, 2, 0);
+			yield return new ClampTest(size, 3, 2, 1, 3, 2, 1);
+		}
+
+		[Test, TestCaseSource(nameof(GetClampTests))]
+		public void Clamp(ClampTest test)
 		{
 			test.Run();
 		}

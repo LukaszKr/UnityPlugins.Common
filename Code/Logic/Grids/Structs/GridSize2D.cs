@@ -33,6 +33,7 @@ namespace UnityPlugins.Common.Logic
 			}
 		}
 
+		#region Serialization
 		public GridSize2D(FastBinaryReader reader)
 		{
 			X = reader.ReadInt();
@@ -44,6 +45,7 @@ namespace UnityPlugins.Common.Logic
 			writer.Write(X);
 			writer.Write(Y);
 		}
+		#endregion
 
 		public int Get(EGridAxis2D axis)
 		{
@@ -66,6 +68,13 @@ namespace UnityPlugins.Common.Logic
 		public GridSize2D Max(GridSize2D other)
 		{
 			return new GridSize2D(Math.Max(X, other.X), Math.Max(Y, other.Y));
+		}
+
+		public GridPoint2D Clamp(GridPoint2D position)
+		{
+			int clampedX = Math.Clamp(position.X, 0, X-1);
+			int clampedY = Math.Clamp(position.Y, 0, Y-1);
+			return new GridPoint2D(clampedX, clampedY);
 		}
 
 		public bool Contains(int x, int y)

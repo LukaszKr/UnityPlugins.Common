@@ -21,6 +21,7 @@ namespace UnityPlugins.Common.Logic
 			Z = z;
 		}
 
+		#region Serialization
 		public GridSize3D(FastBinaryReader reader)
 		{
 			X = reader.ReadInt();
@@ -34,6 +35,7 @@ namespace UnityPlugins.Common.Logic
 			writer.Write(Y);
 			writer.Write(Z);
 		}
+		#endregion
 
 		public int Get(EGridAxis3D axis)
 		{
@@ -58,6 +60,13 @@ namespace UnityPlugins.Common.Logic
 		public GridSize3D Max(GridSize3D other)
 		{
 			return new GridSize3D(Math.Max(X, other.X), Math.Max(Y, other.Y), Math.Max(Z, other.Z));
+		}
+		public GridPoint3D Clamp(GridPoint3D position)
+		{
+			int clampedX = Math.Clamp(position.X, 0, X-1);
+			int clampedY = Math.Clamp(position.Y, 0, Y-1);
+			int clampedZ = Math.Clamp(position.Z, 0, Z-1);
+			return new GridPoint3D(clampedX, clampedY, clampedZ);
 		}
 
 		public bool Contains(int x, int y, int z)
