@@ -8,7 +8,7 @@ namespace UnityPlugins.Common.Editor
 		public static void DrawPreview(Rect rect, EEasingType type)
 		{
 			Easing.Function func = type.ToFunc();
-			int steps = Mathf.CeilToInt(rect.width/8f);
+			int steps = Mathf.CeilToInt(rect.width/4f);
 			float perStep = 1f/steps;
 
 			if(Event.current.type == EventType.Repaint)
