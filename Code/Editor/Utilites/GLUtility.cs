@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace UnityPlugins.Common.Editor
 {
@@ -13,10 +14,10 @@ namespace UnityPlugins.Common.Editor
 				m_Material = new Material(Shader.Find("Hidden/Internal-Colored"));
 				m_Material.hideFlags = HideFlags.HideAndDontSave;
 				//Turn on alpha blending
-				m_Material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-				m_Material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+				m_Material.SetInt("_SrcBlend", (int)BlendMode.SrcAlpha);
+				m_Material.SetInt("_DstBlend", (int)BlendMode.OneMinusSrcAlpha);
 				// Turn backface culling off
-				m_Material.SetInt("_Cull", (int)UnityEngine.Rendering.CullMode.Off);
+				m_Material.SetInt("_Cull", (int)CullMode.Off);
 				// Turn off depth writes
 				m_Material.SetInt("_ZWrite", 0);
 			}
