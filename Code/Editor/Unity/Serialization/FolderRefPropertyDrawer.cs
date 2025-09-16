@@ -12,7 +12,7 @@ namespace UnityPlugins.Common.Editor
 		{
 			SerializedProperty valueProperty = property.FindPropertyRelative(nameof(FolderRef.Value));
 			Object oldValue = valueProperty.objectReferenceValue;
-			EditorGUI.PropertyField(position, valueProperty);
+			EditorGUI.PropertyField(position, valueProperty, label);
 			Object newValue = valueProperty.objectReferenceValue;
 			if(newValue != oldValue && newValue != null)
 			{
