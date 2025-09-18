@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace UnityPlugins.Common.Logic
 {
-	[Serializable]
-	public struct GridPoint3D : IEquatable<GridPoint3D>
+	[Serializable, JsonConverter(typeof(GridPoint3DJsonConverter))]
+	public struct GridPoint3D : IEquatable<GridPoint3D>, IBinarySerializable
 	{
 		public int X;
 		public int Y;
@@ -13,7 +14,7 @@ namespace UnityPlugins.Common.Logic
 		public static bool operator ==(GridPoint3D l, GridPoint3D r) => l.Equals(r);
 		public static bool operator !=(GridPoint3D l, GridPoint3D r) => !l.Equals(r);
 
-		[DebuggerStepThrough]
+		[DebuggerStepThrough, JsonConstructor]
 		public GridPoint3D(int x, int y, int z)
 		{
 			X = x;
@@ -28,6 +29,22 @@ namespace UnityPlugins.Common.Logic
 			Y = size.Y;
 			Z = size.Z;
 		}
+
+		#region Serialization
+		public GridPoint3D(FastBinaryReader reader)
+		{
+			X = reader.ReadInt();
+			Y = reader.ReadInt();
+			Z = reader.ReadInt();
+		}
+
+		public void WriteToBuffer(FastBinaryWriter writer)
+		{
+			writer.Write(X);
+			writer.Write(Y);
+			writer.Write(Z);
+		}
+		#endregion
 
 		public int Get(EGridAxis3D axis)
 		{

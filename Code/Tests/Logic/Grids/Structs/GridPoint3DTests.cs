@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Newtonsoft.Json;
+using NUnit.Framework;
 using UnityPlugins.Common.Tests;
 
 namespace UnityPlugins.Common.Logic.Grids.Structs
@@ -251,6 +252,37 @@ namespace UnityPlugins.Common.Logic.Grids.Structs
 		public void Max(MaxTest test)
 		{
 			test.Run();
+		}
+		#endregion
+
+		#region Serialization
+		[Test]
+		public void Serialization_Binary()
+		{
+			GridPoint3D point = new GridPoint3D(1, 2, 3);
+			FastBinaryWriter writer = new FastBinaryWriter(64);
+			byte[] bytes = point.WriteToByteArray(writer);
+			GridPoint3D deserialized = new GridPoint3D(bytes.ToBinaryReader());
+			Assert.AreEqual(point, deserialized);
+		}
+
+		[Test]
+		public void Serialization_Json()
+		{
+			GridPoint3D point = new GridPoint3D(1, 2, 3);
+			string json = JsonConvert.SerializeObject(point);
+			Assert.AreEqual(json[0], '[', "Object is not serialized as array");
+			GridPoint3D deserialized = JsonConvert.DeserializeObject<GridPoint3D>(json);
+			Assert.AreEqual(point, deserialized);
+		}
+
+		[Test]
+		public void Serialization_JsonObject()
+		{
+			GridPoint3D point = new GridPoint3D(1, 2, 3);
+			string json = "{\"X\": 1, \"Y\": 2, \"Z\": 3}";
+			GridPoint3D deserialized = JsonConvert.DeserializeObject<GridPoint3D>(json);
+			Assert.AreEqual(point, deserialized);
 		}
 		#endregion
 	}

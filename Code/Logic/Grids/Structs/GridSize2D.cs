@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace UnityPlugins.Common.Logic
 {
+	[JsonConverter(typeof(GridSize2DJsonConverter))]
 	public readonly struct GridSize2D : IEquatable<GridSize2D>, IBinarySerializable
 	{
 		public readonly int X;
@@ -11,7 +13,7 @@ namespace UnityPlugins.Common.Logic
 		public static bool operator ==(GridSize2D l, GridSize2D r) => l.Equals(r);
 		public static bool operator !=(GridSize2D l, GridSize2D r) => !l.Equals(r);
 
-		[DebuggerStepThrough]
+		[DebuggerStepThrough, JsonConstructor]
 		public GridSize2D(int x, int y)
 		{
 			X = x;

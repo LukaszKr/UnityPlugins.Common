@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace UnityPlugins.Common.Logic
 {
-	[Serializable]
-	public struct GridPoint2D : IEquatable<GridPoint2D>
+	[Serializable, JsonConverter(typeof(GridPoint2DJsonConverter))]
+	public struct GridPoint2D : IEquatable<GridPoint2D>, IBinarySerializable
 	{
 		public int X;
 		public int Y;
@@ -12,7 +13,7 @@ namespace UnityPlugins.Common.Logic
 		public static bool operator ==(GridPoint2D l, GridPoint2D r) => l.Equals(r);
 		public static bool operator !=(GridPoint2D l, GridPoint2D r) => !l.Equals(r);
 
-		[DebuggerStepThrough]
+		[DebuggerStepThrough, JsonConstructor]
 		public GridPoint2D(int x, int y)
 		{
 			X = x;
@@ -40,6 +41,20 @@ namespace UnityPlugins.Common.Logic
 				Y = valueA;
 			}
 		}
+
+		#region Serialization
+		public GridPoint2D(FastBinaryReader reader)
+		{
+			X = reader.ReadInt();
+			Y = reader.ReadInt();
+		}
+
+		public void WriteToBuffer(FastBinaryWriter writer)
+		{
+			writer.Write(X);
+			writer.Write(Y);
+		}
+		#endregion
 
 		public int Get(EGridAxis2D axis)
 		{

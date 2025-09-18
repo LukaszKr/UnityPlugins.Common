@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace UnityPlugins.Common.Logic
 {
+	[JsonConverter(typeof(GridSize3DJsonConverter))]
 	public readonly struct GridSize3D : IEquatable<GridSize3D>, IBinarySerializable
 	{
 		public readonly int X;

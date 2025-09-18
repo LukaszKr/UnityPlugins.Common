@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using UnityPlugins.Common.Tests;
 
@@ -233,6 +234,25 @@ namespace UnityPlugins.Common.Logic.Grids.Structs
 			FastBinaryWriter writer = new FastBinaryWriter(64);
 			byte[] bytes = size.WriteToByteArray(writer);
 			GridSize3D deserialized = new GridSize3D(bytes.ToBinaryReader());
+			Assert.AreEqual(size, deserialized);
+		}
+
+		[Test]
+		public void Serialization_Json()
+		{
+			GridSize3D size = new GridSize3D(1, 2, 3);
+			string json = JsonConvert.SerializeObject(size);
+			Assert.AreEqual(json[0], '[', "Object is not serialized as array");
+			GridSize3D deserialized = JsonConvert.DeserializeObject<GridSize3D>(json);
+			Assert.AreEqual(size, deserialized);
+		}
+
+		[Test]
+		public void Serialization_JsonObject()
+		{
+			GridSize3D size = new GridSize3D(1, 2, 3);
+			string json = "{\"X\": 1, \"Y\": 2, \"Z\": 3}";
+			GridSize3D deserialized = JsonConvert.DeserializeObject<GridSize3D>(json);
 			Assert.AreEqual(size, deserialized);
 		}
 		#endregion
