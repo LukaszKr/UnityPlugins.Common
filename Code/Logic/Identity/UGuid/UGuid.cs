@@ -27,6 +27,7 @@ namespace UnityPlugins.Common.Logic
 			Value = uguid.Value;
 		}
 
+		[JsonConstructor]
 		public UGuid(string guid)
 		{
 			Value = new Guid(guid);

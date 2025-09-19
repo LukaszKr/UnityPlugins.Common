@@ -11,6 +11,7 @@ namespace UnityPlugins.Common.Logic
 		public static bool operator ==(ID<T> left, ID<T> right) => (left.Value == right.Value);
 		public static bool operator !=(ID<T> left, ID<T> right) => (left.Value != right.Value);
 
+		[JsonConstructor]
 		public ID(int value)
 		{
 			Value = value;
