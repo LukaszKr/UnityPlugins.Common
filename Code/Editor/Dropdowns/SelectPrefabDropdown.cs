@@ -29,8 +29,10 @@ namespace UnityPlugins.Common.Editor
 				string fileName = Path.GetFileNameWithoutExtension(path);
 				DropdownDataItem<string> dataItem = new DropdownDataItem<string>(fileName, path);
 				dataItem.icon = (Texture2D)AssetDatabase.GetCachedIcon(path);
-				string[] labels = AssetDatabase.GetLabels(new GUID(guid));
-				if(labels.Length > 0)
+
+				HashSet<string> labels = new HashSet<string>();
+				CollectLabels(labels, guid);
+				if(labels.Count > 0)
 				{
 					foreach(string label in labels)
 					{
@@ -43,6 +45,43 @@ namespace UnityPlugins.Common.Editor
 				}
 			}
 			return root;
+		}
+
+		private void CollectLabels(HashSet<string> allLabels, string guid)
+		{
+			string[] labels = AssetDatabase.GetLabels(new GUID(guid));
+			foreach(string label in labels)
+			{
+				allLabels.Add(label);
+			}
+
+			if(allLabels.Count > 0)
+			{
+				return;
+			}
+
+			string path = AssetDatabase.GUIDToAssetPath(guid);
+			DirectoryInfo parentFolder = null;
+			if(AssetDatabase.IsValidFolder(path))
+			{
+				DirectoryInfo folder = new DirectoryInfo(path);
+				parentFolder = folder.Parent;
+			}
+			else
+			{
+				FileInfo file = new FileInfo(path);
+				parentFolder = file.Directory;
+			}
+
+			int startAt = parentFolder.FullName.IndexOf("Assets");
+			if(startAt >= 0)
+			{
+				string folderPath = parentFolder.FullName.Substring(startAt);
+				if(AssetDatabase.IsValidFolder(folderPath))
+				{
+					CollectLabels(allLabels, AssetDatabase.AssetPathToGUID(folderPath));
+				}
+			}
 		}
 
 		protected override void ItemSelected(AdvancedDropdownItem item)
