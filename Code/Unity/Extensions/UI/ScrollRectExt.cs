@@ -12,8 +12,9 @@ namespace UnityPlugins.Common.Unity
 			Vector2 endPos = contentPos - childPos;
 			//keep selected in middle if possible
 			RectTransform rectTransform = scrollRect.GetComponent<RectTransform>();
-			endPos.x += rectTransform.rect.width*rectTransform.pivot.x;
-			endPos.y -= rectTransform.rect.height*rectTransform.pivot.y;
+			//0.5 is probably a pivot one of the elements, but it's not scrollrect, content or child
+			endPos.x += rectTransform.rect.width*0.5f;
+			endPos.y -= rectTransform.rect.height*0.5f;
 
 			if(!scrollRect.horizontal)
 			{
