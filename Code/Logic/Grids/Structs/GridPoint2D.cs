@@ -392,6 +392,39 @@ namespace UnityPlugins.Common.Logic
 				return EGridDirection2D.Up;
 			}
 		}
+
+		public EGridCardinal2D GetGridCardinal(GridPoint2D other)
+		{
+			int deltaX = other.X-X;
+			int deltaY = other.Y-Y;
+			int absDeltaX = Math.Abs(deltaX);
+			int absDeltaY = Math.Abs(deltaY);
+
+			if(absDeltaX > absDeltaY)
+			{
+				if(deltaX > 0)
+				{
+					return EGridCardinal2D.Right;
+				}
+				return EGridCardinal2D.Left;
+			}
+			else if(absDeltaX < absDeltaY)
+			{
+				if(deltaY > 0)
+				{
+					return EGridCardinal2D.Down;
+				}
+				return EGridCardinal2D.Up;
+			}
+			else
+			{
+				if(deltaY > 0)
+				{
+					return EGridCardinal2D.Down;
+				}
+				return EGridCardinal2D.Up;
+			}
+		}
 		#endregion
 
 		public override bool Equals(object obj)

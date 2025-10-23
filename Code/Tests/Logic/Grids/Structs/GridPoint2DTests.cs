@@ -554,6 +554,64 @@ namespace UnityPlugins.Common.Logic.Grids.Structs
 		}
 		#endregion
 
+		#region GetGridCardinal
+		public class GetGridCardinalTest
+		{
+			public readonly GridPoint2D Origin;
+			public readonly GridPoint2D Target;
+			public readonly EGridCardinal2D Expected;
+
+			public GetGridCardinalTest(int originX, int originY, EGridCardinal2D expected, int targetX, int targetY)
+			{
+				Origin = new GridPoint2D(originX, originY);
+				Expected = expected;
+				Target = new GridPoint2D(targetX, targetY);
+			}
+
+			public GetGridCardinalTest(EGridCardinal2D expected, int targetX, int targetY)
+				: this(0, 0, expected, targetX, targetY)
+			{
+			}
+
+			public void Run()
+			{
+				EGridCardinal2D actual = Origin.GetGridCardinal(Target);
+				Assert.AreEqual(Expected, actual);
+			}
+
+			public override string ToString()
+			{
+				return $"{Target} is {Expected} from {Origin}";
+			}
+		}
+
+		private static readonly GetGridCardinalTest[] m_GetGetGridCardinalTests = new GetGridCardinalTest[]
+		{
+			new GetGridCardinalTest(EGridCardinal2D.Up, 0, -1),
+			new GetGridCardinalTest(EGridCardinal2D.Up, 1, -1),
+			new GetGridCardinalTest(EGridCardinal2D.Right, 2, -1),
+			new GetGridCardinalTest(EGridCardinal2D.Up, 1, -2),
+			new GetGridCardinalTest(EGridCardinal2D.Right, 1, 0),
+			new GetGridCardinalTest(EGridCardinal2D.Up, 1, 1),
+			new GetGridCardinalTest(EGridCardinal2D.Right, 2, 1),
+			new GetGridCardinalTest(EGridCardinal2D.Down, 1, 2),
+			new GetGridCardinalTest(EGridCardinal2D.Down, 0, 1),
+			new GetGridCardinalTest(EGridCardinal2D.Down, -1, 1),
+			new GetGridCardinalTest(EGridCardinal2D.Down, -1, 2),
+			new GetGridCardinalTest(EGridCardinal2D.Left, -2, 1),
+			new GetGridCardinalTest(EGridCardinal2D.Left, -1, 0),
+			new GetGridCardinalTest(EGridCardinal2D.Up, -1, -1),
+			new GetGridCardinalTest(EGridCardinal2D.Up, -1, -2),
+			new GetGridCardinalTest(EGridCardinal2D.Left, -2, -1),
+		};
+
+		[Test, TestCaseSource(nameof(m_GetGetGridCardinalTests))]
+		public void GetGridCardinal(GetGridCardinalTest test)
+		{
+			test.Run();
+		}
+		#endregion
+
 		[Test]
 		public void Get()
 		{
