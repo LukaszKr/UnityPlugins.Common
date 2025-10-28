@@ -53,7 +53,7 @@ namespace UnityPlugins.Common.Unity
 			}
 		}
 
-		public bool Set(TValue value)
+		public virtual bool Set(TValue value)
 		{
 			if(!Equals(m_Value, value))
 			{
