@@ -592,7 +592,7 @@ namespace UnityPlugins.Common.Logic.Grids.Structs
 			new GetGridCardinalTest(EGridCardinal2D.Right, 2, -1),
 			new GetGridCardinalTest(EGridCardinal2D.Up, 1, -2),
 			new GetGridCardinalTest(EGridCardinal2D.Right, 1, 0),
-			new GetGridCardinalTest(EGridCardinal2D.Up, 1, 1),
+			new GetGridCardinalTest(EGridCardinal2D.Down, 1, 1),
 			new GetGridCardinalTest(EGridCardinal2D.Right, 2, 1),
 			new GetGridCardinalTest(EGridCardinal2D.Down, 1, 2),
 			new GetGridCardinalTest(EGridCardinal2D.Down, 0, 1),
