@@ -14,7 +14,7 @@ namespace UnityPlugins.Common.Editor
 			string path = EditorAssetsUtility.GetSelectedFolderPath();
 			path = $"{path}/{assetType.Name}.asset";
 			path = AssetDatabase.GenerateUniqueAssetPath(path);
-			AssetDatabase.CreateAsset(so, path);
+			ProjectWindowUtil.CreateAsset(so, path);
 		}
 	}
 }
