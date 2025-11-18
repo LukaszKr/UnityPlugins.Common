@@ -1,14 +1,10 @@
 {
-    "name": "UnityPlugins.Common.Editor",
-    "rootNamespace": "UnityPlugins.Common.Editor",
+    "name": "UnityPlugins.Common.Unity",
+    "rootNamespace": "UnityPlugins.Common.Unity",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:a4f27f4560b427748867decce1333bea",
-        "GUID:b3e8d852c59b26a49874f043a6c012c1"
+        "UnityPlugins.Common.Logic"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,

@@ -1,12 +1,12 @@
 {
-    "name": "UnityPlugins.Common.Tests",
+    "name": "UnityPlugins.Common.Benchmarks",
     "rootNamespace": "UnityPlugins.Common",
     "references": [
-        "GUID:27619889b8ba8c24980f49ee34dbb44a",
-        "GUID:0acc523941302664db1f4e527237feb3",
-        "GUID:a4f27f4560b427748867decce1333bea",
-        "GUID:b3e8d852c59b26a49874f043a6c012c1",
-        "GUID:3ce9475b178ec2e439e356365496353f"
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "Unity.PerformanceTesting",
+        "UnityPlugins.Common.Logic",
+        "UnityPlugins.Common.Unity"
     ],
     "includePlatforms": [
         "Editor"
@@ -15,8 +15,7 @@
     "allowUnsafeCode": false,
     "overrideReferences": true,
     "precompiledReferences": [
-        "nunit.framework.dll",
-        "Newtonsoft.Json.dll"
+        "nunit.framework.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [
