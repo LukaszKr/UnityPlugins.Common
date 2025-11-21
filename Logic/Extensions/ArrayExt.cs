@@ -20,6 +20,16 @@ namespace UnityPlugins.Common.Logic
 			return array;
 		}
 
+		public static void Create<TData>(out TData[][] output, GridSize2D size)
+		{
+			output = Create<TData>(size);
+		}
+
+		public static void Create<TData>(out TData[][] output, int sizeX, int sizeY)
+		{
+			output = Create<TData>(sizeX, sizeY);
+		}
+
 		public static TData[][][] Create<TData>(GridSize3D size)
 		{
 			return Create<TData>(size.X, size.Y, size.Z);
@@ -38,6 +48,16 @@ namespace UnityPlugins.Common.Logic
 				}
 			}
 			return array;
+		}
+
+		public static void Create<TData>(out TData[][][] output, GridSize3D size)
+		{
+			output = Create<TData>(size);
+		}
+
+		public static void Create<TData>(out TData[][][] output, int sizeX, int sizeY, int sizeZ)
+		{
+			output = Create<TData>(sizeX, sizeY, sizeZ);
 		}
 		#endregion
 
