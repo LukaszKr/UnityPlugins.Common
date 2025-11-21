@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using DG.Tweening;
 
 namespace UnityPlugins.Common.Unity
@@ -26,6 +27,17 @@ namespace UnityPlugins.Common.Unity
 			{
 				m_Sequence.Kill(complete);
 				m_Sequence = null;
+			}
+		}
+
+		/// <summary>
+		/// For use in coroutines.
+		/// </summary>
+		public IEnumerator WaitUntilFinished()
+		{
+			while(IsActive)
+			{
+				yield return null;
 			}
 		}
 
