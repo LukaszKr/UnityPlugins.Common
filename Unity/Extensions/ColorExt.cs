@@ -4,6 +4,15 @@ namespace UnityPlugins.Common.Unity
 {
 	public static class ColorExt
 	{
+		public static Color Blend(this Color color, Color other, float blendFactor)
+		{
+			float r = color.r+(other.r-color.r)*blendFactor;
+			float g = color.g+(other.g-color.g)*blendFactor;
+			float b = color.b+(other.b-color.b)*blendFactor;
+			float a = color.a+(other.a-color.a)*blendFactor;
+			return new Color(r, g, b, a);
+		}
+
 		#region HSV - Set
 		public static Color SetH(this Color rgbColor, float value)
 		{
