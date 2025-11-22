@@ -49,6 +49,12 @@
 	{
 		public static readonly EnumExt<EEasingType> Meta = new EnumExt<EEasingType>();
 
+		public static float Evaluate(this EEasingType method, float progress)
+		{
+			Easing.Function func = method.ToFunc();
+			return func(progress);
+		}
+
 		public static Easing.Function ToFunc(this EEasingType type)
 		{
 			return Easing.All[(int)type];
