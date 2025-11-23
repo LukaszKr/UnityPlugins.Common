@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿#if DOTWEEN
+using DG.Tweening;
 using UnityEditor;
 using UnityEngine;
 using UnityPlugins.Common.Unity;
@@ -44,3 +45,4 @@ namespace UnityPlugins.Common.Editor
 		}
 	}
 }
+#endif

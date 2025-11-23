@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿#if DOTWEEN
+using DG.Tweening;
 
 namespace UnityPlugins.Common.Unity
 {
@@ -10,3 +11,4 @@ namespace UnityPlugins.Common.Unity
 		public static implicit operator Ease(DOParametersContainer container) => container.Parameters.Ease;
 	}
 }
+#endif

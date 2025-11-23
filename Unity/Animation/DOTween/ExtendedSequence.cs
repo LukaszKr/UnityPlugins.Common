@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if DOTWEEN
+using System;
 using System.Collections;
 using DG.Tweening;
 
@@ -53,3 +54,4 @@ namespace UnityPlugins.Common.Unity
 		#endregion
 	}
 }
+#endif
