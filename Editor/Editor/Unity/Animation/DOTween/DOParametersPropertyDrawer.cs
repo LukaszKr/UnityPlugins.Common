@@ -5,8 +5,8 @@ using UnityPlugins.Common.Unity;
 
 namespace UnityPlugins.Common.Editor
 {
-	[CustomPropertyDrawer(typeof(AnimationParameter))]
-	public class AnimationParameterPropertyDrawer : AExtendedPropertyDrawer
+	[CustomPropertyDrawer(typeof(DOParameters))]
+	public class DOParametersPropertyDrawer : AExtendedPropertyDrawer
 	{
 		private const float DASH_LENGTH = 1f;
 		private const float PREVIEW_LINES = 5f;
@@ -16,8 +16,8 @@ namespace UnityPlugins.Common.Editor
 		protected override void Draw(Rect position, SerializedProperty property, GUIContent label)
 		{
 			Draw(position, label,
-			property.FindPropertyRelative(nameof(AnimationParameter.Duration)),
-			property.FindPropertyRelative(nameof(AnimationParameter.Ease)));
+			property.FindPropertyRelative(nameof(DOParameters.Duration)),
+			property.FindPropertyRelative(nameof(DOParameters.Ease)));
 		}
 
 		private void Draw(Rect rect, GUIContent label, SerializedProperty duration, SerializedProperty ease)

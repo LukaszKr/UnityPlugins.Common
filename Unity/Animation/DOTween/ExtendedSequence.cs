@@ -4,7 +4,7 @@ using DG.Tweening;
 
 namespace UnityPlugins.Common.Unity
 {
-	public class SequenceAnimation
+	public class ExtendedSequence
 	{
 		private Sequence m_Sequence;
 		private Action m_OnFinished;
