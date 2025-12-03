@@ -146,5 +146,10 @@ namespace UnityPlugins.Common.Logic
 				Write(data);
 			}
 		}
+
+		public override string ToString()
+		{
+			return $"[{nameof(FastBinaryWriter)}, {Head}/{Buffer.Length}]";
+		}
 	}
 }

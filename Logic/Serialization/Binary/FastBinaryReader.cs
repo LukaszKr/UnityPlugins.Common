@@ -131,5 +131,10 @@ namespace UnityPlugins.Common.Logic
 			}
 			return string.Empty;
 		}
+
+		public override string ToString()
+		{
+			return $"[{nameof(FastBinaryReader)}, {Head}/{Buffer.Length}]";
+		}
 	}
 }
