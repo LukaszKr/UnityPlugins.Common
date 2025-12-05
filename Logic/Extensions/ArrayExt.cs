@@ -70,6 +70,11 @@ namespace UnityPlugins.Common.Logic
 			return newArray;
 		}
 
+		public static void Resize<TData>(ref TData[] array, int length)
+		{
+			array = array.Resize(length);
+		}
+
 		public static TData[] Resize<TData>(this TData[] array, int length)
 		{
 			TData[] newArray = new TData[length];
@@ -84,6 +89,16 @@ namespace UnityPlugins.Common.Logic
 				newArray[x] = array[x];
 			}
 			return newArray;
+		}
+
+		public static void Resize<TData>(ref TData[][] array, GridSize2D size)
+		{
+			array = array.Resize(size);
+		}
+
+		public static void Resize<TData>(ref TData[][] array, int sizeX, int sizeY)
+		{
+			array = array.Resize(sizeX, sizeY);
 		}
 
 		public static TData[][] Resize<TData>(this TData[][] array, GridSize2D size)
@@ -111,6 +126,16 @@ namespace UnityPlugins.Common.Logic
 				}
 			}
 			return newArray;
+		}
+
+		public static void Resize<TData>(ref TData[][][] array, GridSize3D size)
+		{
+			array = array.Resize(size);
+		}
+
+		public static void Resize<TData>(ref TData[][][] array, int sizeX, int sizeY, int sizeZ)
+		{
+			array = array.Resize(sizeX, sizeY, sizeZ);
 		}
 
 		public static TData[][][] Resize<TData>(this TData[][][] array, GridSize3D size)
