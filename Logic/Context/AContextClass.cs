@@ -1,6 +1,6 @@
 ﻿namespace UnityPlugins.Common.Logic
 {
-	public abstract class AContextClass<TContext>
+	public abstract class AContextClass<TContext> : IContextClass
 	{
 		private readonly ContextHandler<TContext> m_ContextHandler;
 		protected TContext m_Context;
