@@ -9,6 +9,7 @@ namespace UnityPlugins.Common.Logic.Context
 		{
 			public bool ContextWillBeDifferent;
 
+			public int InitializeCallCount;
 			public int AttachCallCount;
 			public int DetachCallCount;
 			public int ReplaceCallCount;
@@ -18,6 +19,11 @@ namespace UnityPlugins.Common.Logic.Context
 			public TestContextClass(bool willChangeContext = false)
 			{
 				ContextWillBeDifferent = willChangeContext;
+			}
+
+			protected override void OnInitialize()
+			{
+				InitializeCallCount++;
 			}
 
 			protected override void OnAttach(EventBinder binder)
@@ -49,7 +55,7 @@ namespace UnityPlugins.Common.Logic.Context
 			TestContextClass test = new TestContextClass();
 			test.SetContext(1);
 
-			AssertTestClass(test, 1, 0, 0);
+			AssertTestClass(test, 1, 1, 0, 0);
 		}
 
 		[Test]
@@ -59,7 +65,7 @@ namespace UnityPlugins.Common.Logic.Context
 			test.SetContext(1);
 			test.SetContext(2);
 
-			AssertTestClass(test, 2, 1, 1);
+			AssertTestClass(test, 1, 2, 1, 1);
 		}
 
 		[Test]
@@ -69,7 +75,7 @@ namespace UnityPlugins.Common.Logic.Context
 			test.SetContext(1);
 			test.SetContext(1);
 
-			AssertTestClass(test, 2, 1, 1);
+			AssertTestClass(test, 1, 2, 1, 1);
 		}
 
 		[Test]
@@ -79,7 +85,7 @@ namespace UnityPlugins.Common.Logic.Context
 			test.SetContext(1);
 			test.ClearContext();
 
-			AssertTestClass(test, 1, 1, 0);
+			AssertTestClass(test, 1, 1, 1, 0);
 		}
 
 		[Test]
@@ -87,7 +93,7 @@ namespace UnityPlugins.Common.Logic.Context
 		{
 			TestContextClass test = new TestContextClass();
 			test.ClearContext();
-			AssertTestClass(test, 0, 0, 0);
+			AssertTestClass(test, 0, 0, 0, 0);
 		}
 
 		[Test]
@@ -103,8 +109,9 @@ namespace UnityPlugins.Common.Logic.Context
 		}
 
 		#region Helpers
-		private void AssertTestClass(TestContextClass test, int attachCallCount, int detachCallCount, int replaceCallCount)
+		private void AssertTestClass(TestContextClass test, int initializeCallCount, int attachCallCount, int detachCallCount, int replaceCallCount)
 		{
+			Assert.AreEqual(initializeCallCount, test.InitializeCallCount, "OnInitialize");
 			Assert.AreEqual(attachCallCount, test.AttachCallCount, "OnAttach");
 			Assert.AreEqual(detachCallCount, test.DetachCallCount, "OnDetach");
 			Assert.AreEqual(replaceCallCount, test.ReplaceCallCount, "OnReplace");

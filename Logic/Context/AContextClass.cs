@@ -3,6 +3,7 @@
 	public abstract class AContextClass<TContext> : IContextClass
 	{
 		private readonly ContextHandler<TContext> m_ContextHandler;
+		private bool m_IsInitialized;
 		protected TContext m_Context;
 
 		public AContextClass()
@@ -10,14 +11,25 @@
 			m_ContextHandler = new ContextHandler<TContext>(OnAttach, OnDetach, Replace);
 		}
 
+		public void TryInitialize()
+		{
+			if(!m_IsInitialized)
+			{
+				m_IsInitialized = true;
+				OnInitialize();
+			}
+		}
+
 		public void SetContext(TContext context)
 		{
+			TryInitialize();
 			m_ContextHandler.SetContext(context);
 		}
 
 		public void ClearContext()
 		{
 			m_ContextHandler.ClearContext();
+			m_Context = default;
 		}
 
 		private void OnAttach(TContext context, EventBinder binder)
@@ -26,6 +38,7 @@
 			OnAttach(binder);
 		}
 
+		protected abstract void OnInitialize();
 		protected abstract void OnAttach(EventBinder binder);
 		protected abstract void OnDetach();
 
