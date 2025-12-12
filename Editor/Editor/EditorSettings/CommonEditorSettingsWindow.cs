@@ -1,5 +1,4 @@
 ﻿using UnityEditor;
-using UnityPlugins.Common.Editor;
 
 namespace UnityPlugins.Common.Editor
 {
