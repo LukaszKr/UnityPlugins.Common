@@ -12,7 +12,7 @@ namespace UnityPlugins.Common.Unity
 		{
 			get
 			{
-				if(ReferenceEquals(m_Transform, null))
+				if(!m_Transform)
 				{
 					m_Transform = base.transform;
 				}
@@ -24,7 +24,7 @@ namespace UnityPlugins.Common.Unity
 		{
 			get
 			{
-				if(ReferenceEquals(m_GameObject, null))
+				if(!m_GameObject)
 				{
 					m_GameObject = base.gameObject;
 				}
