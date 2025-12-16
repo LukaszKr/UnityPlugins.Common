@@ -46,12 +46,12 @@ namespace UnityPlugins.Common.Unity
 			float verticalSpacing = point.Y*m_HexSpacing;
 			if((point.Y & 1) == 1)
 			{
-				return new Vector3(horizontalSpacing + m_Sqrt3_Half, -verticalSpacing);
+				return new Vector2(horizontalSpacing + m_Sqrt3_Half, -verticalSpacing);
 			}
-			return new Vector3(horizontalSpacing, -verticalSpacing);
+			return new Vector2(horizontalSpacing, -verticalSpacing);
 		}
 
-		public static Vector3 ToPointyHexVector3(this GridPoint2D point)
+		public static Vector3	ToPointyHexVector3(this GridPoint2D point)
 		{
 			float horizontalSpacing = point.X * m_Sqrt3;
 			float verticalSpacing = point.Y*m_HexSpacing;
@@ -68,9 +68,9 @@ namespace UnityPlugins.Common.Unity
 			float horizontalSpacing = point.Y*m_HexSpacing;
 			if((point.Y & 1) == 1)
 			{
-				return new Vector3(horizontalSpacing + m_Sqrt3_Half, -verticalSpacing);
+				return new Vector2(horizontalSpacing + m_Sqrt3_Half, -verticalSpacing);
 			}
-			return new Vector3(horizontalSpacing, -verticalSpacing);
+			return new Vector2(horizontalSpacing, -verticalSpacing);
 		}
 
 		public static Vector3 ToFlatHexVector3(this GridPoint2D point)
