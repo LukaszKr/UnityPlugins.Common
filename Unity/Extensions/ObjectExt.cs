@@ -8,6 +8,16 @@ namespace UnityPlugins.Common.Unity
 {
 	public static class ObjectExt
 	{
+		public static void TryDestroyImmediate<TObject>(ref TObject current)
+			where TObject : Object
+		{
+			if(current)
+			{
+				Object.DestroyImmediate(current);
+			}
+			current = null;
+		}
+
 #if UNITY_EDITOR
 		public static string GetEditorGUID(this Object target)
 		{
